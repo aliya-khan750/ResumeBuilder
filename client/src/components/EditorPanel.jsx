@@ -6,6 +6,7 @@ import ProjectsSection from "./ProjectsSection";
 import CertificationsSection from "./CertificationsSection";
 import AchievementsSection from "./AchievementsSection";
 import LanguagesSection from "./LanguagesSection";
+import ReferencesSection from "./ReferencesSection";
 
 function EditorPanel() {
   return (
@@ -125,6 +126,8 @@ function EditorPanel() {
 <AchievementsSection />
 {/* Languages Section */}
 <LanguagesSection />
+{/* References Section */}
+<ReferencesSection />
 
     </section>
   );
