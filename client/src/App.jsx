@@ -1,20 +1,13 @@
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
+import BuilderLayout from "./layouts/BuilderLayout";
 
 function App() {
   return (
-    <>
-      <Navbar />
-
-      <div className="app-layout">
-        <Sidebar />
-
-        <main className="main-content">
-          <h1>Resume Builder</h1>
-          <p>Build your professional resume.</p>
-        </main>
+    <BuilderLayout>
+      <div className="builder-placeholder">
+        <h1>Resume Editor</h1>
+        <p>Your resume workspace will appear here.</p>
       </div>
-    </>
+    </BuilderLayout>
   );
 }
 

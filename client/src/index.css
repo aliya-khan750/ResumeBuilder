@@ -289,3 +289,38 @@ a {
   margin: 0;
   color: var(--text-muted);
 }
+/* =========================
+   Builder Layout
+========================= */
+
+.builder-app {
+  min-height: 100vh;
+  background: var(--white);
+}
+
+.builder-body {
+  display: flex;
+  min-height: calc(100vh - 74px);
+}
+
+.builder-main {
+  flex: 1;
+  min-width: 0;
+  padding: 28px;
+  background: var(--white);
+}
+
+.builder-placeholder {
+  width: 100%;
+}
+
+.builder-placeholder h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  color: var(--text);
+}
+
+.builder-placeholder p {
+  margin: 0;
+  color: var(--text-muted);
+}
