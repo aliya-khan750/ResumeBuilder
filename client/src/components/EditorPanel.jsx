@@ -4,6 +4,7 @@ import EducationSection from "./EducationSection";
 import SkillsSection from "./SkillsSection";
 import ProjectsSection from "./ProjectsSection";
 import CertificationsSection from "./CertificationsSection";
+import AchievementsSection from "./AchievementsSection";
 
 function EditorPanel() {
   return (
@@ -118,6 +119,9 @@ function EditorPanel() {
       <ProjectsSection /> 
       {/* Certifications Section */}
 <CertificationsSection /> 
+
+{/* Achievements Section */}
+<AchievementsSection />
 
     </section>
   );
