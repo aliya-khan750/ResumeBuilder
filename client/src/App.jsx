@@ -1,9 +1,15 @@
+import Navbar from "./components/Navbar";
+
 function App() {
   return (
-    <div>
-      <h1>Resume Builder</h1>
-      <p>Build your professional resume.</p>
-    </div>
+    <>
+      <Navbar />
+
+      <main>
+        <h1>Resume Builder</h1>
+        <p>Build your professional resume.</p>
+      </main>
+    </>
   );
 }
 
