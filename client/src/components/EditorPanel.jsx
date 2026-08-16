@@ -7,6 +7,7 @@ import CertificationsSection from "./CertificationsSection";
 import AchievementsSection from "./AchievementsSection";
 import LanguagesSection from "./LanguagesSection";
 import ReferencesSection from "./ReferencesSection";
+import CustomSection from "./CustomSection";
 
 function EditorPanel() {
   return (
@@ -128,6 +129,8 @@ function EditorPanel() {
 <LanguagesSection />
 {/* References Section */}
 <ReferencesSection />
+{/* Custom Section */}
+<CustomSection />
 
     </section>
   );
