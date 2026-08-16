@@ -1,7 +1,8 @@
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import EditorPanel from "../components/EditorPanel";
 
-function BuilderLayout({ children }) {
+function BuilderLayout() {
   return (
     <div className="builder-app">
       <Navbar />
@@ -10,7 +11,7 @@ function BuilderLayout({ children }) {
         <Sidebar />
 
         <main className="builder-main">
-          {children}
+          <EditorPanel />
         </main>
       </div>
     </div>

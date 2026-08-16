@@ -1,0 +1,145 @@
+.editor-panel {
+  padding: 32px;
+  max-width: 900px;
+}
+
+/* Header */
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.editor-header h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #2b211d;
+}
+
+/* Save Button */
+.save-button {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.save-button:hover {
+  background: var(--primary-dark);
+}
+
+/* Section */
+.editor-section {
+  background: var(--white);
+  border: 1px solid #e5ded8;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+/* Section Title */
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.section-title h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: #2b211d;
+}
+
+.section-title p {
+  margin: 0;
+  color: #777777;
+  font-size: 14px;
+}
+
+.section-title span {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Form Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3b302b;
+}
+
+/* Inputs */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 13px;
+  border: 1px solid #d8cec6;
+  border-radius: 7px;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+  background: #ffffff;
+  color: #2b211d;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999999;
+}
+
+/* Input Focus */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(168, 71, 43, 0.1);
+}
+
+/* Textarea */
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Full Width */
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .editor-panel {
+    padding: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .editor-header {
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
