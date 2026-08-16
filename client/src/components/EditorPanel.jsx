@@ -1,4 +1,5 @@
 import "./EditorPanel.css";
+import ExperienceSection from "./ExperienceSection";
 
 function EditorPanel() {
   return (
@@ -103,6 +104,9 @@ function EditorPanel() {
         </div>
 
       </div>
+
+      {/* Experience Section */}
+      <ExperienceSection />
 
     </section>
   );

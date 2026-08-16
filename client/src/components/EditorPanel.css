@@ -143,3 +143,35 @@
     gap: 15px;
   }
 }
+.add-button {
+  margin-top: 20px;
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 10px 18px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add-button:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.form-group select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 13px;
+  border: 1px solid #d8cec6;
+  border-radius: 7px;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+  background: #ffffff;
+  color: #2b211d;
+}
+
+.form-group select:focus {
+  border-color: var(--primary);
+}
