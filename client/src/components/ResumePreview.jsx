@@ -4,7 +4,12 @@ import { useResume } from "../context/ResumeContext";
 function ResumePreview() {
   const { resumeData } = useResume();
 
-  const { personal, education } = resumeData;
+  const {
+    personal,
+    education,
+    experience,
+  } = resumeData;
+
 
   return (
     <div className="resume-preview-wrapper">
@@ -28,27 +33,38 @@ function ResumePreview() {
           <div className="resume-contact">
 
             {personal.location && (
-              <span>{personal.location}</span>
+              <span>
+                {personal.location}
+              </span>
             )}
 
             {personal.phone && (
-              <span>{personal.phone}</span>
+              <span>
+                {personal.phone}
+              </span>
             )}
 
             {personal.email && (
-              <span>{personal.email}</span>
+              <span>
+                {personal.email}
+              </span>
             )}
 
           </div>
 
+
           <div className="resume-links">
 
             {personal.linkedin && (
-              <span>{personal.linkedin}</span>
+              <span>
+                {personal.linkedin}
+              </span>
             )}
 
             {personal.github && (
-              <span>{personal.github}</span>
+              <span>
+                {personal.github}
+              </span>
             )}
 
           </div>
@@ -56,12 +72,14 @@ function ResumePreview() {
         </header>
 
 
-        {/* ================= PROFESSIONAL SUMMARY ================= */}
+        {/* ================= SUMMARY ================= */}
 
         {personal.summary && (
           <section className="resume-section">
 
-            <h2>PROFESSIONAL SUMMARY</h2>
+            <h2>
+              PROFESSIONAL SUMMARY
+            </h2>
 
             <p>
               {personal.summary}
@@ -82,19 +100,25 @@ function ResumePreview() {
             education.location ||
             education.grade
           ) && (
+
             <section className="resume-section">
 
-              <h2>EDUCATION</h2>
+              <h2>
+                EDUCATION
+              </h2>
 
               <div className="resume-entry">
 
                 {education.degree && (
                   <div className="entry-title">
+
                     <strong>
                       {education.degree}
                     </strong>
+
                   </div>
                 )}
+
 
                 <div className="entry-subtitle">
 
@@ -112,9 +136,11 @@ function ResumePreview() {
 
                 </div>
 
+
                 {(education.startYear ||
                   education.endYear ||
                   education.grade) && (
+
                   <p>
 
                     {education.startYear}
@@ -133,6 +159,7 @@ function ResumePreview() {
                     )}
 
                   </p>
+
                 )}
 
               </div>
@@ -145,27 +172,37 @@ function ResumePreview() {
 
         <section className="resume-section">
 
-          <h2>TECHNICAL SKILLS</h2>
+          <h2>
+            TECHNICAL SKILLS
+          </h2>
 
           <div className="skills-content">
 
             <p>
-              <strong>Programming Languages:</strong>{" "}
+              <strong>
+                Programming Languages:
+              </strong>{" "}
               Add your programming languages
             </p>
 
             <p>
-              <strong>Web Development:</strong>{" "}
+              <strong>
+                Web Development:
+              </strong>{" "}
               Add your web development skills
             </p>
 
             <p>
-              <strong>Databases:</strong>{" "}
+              <strong>
+                Databases:
+              </strong>{" "}
               Add your databases
             </p>
 
             <p>
-              <strong>Tools & Technologies:</strong>{" "}
+              <strong>
+                Tools & Technologies:
+              </strong>{" "}
               Add your tools and technologies
             </p>
 
@@ -176,57 +213,125 @@ function ResumePreview() {
 
         {/* ================= EXPERIENCE ================= */}
 
-        <section className="resume-section">
+        {experience.length > 0 && (
 
-          <h2>EXPERIENCE</h2>
+          <section className="resume-section">
 
-          <div className="resume-entry">
+            <h2>
+              EXPERIENCE
+            </h2>
 
-            <div className="entry-title">
-              <strong>Job Title</strong>
-            </div>
 
-            <div className="entry-subtitle">
+            {experience.map((item, index) => (
 
-              <span>
-                Company Name
-              </span>
+              <div
+                className="resume-entry"
+                key={index}
+              >
 
-              <span>
-                Location
-              </span>
+                {/* Job Title */}
 
-            </div>
+                {item.jobTitle && (
 
-            <ul>
+                  <div className="entry-title">
 
-              <li>
-                Your responsibility or achievement
-              </li>
+                    <strong>
+                      {item.jobTitle}
+                    </strong>
 
-              <li>
-                Your responsibility or achievement
-              </li>
+                  </div>
 
-            </ul>
+                )}
 
-          </div>
 
-        </section>
+                {/* Company + Location */}
+
+                {(item.company ||
+                  item.location) && (
+
+                  <div className="entry-subtitle">
+
+                    <span>
+                      {item.company}
+                    </span>
+
+                    <span>
+                      {item.location}
+                    </span>
+
+                  </div>
+
+                )}
+
+
+                {/* Employment + Dates */}
+
+                {(item.employmentType ||
+                  item.startDate ||
+                  item.endDate) && (
+
+                  <p>
+
+                    {item.employmentType}
+
+                    {item.startDate && (
+                      <>
+                        {" | "}
+                        {item.startDate}
+                      </>
+                    )}
+
+                    {item.endDate && (
+                      <>
+                        {" - "}
+                        {item.endDate}
+                      </>
+                    )}
+
+                  </p>
+
+                )}
+
+
+                {/* Description */}
+
+                {item.description && (
+
+                  <ul>
+
+                    <li>
+                      {item.description}
+                    </li>
+
+                  </ul>
+
+                )}
+
+              </div>
+
+            ))}
+
+          </section>
+
+        )}
 
 
         {/* ================= PROJECTS ================= */}
 
         <section className="resume-section">
 
-          <h2>PROJECTS</h2>
+          <h2>
+            PROJECTS
+          </h2>
 
           <div className="resume-entry">
 
             <div className="project-title">
+
               <strong>
                 Project Name
               </strong>
+
             </div>
 
             <p className="tech-stack">
@@ -234,7 +339,6 @@ function ResumePreview() {
               <strong>
                 Tech Stack:
               </strong>{" "}
-
               Add technologies used
 
             </p>
@@ -260,7 +364,9 @@ function ResumePreview() {
 
         <section className="resume-section">
 
-          <h2>CERTIFICATIONS</h2>
+          <h2>
+            CERTIFICATIONS
+          </h2>
 
           <ul>
 
@@ -277,7 +383,9 @@ function ResumePreview() {
 
         <section className="resume-section">
 
-          <h2>ACHIEVEMENTS</h2>
+          <h2>
+            ACHIEVEMENTS
+          </h2>
 
           <ul>
 
@@ -298,7 +406,9 @@ function ResumePreview() {
 
         <section className="resume-section">
 
-          <h2>LANGUAGES</h2>
+          <h2>
+            LANGUAGES
+          </h2>
 
           <p>
             Add languages you know

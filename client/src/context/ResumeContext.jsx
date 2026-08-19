@@ -15,7 +15,14 @@ export function ResumeProvider({ children }) {
       summary: "",
     },
 
-    education: [],
+    education: {
+      degree: "",
+      institution: "",
+      startYear: "",
+      endYear: "",
+      location: "",
+      grade: "",
+    },
 
     experience: [],
 
@@ -39,9 +46,12 @@ export function ResumeProvider({ children }) {
     customSections: [],
   });
 
+  /* ================= PERSONAL ================= */
+
   const updatePersonal = (field, value) => {
     setResumeData((prev) => ({
       ...prev,
+
       personal: {
         ...prev.personal,
         [field]: value,
@@ -49,12 +59,18 @@ export function ResumeProvider({ children }) {
     }));
   };
 
+
+  /* ================= RESUME DATA ================= */
+
   const updateResumeData = (section, data) => {
     setResumeData((prev) => ({
       ...prev,
       [section]: data,
     }));
   };
+
+
+  /* ================= RESET ================= */
 
   const resetResume = () => {
     setResumeData({
@@ -70,14 +86,16 @@ export function ResumeProvider({ children }) {
       },
 
       education: {
-  degree: "",
-  institution: "",
-  startYear: "",
-  endYear: "",
-  location: "",
-  grade: "",
-},
+        degree: "",
+        institution: "",
+        startYear: "",
+        endYear: "",
+        location: "",
+        grade: "",
+      },
+
       experience: [],
+
       projects: [],
 
       skills: {
@@ -88,12 +106,17 @@ export function ResumeProvider({ children }) {
       },
 
       certifications: [],
+
       achievements: [],
+
       languages: [],
+
       references: [],
+
       customSections: [],
     });
   };
+
 
   return (
     <ResumeContext.Provider
@@ -110,11 +133,14 @@ export function ResumeProvider({ children }) {
   );
 }
 
+
 export function useResume() {
   const context = useContext(ResumeContext);
 
   if (!context) {
-    throw new Error("useResume must be used inside ResumeProvider");
+    throw new Error(
+      "useResume must be used inside ResumeProvider"
+    );
   }
 
   return context;
