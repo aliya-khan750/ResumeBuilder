@@ -29,10 +29,9 @@ export function ResumeProvider({ children }) {
     projects: [],
 
     skills: {
-      programmingLanguages: "",
-      webDevelopment: "",
-      databases: "",
-      tools: "",
+      technicalSkills: "",
+      toolsTechnologies: "",
+      softSkills: "",
     },
 
     certifications: [],
@@ -59,7 +58,6 @@ export function ResumeProvider({ children }) {
     }));
   };
 
-
   /* ================= RESUME DATA ================= */
 
   const updateResumeData = (section, data) => {
@@ -68,7 +66,6 @@ export function ResumeProvider({ children }) {
       [section]: data,
     }));
   };
-
 
   /* ================= RESET ================= */
 
@@ -99,10 +96,9 @@ export function ResumeProvider({ children }) {
       projects: [],
 
       skills: {
-        programmingLanguages: "",
-        webDevelopment: "",
-        databases: "",
-        tools: "",
+        technicalSkills: "",
+        toolsTechnologies: "",
+        softSkills: "",
       },
 
       certifications: [],
@@ -116,7 +112,6 @@ export function ResumeProvider({ children }) {
       customSections: [],
     });
   };
-
 
   return (
     <ResumeContext.Provider
@@ -132,7 +127,6 @@ export function ResumeProvider({ children }) {
     </ResumeContext.Provider>
   );
 }
-
 
 export function useResume() {
   const context = useContext(ResumeContext);

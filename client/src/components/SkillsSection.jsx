@@ -1,4 +1,17 @@
+import { useResume } from "../context/ResumeContext";
+
 function SkillsSection() {
+  const { resumeData, updateResumeData } = useResume();
+
+  const skills = resumeData.skills;
+
+  const updateSkill = (field, value) => {
+    updateResumeData("skills", {
+      ...skills,
+      [field]: value,
+    });
+  };
+
   return (
     <div className="editor-section">
 
@@ -13,28 +26,72 @@ function SkillsSection() {
 
       <div className="form-grid">
 
+        {/* Technical Skills */}
+
         <div className="form-group full-width">
-          <label>Technical Skills</label>
+
+          <label>
+            Technical Skills
+          </label>
+
           <input
             type="text"
             placeholder="e.g. React, JavaScript, Node.js, MongoDB"
+            value={skills.technicalSkills || ""}
+            onChange={(e) =>
+              updateSkill(
+                "technicalSkills",
+                e.target.value
+              )
+            }
           />
+
         </div>
 
+
+        {/* Tools & Technologies */}
+
         <div className="form-group full-width">
-          <label>Tools & Technologies</label>
+
+          <label>
+            Tools & Technologies
+          </label>
+
           <input
             type="text"
             placeholder="e.g. Git, GitHub, VS Code, Docker"
+            value={skills.toolsTechnologies || ""}
+            onChange={(e) =>
+              updateSkill(
+                "toolsTechnologies",
+                e.target.value
+              )
+            }
           />
+
         </div>
 
+
+        {/* Soft Skills */}
+
         <div className="form-group full-width">
-          <label>Soft Skills</label>
+
+          <label>
+            Soft Skills
+          </label>
+
           <input
             type="text"
             placeholder="e.g. Communication, Leadership, Problem Solving"
+            value={skills.softSkills || ""}
+            onChange={(e) =>
+              updateSkill(
+                "softSkills",
+                e.target.value
+              )
+            }
           />
+
         </div>
 
       </div>

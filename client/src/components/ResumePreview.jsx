@@ -8,8 +8,8 @@ function ResumePreview() {
     personal,
     education,
     experience,
+    skills,
   } = resumeData;
-
 
   return (
     <div className="resume-preview-wrapper">
@@ -52,7 +52,6 @@ function ResumePreview() {
 
           </div>
 
-
           <div className="resume-links">
 
             {personal.linkedin && (
@@ -72,7 +71,7 @@ function ResumePreview() {
         </header>
 
 
-        {/* ================= SUMMARY ================= */}
+        {/* ================= PROFESSIONAL SUMMARY ================= */}
 
         {personal.summary && (
           <section className="resume-section">
@@ -119,7 +118,6 @@ function ResumePreview() {
                   </div>
                 )}
 
-
                 <div className="entry-subtitle">
 
                   {education.institution && (
@@ -135,7 +133,6 @@ function ResumePreview() {
                   )}
 
                 </div>
-
 
                 {(education.startYear ||
                   education.endYear ||
@@ -170,45 +167,61 @@ function ResumePreview() {
 
         {/* ================= TECHNICAL SKILLS ================= */}
 
-        <section className="resume-section">
+        {skills &&
+          (
+            skills.technicalSkills ||
+            skills.toolsTechnologies ||
+            skills.softSkills
+          ) && (
 
-          <h2>
-            TECHNICAL SKILLS
-          </h2>
+            <section className="resume-section">
 
-          <div className="skills-content">
+              <h2>
+                TECHNICAL SKILLS
+              </h2>
 
-            <p>
-              <strong>
-                Programming Languages:
-              </strong>{" "}
-              Add your programming languages
-            </p>
+              <div className="skills-content">
 
-            <p>
-              <strong>
-                Web Development:
-              </strong>{" "}
-              Add your web development skills
-            </p>
+                {skills.technicalSkills && (
+                  <p>
 
-            <p>
-              <strong>
-                Databases:
-              </strong>{" "}
-              Add your databases
-            </p>
+                    <strong>
+                      Technical Skills:
+                    </strong>{" "}
 
-            <p>
-              <strong>
-                Tools & Technologies:
-              </strong>{" "}
-              Add your tools and technologies
-            </p>
+                    {skills.technicalSkills}
 
-          </div>
+                  </p>
+                )}
 
-        </section>
+                {skills.toolsTechnologies && (
+                  <p>
+
+                    <strong>
+                      Tools & Technologies:
+                    </strong>{" "}
+
+                    {skills.toolsTechnologies}
+
+                  </p>
+                )}
+
+                {skills.softSkills && (
+                  <p>
+
+                    <strong>
+                      Soft Skills:
+                    </strong>{" "}
+
+                    {skills.softSkills}
+
+                  </p>
+                )}
+
+              </div>
+
+            </section>
+          )}
 
 
         {/* ================= EXPERIENCE ================= */}
@@ -221,7 +234,6 @@ function ResumePreview() {
               EXPERIENCE
             </h2>
 
-
             {experience.map((item, index) => (
 
               <div
@@ -229,10 +241,7 @@ function ResumePreview() {
                 key={index}
               >
 
-                {/* Job Title */}
-
                 {item.jobTitle && (
-
                   <div className="entry-title">
 
                     <strong>
@@ -240,11 +249,7 @@ function ResumePreview() {
                     </strong>
 
                   </div>
-
                 )}
-
-
-                {/* Company + Location */}
 
                 {(item.company ||
                   item.location) && (
@@ -260,11 +265,7 @@ function ResumePreview() {
                     </span>
 
                   </div>
-
                 )}
-
-
-                {/* Employment + Dates */}
 
                 {(item.employmentType ||
                   item.startDate ||
@@ -289,14 +290,9 @@ function ResumePreview() {
                     )}
 
                   </p>
-
                 )}
 
-
-                {/* Description */}
-
                 {item.description && (
-
                   <ul>
 
                     <li>
@@ -304,7 +300,6 @@ function ResumePreview() {
                     </li>
 
                   </ul>
-
                 )}
 
               </div>
@@ -312,7 +307,6 @@ function ResumePreview() {
             ))}
 
           </section>
-
         )}
 
 
@@ -339,6 +333,7 @@ function ResumePreview() {
               <strong>
                 Tech Stack:
               </strong>{" "}
+
               Add technologies used
 
             </p>
