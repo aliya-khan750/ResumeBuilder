@@ -1,0 +1,455 @@
+/* =====================================================
+   PREVIEW WRAPPER
+===================================================== */
+
+.resume-preview-wrapper {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: flex-start;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  padding: 0;
+}
+
+
+/* =====================================================
+   RESUME PAPER
+===================================================== */
+
+.resume-paper {
+  width: 430px;
+  height: 608px;
+
+  min-width: 430px;
+  min-height: 608px;
+
+  max-width: 430px;
+  max-height: 608px;
+
+  flex-shrink: 0;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 8px;
+
+  line-height: 1.35;
+
+  padding: 30px 34px;
+
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.12);
+
+  transform: none;
+
+  overflow: hidden;
+}t
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.resume-header {
+  text-align: center;
+
+  padding-bottom: 3%;
+
+  margin-bottom: 3%;
+
+  border-bottom: 1px solid #111111;
+}
+
+
+/* =====================================================
+   NAME
+===================================================== */
+
+.resume-header h1 {
+  margin: 0 0 5px;
+
+  font-size: clamp(21px, 3vw, 29px);
+
+  font-weight: 700;
+
+  letter-spacing: 1.4px;
+}
+
+
+/* =====================================================
+   CONTACT
+===================================================== */
+
+.resume-contact {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 3px 8px;
+
+  font-size: 8.5px;
+}
+
+
+.resume-contact span:not(:last-child)::after {
+  content: "|";
+
+  margin-left: 8px;
+
+  color: #555555;
+}
+
+
+/* =====================================================
+   LINKS
+===================================================== */
+
+.resume-links {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-top: 4px;
+
+  font-size: 8.5px;
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+.resume-section {
+  margin-bottom: 3.5%;
+}
+
+
+/* =====================================================
+   SECTION HEADING
+===================================================== */
+
+.resume-section h2 {
+  margin: 0 0 5px;
+
+  padding-bottom: 3px;
+
+  border-bottom: 1px solid #222222;
+
+  font-size: 9.5px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* =====================================================
+   PARAGRAPH
+===================================================== */
+
+.resume-section p {
+  margin: 3px 0;
+
+  font-size: 8.5px;
+
+  line-height: 1.4;
+}
+
+
+/* =====================================================
+   PLACEHOLDER
+===================================================== */
+
+.placeholder-text {
+  color: #333333;
+}
+
+
+/* =====================================================
+   ENTRY
+===================================================== */
+
+.resume-entry {
+  margin-bottom: 3%;
+}
+
+
+/* =====================================================
+   ENTRY TITLE
+===================================================== */
+
+.entry-title {
+  margin-bottom: 2px;
+
+  font-size: 9px;
+}
+
+
+.entry-title strong {
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   ENTRY SUBTITLE
+===================================================== */
+
+.entry-subtitle {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: baseline;
+
+  gap: 10px;
+
+  font-size: 8.2px;
+
+  font-style: italic;
+}
+
+
+/* =====================================================
+   LISTS
+===================================================== */
+
+.resume-section ul {
+  margin: 4px 0 0;
+
+  padding-left: 15px;
+}
+
+
+.resume-section li {
+  margin-bottom: 2px;
+
+  font-size: 8.5px;
+
+  line-height: 1.4;
+}
+
+
+/* =====================================================
+   TECHNICAL SKILLS
+===================================================== */
+
+.skills-content p {
+  margin: 3px 0;
+
+  font-size: 8.5px;
+}
+
+
+.skills-content strong {
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   PROJECTS
+===================================================== */
+
+.project-title {
+  margin-bottom: 2px;
+
+  font-size: 9px;
+}
+
+
+.project-title strong {
+  font-weight: 700;
+}
+
+
+.tech-stack {
+  margin: 2px 0 !important;
+
+  font-size: 8.2px !important;
+}
+
+
+/* =====================================================
+   PREVIEW CONTAINER
+===================================================== */
+
+.preview-container {
+  width: 100%;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PREVIEW WRAPPER INSIDE CONTAINER
+===================================================== */
+
+.preview-container .resume-preview-wrapper {
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   LARGE LAPTOP
+===================================================== */
+
+@media (max-width: 1400px) {
+
+  .resume-paper {
+    width: 100%;
+
+    max-width: 590px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL LAPTOP
+===================================================== */
+
+@media (max-width: 1200px) {
+
+  .resume-paper {
+    width: 100%;
+
+    max-width: 550px;
+
+    padding: 6.5% 7.5%;
+  }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .resume-preview-wrapper {
+    overflow: auto;
+
+    justify-content: center;
+  }
+
+  .resume-paper {
+    width: 90%;
+
+    max-width: 590px;
+
+    flex-shrink: 0;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .resume-preview-wrapper {
+    overflow: auto;
+
+    padding: 10px;
+  }
+
+  .resume-paper {
+    width: 95%;
+
+    max-width: 500px;
+
+    padding: 7% 8%;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .resume-paper {
+    width: 96%;
+
+    padding: 7% 7%;
+  }
+
+}
+
+
+/* =====================================================
+   PRINT / PDF
+===================================================== */
+
+@media print {
+
+  .resume-preview-wrapper {
+    width: 210mm;
+
+    height: 297mm;
+
+    padding: 0;
+
+    overflow: visible;
+  }
+
+  .resume-paper {
+    width: 210mm;
+
+    max-width: none;
+
+    height: 297mm;
+
+    aspect-ratio: auto;
+
+    padding: 15mm 16mm;
+
+    box-shadow: none;
+
+    overflow: visible;
+
+    font-size: 11px;
+  }
+
+}

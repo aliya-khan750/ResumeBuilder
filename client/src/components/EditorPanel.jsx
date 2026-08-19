@@ -1,4 +1,7 @@
 import "./EditorPanel.css";
+
+import { useResume } from "../context/ResumeContext";
+
 import ExperienceSection from "./ExperienceSection";
 import EducationSection from "./EducationSection";
 import SkillsSection from "./SkillsSection";
@@ -10,6 +13,10 @@ import ReferencesSection from "./ReferencesSection";
 import CustomSection from "./CustomSection";
 
 function EditorPanel() {
+  const { resumeData, updatePersonal } = useResume();
+
+  const personal = resumeData.personal;
+
   return (
     <section className="editor-panel">
 
@@ -21,6 +28,7 @@ function EditorPanel() {
           Save
         </button>
       </div>
+
 
       {/* Personal Information */}
       <div className="editor-section">
@@ -34,70 +42,113 @@ function EditorPanel() {
           <span>⌃</span>
         </div>
 
+
         <div className="form-grid">
 
           {/* Full Name */}
           <div className="form-group">
             <label>Full Name</label>
+
             <input
               type="text"
               placeholder="Enter your full name"
+              value={personal.fullName}
+              onChange={(e) =>
+                updatePersonal("fullName", e.target.value)
+              }
             />
           </div>
+
 
           {/* Job Title */}
           <div className="form-group">
             <label>Job Title</label>
+
             <input
               type="text"
               placeholder="e.g. Full Stack Developer"
+              value={personal.jobTitle}
+              onChange={(e) =>
+                updatePersonal("jobTitle", e.target.value)
+              }
             />
           </div>
+
 
           {/* Email */}
           <div className="form-group">
             <label>Email</label>
+
             <input
               type="email"
               placeholder="your@email.com"
+              value={personal.email}
+              onChange={(e) =>
+                updatePersonal("email", e.target.value)
+              }
             />
           </div>
+
 
           {/* Phone */}
           <div className="form-group">
             <label>Phone</label>
+
             <input
               type="text"
               placeholder="+91 12345 67890"
+              value={personal.phone}
+              onChange={(e) =>
+                updatePersonal("phone", e.target.value)
+              }
             />
           </div>
+
 
           {/* Location */}
           <div className="form-group full-width">
             <label>Location</label>
+
             <input
               type="text"
               placeholder="City, State, Country"
+              value={personal.location}
+              onChange={(e) =>
+                updatePersonal("location", e.target.value)
+              }
             />
           </div>
+
 
           {/* LinkedIn */}
           <div className="form-group">
             <label>LinkedIn</label>
+
             <input
               type="text"
               placeholder="linkedin.com/in/username"
+              value={personal.linkedin}
+              onChange={(e) =>
+                updatePersonal("linkedin", e.target.value)
+              }
             />
           </div>
+
 
           {/* GitHub */}
           <div className="form-group">
             <label>GitHub</label>
+
             <input
               type="text"
               placeholder="github.com/username"
+              value={personal.github}
+              onChange={(e) =>
+                updatePersonal("github", e.target.value)
+              }
             />
           </div>
+
 
           {/* Professional Summary */}
           <div className="form-group full-width">
@@ -106,31 +157,52 @@ function EditorPanel() {
             <textarea
               rows="5"
               placeholder="Write a short professional summary..."
-            ></textarea>
+              value={personal.summary}
+              onChange={(e) =>
+                updatePersonal("summary", e.target.value)
+              }
+            />
           </div>
 
         </div>
 
       </div>
 
-      {/* Experience Section */}
-      <ExperienceSection />
-      <EducationSection />
-      {/* Skills Section */}
-     <SkillsSection />
-     {/* Projects Section */}
-      <ProjectsSection /> 
-      {/* Certifications Section */}
-<CertificationsSection /> 
 
-{/* Achievements Section */}
-<AchievementsSection />
-{/* Languages Section */}
-<LanguagesSection />
-{/* References Section */}
-<ReferencesSection />
-{/* Custom Section */}
-<CustomSection />
+      {/* Experience */}
+      <ExperienceSection />
+
+
+      {/* Education */}
+      <EducationSection />
+
+
+      {/* Skills */}
+      <SkillsSection />
+
+
+      {/* Projects */}
+      <ProjectsSection />
+
+
+      {/* Certifications */}
+      <CertificationsSection />
+
+
+      {/* Achievements */}
+      <AchievementsSection />
+
+
+      {/* Languages */}
+      <LanguagesSection />
+
+
+      {/* References */}
+      <ReferencesSection />
+
+
+      {/* Custom Section */}
+      <CustomSection />
 
     </section>
   );
