@@ -3,7 +3,11 @@ import { useResume } from "../context/ResumeContext";
 function SkillsSection() {
   const { resumeData, updateResumeData } = useResume();
 
-  const skills = resumeData.skills;
+  const skills = resumeData.skills || {
+    technicalSkills: "",
+    toolsTechnologies: "",
+    softSkills: "",
+  };
 
   const updateSkill = (field, value) => {
     updateResumeData("skills", {
@@ -15,14 +19,22 @@ function SkillsSection() {
   return (
     <div className="editor-section">
 
+      {/* ================= HEADER ================= */}
+
       <div className="section-title">
         <div>
           <h3>Skills</h3>
-          <p>Add your technical and professional skills.</p>
+
+          <p>
+            Add your technical and professional skills.
+          </p>
         </div>
 
         <span>⌃</span>
       </div>
+
+
+      {/* ================= SKILLS ================= */}
 
       <div className="form-grid">
 
@@ -37,7 +49,7 @@ function SkillsSection() {
           <input
             type="text"
             placeholder="e.g. React, JavaScript, Node.js, MongoDB"
-            value={skills.technicalSkills || ""}
+            value={skills.technicalSkills}
             onChange={(e) =>
               updateSkill(
                 "technicalSkills",
@@ -60,7 +72,7 @@ function SkillsSection() {
           <input
             type="text"
             placeholder="e.g. Git, GitHub, VS Code, Docker"
-            value={skills.toolsTechnologies || ""}
+            value={skills.toolsTechnologies}
             onChange={(e) =>
               updateSkill(
                 "toolsTechnologies",
@@ -83,7 +95,7 @@ function SkillsSection() {
           <input
             type="text"
             placeholder="e.g. Communication, Leadership, Problem Solving"
-            value={skills.softSkills || ""}
+            value={skills.softSkills}
             onChange={(e) =>
               updateSkill(
                 "softSkills",

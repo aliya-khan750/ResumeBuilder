@@ -15,14 +15,7 @@ export function ResumeProvider({ children }) {
       summary: "",
     },
 
-    education: {
-      degree: "",
-      institution: "",
-      startYear: "",
-      endYear: "",
-      location: "",
-      grade: "",
-    },
+    education: [],
 
     experience: [],
 
@@ -82,14 +75,7 @@ export function ResumeProvider({ children }) {
         summary: "",
       },
 
-      education: {
-        degree: "",
-        institution: "",
-        startYear: "",
-        endYear: "",
-        location: "",
-        grade: "",
-      },
+      education: [],
 
       experience: [],
 
@@ -127,6 +113,8 @@ export function ResumeProvider({ children }) {
     </ResumeContext.Provider>
   );
 }
+
+/* ================= USE RESUME ================= */
 
 export function useResume() {
   const context = useContext(ResumeContext);

@@ -6,9 +6,15 @@ function ResumePreview() {
 
   const {
     personal,
-    education,
-    experience,
-    skills,
+    education = [],
+    experience = [],
+    skills = {},
+    projects = [],
+    certifications = [],
+    achievements = [],
+    languages = [],
+    references = [],
+    customSections = [],
   } = resumeData;
 
   return (
@@ -90,144 +96,141 @@ function ResumePreview() {
 
         {/* ================= EDUCATION ================= */}
 
-        {education &&
-          (
-            education.degree ||
-            education.institution ||
-            education.startYear ||
-            education.endYear ||
-            education.location ||
-            education.grade
-          ) && (
+        {education.length > 0 && (
+          <section className="resume-section">
 
-            <section className="resume-section">
+            <h2>
+              EDUCATION
+            </h2>
 
-              <h2>
-                EDUCATION
-              </h2>
+            {education.map((item, index) => (
 
-              <div className="resume-entry">
+              <div
+                className="resume-entry"
+                key={index}
+              >
 
-                {education.degree && (
+                {item.degree && (
                   <div className="entry-title">
 
                     <strong>
-                      {education.degree}
+                      {item.degree}
                     </strong>
 
                   </div>
                 )}
 
-                <div className="entry-subtitle">
+                {(item.institution ||
+                  item.location) && (
 
-                  {education.institution && (
-                    <span>
-                      {education.institution}
-                    </span>
-                  )}
+                  <div className="entry-subtitle">
 
-                  {education.location && (
-                    <span>
-                      {education.location}
-                    </span>
-                  )}
+                    {item.institution && (
+                      <span>
+                        {item.institution}
+                      </span>
+                    )}
 
-                </div>
+                    {item.location && (
+                      <span>
+                        {item.location}
+                      </span>
+                    )}
 
-                {(education.startYear ||
-                  education.endYear ||
-                  education.grade) && (
+                  </div>
+                )}
+
+                {(item.startYear ||
+                  item.endYear ||
+                  item.grade) && (
 
                   <p>
 
-                    {education.startYear}
+                    {item.startYear}
 
-                    {education.startYear &&
-                      education.endYear &&
+                    {item.startYear &&
+                      item.endYear &&
                       " - "}
 
-                    {education.endYear}
+                    {item.endYear}
 
-                    {education.grade && (
+                    {item.grade && (
                       <>
                         {" | "}
-                        {education.grade}
+                        {item.grade}
                       </>
                     )}
 
                   </p>
-
                 )}
 
               </div>
 
-            </section>
-          )}
+            ))}
+
+          </section>
+        )}
 
 
         {/* ================= TECHNICAL SKILLS ================= */}
 
-        {skills &&
-          (
-            skills.technicalSkills ||
-            skills.toolsTechnologies ||
-            skills.softSkills
-          ) && (
+        {(skills.technicalSkills ||
+          skills.toolsTechnologies ||
+          skills.softSkills) && (
 
-            <section className="resume-section">
+          <section className="resume-section">
 
-              <h2>
-                TECHNICAL SKILLS
-              </h2>
+            <h2>
+              TECHNICAL SKILLS
+            </h2>
 
-              <div className="skills-content">
+            <div className="skills-content">
 
-                {skills.technicalSkills && (
-                  <p>
+              {skills.technicalSkills && (
+                <p>
 
-                    <strong>
-                      Technical Skills:
-                    </strong>{" "}
+                  <strong>
+                    Technical Skills:
+                  </strong>{" "}
 
-                    {skills.technicalSkills}
+                  {skills.technicalSkills}
 
-                  </p>
-                )}
+                </p>
+              )}
 
-                {skills.toolsTechnologies && (
-                  <p>
+              {skills.toolsTechnologies && (
+                <p>
 
-                    <strong>
-                      Tools & Technologies:
-                    </strong>{" "}
+                  <strong>
+                    Tools & Technologies:
+                  </strong>{" "}
 
-                    {skills.toolsTechnologies}
+                  {skills.toolsTechnologies}
 
-                  </p>
-                )}
+                </p>
+              )}
 
-                {skills.softSkills && (
-                  <p>
+              {skills.softSkills && (
+                <p>
 
-                    <strong>
-                      Soft Skills:
-                    </strong>{" "}
+                  <strong>
+                    Soft Skills:
+                  </strong>{" "}
 
-                    {skills.softSkills}
+                  {skills.softSkills}
 
-                  </p>
-                )}
+                </p>
+              )}
 
-              </div>
+            </div>
 
-            </section>
-          )}
+          </section>
+        )}
 
 
         {/* ================= EXPERIENCE ================= */}
 
         {experience.length > 0 && (
-
           <section className="resume-section">
 
             <h2>
@@ -256,13 +259,17 @@ function ResumePreview() {
 
                   <div className="entry-subtitle">
 
-                    <span>
-                      {item.company}
-                    </span>
+                    {item.company && (
+                      <span>
+                        {item.company}
+                      </span>
+                    )}
 
-                    <span>
-                      {item.location}
-                    </span>
+                    {item.location && (
+                      <span>
+                        {item.location}
+                      </span>
+                    )}
 
                   </div>
                 )}
@@ -312,104 +319,295 @@ function ResumePreview() {
 
         {/* ================= PROJECTS ================= */}
 
-        <section className="resume-section">
+        {projects.length > 0 && (
+          <section className="resume-section">
 
-          <h2>
-            PROJECTS
-          </h2>
+            <h2>
+              PROJECTS
+            </h2>
 
-          <div className="resume-entry">
+            {projects.map((project, index) => (
 
-            <div className="project-title">
+              <div
+                className="resume-entry"
+                key={index}
+              >
 
-              <strong>
-                Project Name
-              </strong>
+                {project.projectName && (
+                  <div className="project-title">
 
-            </div>
+                    <strong>
+                      {project.projectName}
+                    </strong>
 
-            <p className="tech-stack">
+                  </div>
+                )}
 
-              <strong>
-                Tech Stack:
-              </strong>{" "}
+                {project.technologies && (
+                  <p className="tech-stack">
 
-              Add technologies used
+                    <strong>
+                      Tech Stack:
+                    </strong>{" "}
 
-            </p>
+                    {project.technologies}
 
-            <ul>
+                  </p>
+                )}
 
-              <li>
-                Describe your project and its main functionality.
-              </li>
+                {project.projectLink && (
+                  <p className="tech-stack">
 
-              <li>
-                Describe your contribution and key features.
-              </li>
+                    <strong>
+                      Link:
+                    </strong>{" "}
 
-            </ul>
+                    {project.projectLink}
 
-          </div>
+                  </p>
+                )}
 
-        </section>
+                {project.description && (
+                  <ul>
+
+                    <li>
+                      {project.description}
+                    </li>
+
+                  </ul>
+                )}
+
+              </div>
+
+            ))}
+
+          </section>
+        )}
 
 
         {/* ================= CERTIFICATIONS ================= */}
 
-        <section className="resume-section">
+        {certifications.length > 0 && (
+          <section className="resume-section">
 
-          <h2>
-            CERTIFICATIONS
-          </h2>
+            <h2>
+              CERTIFICATIONS
+            </h2>
 
-          <ul>
+            {certifications.map((item, index) => (
 
-            <li>
-              Certification Name — Issuing Organization
-            </li>
+              <div
+                className="resume-entry"
+                key={index}
+              >
 
-          </ul>
+                {item.name && (
+                  <div className="entry-title">
 
-        </section>
+                    <strong>
+                      {item.name}
+                    </strong>
+
+                  </div>
+                )}
+
+                {(item.organization ||
+                  item.date) && (
+
+                  <div className="entry-subtitle">
+
+                    {item.organization && (
+                      <span>
+                        {item.organization}
+                      </span>
+                    )}
+
+                    {item.date && (
+                      <span>
+                        {item.date}
+                      </span>
+                    )}
+
+                  </div>
+                )}
+
+                {item.link && (
+                  <p>
+                    {item.link}
+                  </p>
+                )}
+
+              </div>
+
+            ))}
+
+          </section>
+        )}
 
 
         {/* ================= ACHIEVEMENTS ================= */}
 
-        <section className="resume-section">
+        {achievements.length > 0 && (
+          <section className="resume-section">
 
-          <h2>
-            ACHIEVEMENTS
-          </h2>
+            <h2>
+              ACHIEVEMENTS
+            </h2>
 
-          <ul>
+            {achievements.map((item, index) => (
 
-            <li>
-              Add your achievement or award
-            </li>
+              <div
+                className="resume-entry"
+                key={index}
+              >
 
-            <li>
-              Add another achievement
-            </li>
+                {item.title && (
+                  <div className="entry-title">
 
-          </ul>
+                    <strong>
+                      {item.title}
+                    </strong>
 
-        </section>
+                  </div>
+                )}
+
+                {item.description && (
+                  <ul>
+
+                    <li>
+                      {item.description}
+                    </li>
+
+                  </ul>
+                )}
+
+              </div>
+
+            ))}
+
+          </section>
+        )}
 
 
         {/* ================= LANGUAGES ================= */}
 
-        <section className="resume-section">
+        {languages.length > 0 && (
+          <section className="resume-section">
 
-          <h2>
-            LANGUAGES
-          </h2>
+            <h2>
+              LANGUAGES
+            </h2>
 
-          <p>
-            Add languages you know
-          </p>
+            {languages.map((item, index) => (
 
-        </section>
+              <p key={index}>
+
+                <strong>
+                  {item.language}
+                </strong>
+
+                {item.proficiency && (
+                  <>
+                    {" — "}
+                    {item.proficiency}
+                  </>
+                )}
+
+              </p>
+
+            ))}
+
+          </section>
+        )}
+
+
+        {/* ================= REFERENCES ================= */}
+
+        {references.length > 0 && (
+          <section className="resume-section">
+
+            <h2>
+              REFERENCES
+            </h2>
+
+            {references.map((item, index) => (
+
+              <div
+                className="resume-entry"
+                key={index}
+              >
+
+                {item.name && (
+                  <div className="entry-title">
+
+                    <strong>
+                      {item.name}
+                    </strong>
+
+                  </div>
+                )}
+
+                {item.designation && (
+                  <p>
+                    {item.designation}
+                  </p>
+                )}
+
+                {item.company && (
+                  <p>
+                    {item.company}
+                  </p>
+                )}
+
+                {(item.email ||
+                  item.phone) && (
+
+                  <p>
+
+                    {item.email}
+
+                    {item.email &&
+                      item.phone &&
+                      " | "}
+
+                    {item.phone}
+
+                  </p>
+                )}
+
+              </div>
+
+            ))}
+
+          </section>
+        )}
+
+
+        {/* ================= CUSTOM SECTIONS ================= */}
+
+        {customSections.length > 0 &&
+          customSections.map((item, index) => (
+
+            <section
+              className="resume-section"
+              key={index}
+            >
+
+              {item.title && (
+                <h2>
+                  {item.title.toUpperCase()}
+                </h2>
+              )}
+
+              {item.content && (
+                <p>
+                  {item.content}
+                </p>
+              )}
+
+            </section>
+
+          ))}
 
       </div>
 

@@ -20,7 +20,8 @@ function EditorPanel() {
   return (
     <section className="editor-panel">
 
-      {/* Header */}
+      {/* ================= HEADER ================= */}
+
       <div className="editor-header">
         <h2>Resume Editor</h2>
 
@@ -30,23 +31,31 @@ function EditorPanel() {
       </div>
 
 
-      {/* Personal Information */}
+      {/* ================= PERSONAL INFORMATION ================= */}
+
       <div className="editor-section">
 
         <div className="section-title">
+
           <div>
             <h3>Personal Information</h3>
-            <p>Enter your basic contact information.</p>
+
+            <p>
+              Enter your basic contact information.
+            </p>
           </div>
 
           <span>⌃</span>
+
         </div>
 
 
         <div className="form-grid">
 
           {/* Full Name */}
+
           <div className="form-group">
+
             <label>Full Name</label>
 
             <input
@@ -54,14 +63,20 @@ function EditorPanel() {
               placeholder="Enter your full name"
               value={personal.fullName}
               onChange={(e) =>
-                updatePersonal("fullName", e.target.value)
+                updatePersonal(
+                  "fullName",
+                  e.target.value
+                )
               }
             />
+
           </div>
 
 
           {/* Job Title */}
+
           <div className="form-group">
+
             <label>Job Title</label>
 
             <input
@@ -69,14 +84,20 @@ function EditorPanel() {
               placeholder="e.g. Full Stack Developer"
               value={personal.jobTitle}
               onChange={(e) =>
-                updatePersonal("jobTitle", e.target.value)
+                updatePersonal(
+                  "jobTitle",
+                  e.target.value
+                )
               }
             />
+
           </div>
 
 
           {/* Email */}
+
           <div className="form-group">
+
             <label>Email</label>
 
             <input
@@ -84,14 +105,20 @@ function EditorPanel() {
               placeholder="your@email.com"
               value={personal.email}
               onChange={(e) =>
-                updatePersonal("email", e.target.value)
+                updatePersonal(
+                  "email",
+                  e.target.value
+                )
               }
             />
+
           </div>
 
 
           {/* Phone */}
+
           <div className="form-group">
+
             <label>Phone</label>
 
             <input
@@ -99,14 +126,20 @@ function EditorPanel() {
               placeholder="+91 12345 67890"
               value={personal.phone}
               onChange={(e) =>
-                updatePersonal("phone", e.target.value)
+                updatePersonal(
+                  "phone",
+                  e.target.value
+                )
               }
             />
+
           </div>
 
 
           {/* Location */}
+
           <div className="form-group full-width">
+
             <label>Location</label>
 
             <input
@@ -114,14 +147,20 @@ function EditorPanel() {
               placeholder="City, State, Country"
               value={personal.location}
               onChange={(e) =>
-                updatePersonal("location", e.target.value)
+                updatePersonal(
+                  "location",
+                  e.target.value
+                )
               }
             />
+
           </div>
 
 
           {/* LinkedIn */}
+
           <div className="form-group">
+
             <label>LinkedIn</label>
 
             <input
@@ -129,14 +168,20 @@ function EditorPanel() {
               placeholder="linkedin.com/in/username"
               value={personal.linkedin}
               onChange={(e) =>
-                updatePersonal("linkedin", e.target.value)
+                updatePersonal(
+                  "linkedin",
+                  e.target.value
+                )
               }
             />
+
           </div>
 
 
           {/* GitHub */}
+
           <div className="form-group">
+
             <label>GitHub</label>
 
             <input
@@ -144,24 +189,36 @@ function EditorPanel() {
               placeholder="github.com/username"
               value={personal.github}
               onChange={(e) =>
-                updatePersonal("github", e.target.value)
+                updatePersonal(
+                  "github",
+                  e.target.value
+                )
               }
             />
+
           </div>
 
 
           {/* Professional Summary */}
+
           <div className="form-group full-width">
-            <label>Professional Summary</label>
+
+            <label>
+              Professional Summary
+            </label>
 
             <textarea
               rows="5"
               placeholder="Write a short professional summary..."
               value={personal.summary}
               onChange={(e) =>
-                updatePersonal("summary", e.target.value)
+                updatePersonal(
+                  "summary",
+                  e.target.value
+                )
               }
             />
+
           </div>
 
         </div>
@@ -169,39 +226,48 @@ function EditorPanel() {
       </div>
 
 
-      {/* Experience */}
+      {/* ================= EXPERIENCE ================= */}
+
       <ExperienceSection />
 
 
-      {/* Education */}
+      {/* ================= EDUCATION ================= */}
+
       <EducationSection />
 
 
-      {/* Skills */}
+      {/* ================= SKILLS ================= */}
+
       <SkillsSection />
 
 
-      {/* Projects */}
+      {/* ================= PROJECTS ================= */}
+
       <ProjectsSection />
 
 
-      {/* Certifications */}
+      {/* ================= CERTIFICATIONS ================= */}
+
       <CertificationsSection />
 
 
-      {/* Achievements */}
+      {/* ================= ACHIEVEMENTS ================= */}
+
       <AchievementsSection />
 
 
-      {/* Languages */}
+      {/* ================= LANGUAGES ================= */}
+
       <LanguagesSection />
 
 
-      {/* References */}
+      {/* ================= REFERENCES ================= */}
+
       <ReferencesSection />
 
 
-      {/* Custom Section */}
+      {/* ================= CUSTOM SECTION ================= */}
+
       <CustomSection />
 
     </section>
