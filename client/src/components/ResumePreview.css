@@ -20,6 +20,57 @@
 
 
 /* =====================================================
+   DOWNLOAD PDF BUTTON
+===================================================== */
+
+.download-button {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  padding: 10px 20px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: #b44a2d;
+
+  color: #ffffff;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+
+  z-index: 10;
+}
+
+
+.download-button:hover {
+  background: #963c24;
+
+  transform: translateY(-1px);
+}
+
+
+.download-button:active {
+  transform: translateY(0);
+}
+
+
+/* =====================================================
    RESUME PAPER
 ===================================================== */
 
@@ -58,7 +109,7 @@
   transform: none;
 
   overflow: hidden;
-}t
+}
 
 
 /* =====================================================
@@ -88,6 +139,19 @@
   font-weight: 700;
 
   letter-spacing: 1.4px;
+}
+
+
+/* =====================================================
+   JOB TITLE
+===================================================== */
+
+.resume-header > p {
+  margin: 0 0 5px;
+
+  font-size: 10px;
+
+  font-weight: 500;
 }
 
 
@@ -127,6 +191,8 @@
   display: flex;
 
   justify-content: center;
+
+  flex-wrap: wrap;
 
   gap: 15px;
 
@@ -400,6 +466,18 @@
     padding: 7% 8%;
   }
 
+  .download-button {
+    position: fixed;
+
+    top: 10px;
+
+    right: 10px;
+
+    padding: 9px 15px;
+
+    font-size: 12px;
+  }
+
 }
 
 
@@ -423,6 +501,10 @@
 ===================================================== */
 
 @media print {
+
+  .download-button {
+    display: none;
+  }
 
   .resume-preview-wrapper {
     width: 210mm;

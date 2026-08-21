@@ -1,5 +1,6 @@
 import "./ResumePreview.css";
 import { useResume } from "../context/ResumeContext";
+import html2pdf from "html2pdf.js";
 
 function ResumePreview() {
   const { resumeData } = useResume();
@@ -17,12 +18,237 @@ function ResumePreview() {
     customSections = [],
   } = resumeData;
 
+
+  /* =====================================================
+     DOWNLOAD PDF
+  ===================================================== */
+
+  const downloadPDF = async () => {
+    const resume = document.getElementById("resume-paper");
+
+    if (!resume) {
+      alert("Resume preview not found!");
+      return;
+    }
+
+    try {
+      /* =================================================
+         FILE NAME
+      ================================================= */
+
+      const cleanName = personal.fullName?.trim()
+        ? personal.fullName
+            .trim()
+            .replace(/[^a-zA-Z0-9 ]/g, "")
+            .replace(/\s+/g, "_")
+        : "My";
+
+      const fileName = `${cleanName}_Resume.pdf`;
+
+
+      /* =================================================
+         SAVE ORIGINAL STYLES
+      ================================================= */
+
+      const originalStyles = {
+        width: resume.style.width,
+        height: resume.style.height,
+        minWidth: resume.style.minWidth,
+        minHeight: resume.style.minHeight,
+        maxWidth: resume.style.maxWidth,
+        maxHeight: resume.style.maxHeight,
+        padding: resume.style.padding,
+        boxSizing: resume.style.boxSizing,
+        transform: resume.style.transform,
+        boxShadow: resume.style.boxShadow,
+        overflow: resume.style.overflow,
+        fontSize: resume.style.fontSize,
+        lineHeight: resume.style.lineHeight,
+      };
+
+
+      /* =================================================
+         TEMPORARY A4 SIZE
+
+         A4 at 96 DPI:
+         794px × 1123px
+      ================================================= */
+
+      resume.style.width = "794px";
+      resume.style.height = "1123px";
+
+      resume.style.minWidth = "794px";
+      resume.style.minHeight = "1123px";
+
+      resume.style.maxWidth = "794px";
+      resume.style.maxHeight = "1123px";
+
+      resume.style.padding = "55px 65px";
+
+      resume.style.boxSizing = "border-box";
+
+      resume.style.transform = "none";
+
+      resume.style.boxShadow = "none";
+
+      resume.style.overflow = "hidden";
+
+      resume.style.fontSize = "11px";
+
+      resume.style.lineHeight = "1.4";
+
+
+      /* =================================================
+         FORCE WHITE BACKGROUND
+      ================================================= */
+
+      resume.style.backgroundColor = "#ffffff";
+
+      resume.style.color = "#111111";
+
+
+      /* =================================================
+         WAIT FOR BROWSER RENDER
+      ================================================= */
+
+      await new Promise((resolve) => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(resolve);
+        });
+      });
+
+
+      /* =================================================
+         PDF OPTIONS
+      ================================================= */
+
+      const options = {
+        margin: 0,
+
+        filename: fileName,
+
+        image: {
+          type: "jpeg",
+          quality: 1,
+        },
+
+        html2canvas: {
+          scale: 2,
+
+          useCORS: true,
+
+          allowTaint: true,
+
+          backgroundColor: "#ffffff",
+
+          logging: false,
+
+          scrollX: 0,
+
+          scrollY: 0,
+
+          windowWidth: 794,
+
+          windowHeight: 1123,
+        },
+
+        jsPDF: {
+          unit: "mm",
+
+          format: "a4",
+
+          orientation: "portrait",
+
+          compress: true,
+        },
+
+        pagebreak: {
+          mode: ["css", "legacy"],
+        },
+      };
+
+
+      /* =================================================
+         GENERATE PDF
+      ================================================= */
+
+      await html2pdf()
+        .set(options)
+        .from(resume)
+        .save();
+
+
+      /* =================================================
+         RESTORE LIVE PREVIEW
+      ================================================= */
+
+      resume.style.width = originalStyles.width;
+      resume.style.height = originalStyles.height;
+
+      resume.style.minWidth = originalStyles.minWidth;
+      resume.style.minHeight = originalStyles.minHeight;
+
+      resume.style.maxWidth = originalStyles.maxWidth;
+      resume.style.maxHeight = originalStyles.maxHeight;
+
+      resume.style.padding = originalStyles.padding;
+
+      resume.style.boxSizing = originalStyles.boxSizing;
+
+      resume.style.transform = originalStyles.transform;
+
+      resume.style.boxShadow = originalStyles.boxShadow;
+
+      resume.style.overflow = originalStyles.overflow;
+
+      resume.style.fontSize = originalStyles.fontSize;
+
+      resume.style.lineHeight = originalStyles.lineHeight;
+
+    } catch (error) {
+
+      console.error(
+        "PDF generation error:",
+        error
+      );
+
+      alert(
+        "Unable to generate PDF. Please try again."
+      );
+    }
+  };
+
+
   return (
     <div className="resume-preview-wrapper">
 
-      <div className="resume-paper">
 
-        {/* ================= HEADER ================= */}
+      {/* =================================================
+          DOWNLOAD BUTTON
+      ================================================= */}
+
+      <button
+        type="button"
+        className="download-button"
+        onClick={downloadPDF}
+      >
+        Download PDF
+      </button>
+
+
+      {/* =================================================
+          RESUME PAPER
+      ================================================= */}
+
+      <div
+        id="resume-paper"
+        className="resume-paper"
+      >
+
+
+        {/* =================================================
+            HEADER
+        ================================================= */}
 
         <header className="resume-header">
 
@@ -35,6 +261,7 @@ function ResumePreview() {
               {personal.jobTitle}
             </p>
           )}
+
 
           <div className="resume-contact">
 
@@ -58,6 +285,7 @@ function ResumePreview() {
 
           </div>
 
+
           <div className="resume-links">
 
             {personal.linkedin && (
@@ -77,9 +305,12 @@ function ResumePreview() {
         </header>
 
 
-        {/* ================= PROFESSIONAL SUMMARY ================= */}
+        {/* =================================================
+            PROFESSIONAL SUMMARY
+        ================================================= */}
 
         {personal.summary && (
+
           <section className="resume-section">
 
             <h2>
@@ -91,12 +322,16 @@ function ResumePreview() {
             </p>
 
           </section>
+
         )}
 
 
-        {/* ================= EDUCATION ================= */}
+        {/* =================================================
+            EDUCATION
+        ================================================= */}
 
         {education.length > 0 && (
+
           <section className="resume-section">
 
             <h2>
@@ -111,6 +346,7 @@ function ResumePreview() {
               >
 
                 {item.degree && (
+
                   <div className="entry-title">
 
                     <strong>
@@ -118,7 +354,9 @@ function ResumePreview() {
                     </strong>
 
                   </div>
+
                 )}
+
 
                 {(item.institution ||
                   item.location) && (
@@ -138,7 +376,9 @@ function ResumePreview() {
                     )}
 
                   </div>
+
                 )}
+
 
                 {(item.startYear ||
                   item.endYear ||
@@ -162,6 +402,7 @@ function ResumePreview() {
                     )}
 
                   </p>
+
                 )}
 
               </div>
@@ -169,10 +410,13 @@ function ResumePreview() {
             ))}
 
           </section>
+
         )}
 
 
-        {/* ================= TECHNICAL SKILLS ================= */}
+        {/* =================================================
+            TECHNICAL SKILLS
+        ================================================= */}
 
         {(skills.technicalSkills ||
           skills.toolsTechnologies ||
@@ -187,6 +431,7 @@ function ResumePreview() {
             <div className="skills-content">
 
               {skills.technicalSkills && (
+
                 <p>
 
                   <strong>
@@ -196,9 +441,11 @@ function ResumePreview() {
                   {skills.technicalSkills}
 
                 </p>
+
               )}
 
               {skills.toolsTechnologies && (
+
                 <p>
 
                   <strong>
@@ -208,9 +455,11 @@ function ResumePreview() {
                   {skills.toolsTechnologies}
 
                 </p>
+
               )}
 
               {skills.softSkills && (
+
                 <p>
 
                   <strong>
@@ -220,17 +469,22 @@ function ResumePreview() {
                   {skills.softSkills}
 
                 </p>
+
               )}
 
             </div>
 
           </section>
+
         )}
 
 
-        {/* ================= EXPERIENCE ================= */}
+        {/* =================================================
+            EXPERIENCE
+        ================================================= */}
 
         {experience.length > 0 && (
+
           <section className="resume-section">
 
             <h2>
@@ -245,6 +499,7 @@ function ResumePreview() {
               >
 
                 {item.jobTitle && (
+
                   <div className="entry-title">
 
                     <strong>
@@ -252,7 +507,9 @@ function ResumePreview() {
                     </strong>
 
                   </div>
+
                 )}
+
 
                 {(item.company ||
                   item.location) && (
@@ -272,7 +529,9 @@ function ResumePreview() {
                     )}
 
                   </div>
+
                 )}
+
 
                 {(item.employmentType ||
                   item.startDate ||
@@ -297,9 +556,12 @@ function ResumePreview() {
                     )}
 
                   </p>
+
                 )}
 
+
                 {item.description && (
+
                   <ul>
 
                     <li>
@@ -307,6 +569,7 @@ function ResumePreview() {
                     </li>
 
                   </ul>
+
                 )}
 
               </div>
@@ -314,12 +577,16 @@ function ResumePreview() {
             ))}
 
           </section>
+
         )}
 
 
-        {/* ================= PROJECTS ================= */}
+        {/* =================================================
+            PROJECTS
+        ================================================= */}
 
         {projects.length > 0 && (
+
           <section className="resume-section">
 
             <h2>
@@ -334,6 +601,7 @@ function ResumePreview() {
               >
 
                 {project.projectName && (
+
                   <div className="project-title">
 
                     <strong>
@@ -341,9 +609,12 @@ function ResumePreview() {
                     </strong>
 
                   </div>
+
                 )}
 
+
                 {project.technologies && (
+
                   <p className="tech-stack">
 
                     <strong>
@@ -353,9 +624,12 @@ function ResumePreview() {
                     {project.technologies}
 
                   </p>
+
                 )}
 
+
                 {project.projectLink && (
+
                   <p className="tech-stack">
 
                     <strong>
@@ -365,9 +639,12 @@ function ResumePreview() {
                     {project.projectLink}
 
                   </p>
+
                 )}
 
+
                 {project.description && (
+
                   <ul>
 
                     <li>
@@ -375,6 +652,7 @@ function ResumePreview() {
                     </li>
 
                   </ul>
+
                 )}
 
               </div>
@@ -382,12 +660,16 @@ function ResumePreview() {
             ))}
 
           </section>
+
         )}
 
 
-        {/* ================= CERTIFICATIONS ================= */}
+        {/* =================================================
+            CERTIFICATIONS
+        ================================================= */}
 
         {certifications.length > 0 && (
+
           <section className="resume-section">
 
             <h2>
@@ -402,6 +684,7 @@ function ResumePreview() {
               >
 
                 {item.name && (
+
                   <div className="entry-title">
 
                     <strong>
@@ -409,7 +692,9 @@ function ResumePreview() {
                     </strong>
 
                   </div>
+
                 )}
+
 
                 {(item.organization ||
                   item.date) && (
@@ -429,7 +714,9 @@ function ResumePreview() {
                     )}
 
                   </div>
+
                 )}
+
 
                 {item.link && (
                   <p>
@@ -442,12 +729,16 @@ function ResumePreview() {
             ))}
 
           </section>
+
         )}
 
 
-        {/* ================= ACHIEVEMENTS ================= */}
+        {/* =================================================
+            ACHIEVEMENTS
+        ================================================= */}
 
         {achievements.length > 0 && (
+
           <section className="resume-section">
 
             <h2>
@@ -462,6 +753,7 @@ function ResumePreview() {
               >
 
                 {item.title && (
+
                   <div className="entry-title">
 
                     <strong>
@@ -469,9 +761,12 @@ function ResumePreview() {
                     </strong>
 
                   </div>
+
                 )}
 
+
                 {item.description && (
+
                   <ul>
 
                     <li>
@@ -479,6 +774,7 @@ function ResumePreview() {
                     </li>
 
                   </ul>
+
                 )}
 
               </div>
@@ -486,12 +782,16 @@ function ResumePreview() {
             ))}
 
           </section>
+
         )}
 
 
-        {/* ================= LANGUAGES ================= */}
+        {/* =================================================
+            LANGUAGES
+        ================================================= */}
 
         {languages.length > 0 && (
+
           <section className="resume-section">
 
             <h2>
@@ -502,9 +802,11 @@ function ResumePreview() {
 
               <p key={index}>
 
-                <strong>
-                  {item.language}
-                </strong>
+                {item.language && (
+                  <strong>
+                    {item.language}
+                  </strong>
+                )}
 
                 {item.proficiency && (
                   <>
@@ -518,12 +820,16 @@ function ResumePreview() {
             ))}
 
           </section>
+
         )}
 
 
-        {/* ================= REFERENCES ================= */}
+        {/* =================================================
+            REFERENCES
+        ================================================= */}
 
         {references.length > 0 && (
+
           <section className="resume-section">
 
             <h2>
@@ -538,6 +844,7 @@ function ResumePreview() {
               >
 
                 {item.name && (
+
                   <div className="entry-title">
 
                     <strong>
@@ -545,6 +852,7 @@ function ResumePreview() {
                     </strong>
 
                   </div>
+
                 )}
 
                 {item.designation && (
@@ -573,6 +881,7 @@ function ResumePreview() {
                     {item.phone}
 
                   </p>
+
                 )}
 
               </div>
@@ -580,10 +889,13 @@ function ResumePreview() {
             ))}
 
           </section>
+
         )}
 
 
-        {/* ================= CUSTOM SECTIONS ================= */}
+        {/* =================================================
+            CUSTOM SECTIONS
+        ================================================= */}
 
         {customSections.length > 0 &&
           customSections.map((item, index) => (
