@@ -2,67 +2,128 @@ import { createContext, useContext, useState } from "react";
 
 const ResumeContext = createContext();
 
+/* ================= INITIAL RESUME DATA ================= */
+
+const initialResumeData = {
+  personal: {
+    fullName: "",
+    jobTitle: "",
+    email: "",
+    phone: "",
+    location: "",
+    linkedin: "",
+    github: "",
+    summary: "",
+  },
+
+  education: [],
+
+  experience: [],
+
+  projects: [],
+
+  skills: {
+    technicalSkills: "",
+    toolsTechnologies: "",
+    softSkills: "",
+  },
+
+  certifications: [],
+
+  achievements: [],
+
+  languages: [],
+
+  references: [],
+
+  customSections: [],
+};
+
+
+/* ================= RESUME PROVIDER ================= */
+
 export function ResumeProvider({ children }) {
-  const [resumeData, setResumeData] = useState({
-    personal: {
-      fullName: "",
-      jobTitle: "",
-      email: "",
-      phone: "",
-      location: "",
-      linkedin: "",
-      github: "",
-      summary: "",
-    },
 
-    education: [],
+  const [resumeData, setResumeData] = useState(() => {
 
-    experience: [],
+    const savedResume =
+      localStorage.getItem("resumeData");
 
-    projects: [],
+    if (savedResume) {
 
-    skills: {
-      technicalSkills: "",
-      toolsTechnologies: "",
-      softSkills: "",
-    },
+      try {
 
-    certifications: [],
+        return JSON.parse(savedResume);
 
-    achievements: [],
+      } catch (error) {
 
-    languages: [],
+        console.error(
+          "Error loading saved resume:",
+          error
+        );
 
-    references: [],
+        return initialResumeData;
+      }
 
-    customSections: [],
+    }
+
+    return initialResumeData;
   });
+
 
   /* ================= PERSONAL ================= */
 
   const updatePersonal = (field, value) => {
+
     setResumeData((prev) => ({
+
       ...prev,
 
       personal: {
         ...prev.personal,
         [field]: value,
       },
+
     }));
+
   };
+
 
   /* ================= RESUME DATA ================= */
 
   const updateResumeData = (section, data) => {
+
     setResumeData((prev) => ({
+
       ...prev,
+
       [section]: data,
+
     }));
+
   };
+
+
+  /* ================= SAVE RESUME ================= */
+
+  const saveResume = () => {
+
+    localStorage.setItem(
+      "resumeData",
+      JSON.stringify(resumeData)
+    );
+
+  };
+
 
   /* ================= RESET ================= */
 
   const resetResume = () => {
+
+    localStorage.removeItem(
+      "resumeData"
+    );
+
     setResumeData({
       personal: {
         fullName: "",
@@ -97,33 +158,56 @@ export function ResumeProvider({ children }) {
 
       customSections: [],
     });
+
   };
 
+
+  /* ================= PROVIDER ================= */
+
   return (
+
     <ResumeContext.Provider
       value={{
+
         resumeData,
+
         setResumeData,
+
         updatePersonal,
+
         updateResumeData,
+
+        saveResume,
+
         resetResume,
+
       }}
     >
+
       {children}
+
     </ResumeContext.Provider>
+
   );
+
 }
+
 
 /* ================= USE RESUME ================= */
 
 export function useResume() {
-  const context = useContext(ResumeContext);
+
+  const context =
+    useContext(ResumeContext);
 
   if (!context) {
+
     throw new Error(
       "useResume must be used inside ResumeProvider"
     );
+
   }
 
   return context;
+
 }

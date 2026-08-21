@@ -13,9 +13,21 @@ import ReferencesSection from "./ReferencesSection";
 import CustomSection from "./CustomSection";
 
 function EditorPanel() {
-  const { resumeData, updatePersonal } = useResume();
+  const {
+    resumeData,
+    updatePersonal,
+    saveResume,
+  } = useResume();
 
   const personal = resumeData.personal;
+
+  /* ================= SAVE RESUME ================= */
+
+  const handleSave = () => {
+    saveResume();
+
+    alert("Resume saved successfully!");
+  };
 
   return (
     <section className="editor-panel">
@@ -23,11 +35,18 @@ function EditorPanel() {
       {/* ================= HEADER ================= */}
 
       <div className="editor-header">
-        <h2>Resume Editor</h2>
 
-        <button className="save-button">
+        <h2>
+          Resume Editor
+        </h2>
+
+        <button
+          className="save-button"
+          onClick={handleSave}
+        >
           Save
         </button>
+
       </div>
 
 
@@ -38,25 +57,31 @@ function EditorPanel() {
         <div className="section-title">
 
           <div>
-            <h3>Personal Information</h3>
+            <h3>
+              Personal Information
+            </h3>
 
             <p>
               Enter your basic contact information.
             </p>
           </div>
 
-          <span>⌃</span>
+          <span>
+            ⌃
+          </span>
 
         </div>
 
 
         <div className="form-grid">
 
-          {/* Full Name */}
+          {/* ================= FULL NAME ================= */}
 
           <div className="form-group">
 
-            <label>Full Name</label>
+            <label>
+              Full Name
+            </label>
 
             <input
               type="text"
@@ -73,11 +98,13 @@ function EditorPanel() {
           </div>
 
 
-          {/* Job Title */}
+          {/* ================= JOB TITLE ================= */}
 
           <div className="form-group">
 
-            <label>Job Title</label>
+            <label>
+              Job Title
+            </label>
 
             <input
               type="text"
@@ -94,11 +121,13 @@ function EditorPanel() {
           </div>
 
 
-          {/* Email */}
+          {/* ================= EMAIL ================= */}
 
           <div className="form-group">
 
-            <label>Email</label>
+            <label>
+              Email
+            </label>
 
             <input
               type="email"
@@ -115,11 +144,13 @@ function EditorPanel() {
           </div>
 
 
-          {/* Phone */}
+          {/* ================= PHONE ================= */}
 
           <div className="form-group">
 
-            <label>Phone</label>
+            <label>
+              Phone
+            </label>
 
             <input
               type="text"
@@ -136,11 +167,13 @@ function EditorPanel() {
           </div>
 
 
-          {/* Location */}
+          {/* ================= LOCATION ================= */}
 
           <div className="form-group full-width">
 
-            <label>Location</label>
+            <label>
+              Location
+            </label>
 
             <input
               type="text"
@@ -157,11 +190,13 @@ function EditorPanel() {
           </div>
 
 
-          {/* LinkedIn */}
+          {/* ================= LINKEDIN ================= */}
 
           <div className="form-group">
 
-            <label>LinkedIn</label>
+            <label>
+              LinkedIn
+            </label>
 
             <input
               type="text"
@@ -178,11 +213,13 @@ function EditorPanel() {
           </div>
 
 
-          {/* GitHub */}
+          {/* ================= GITHUB ================= */}
 
           <div className="form-group">
 
-            <label>GitHub</label>
+            <label>
+              GitHub
+            </label>
 
             <input
               type="text"
@@ -199,7 +236,7 @@ function EditorPanel() {
           </div>
 
 
-          {/* Professional Summary */}
+          {/* ================= PROFESSIONAL SUMMARY ================= */}
 
           <div className="form-group full-width">
 
