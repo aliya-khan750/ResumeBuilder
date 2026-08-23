@@ -1,12 +1,87 @@
+import { useState } from "react";
 import "./Login.css";
 
 function Login() {
-  const handleLogin = (e) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // ================= HANDLE INPUT =================
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setError("");
+  };
+
+  // ================= LOGIN =================
+
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Actual authentication hum baad mein
-    // MERN backend + MongoDB ke saath add karenge.
-    alert("Login functionality will be connected soon.");
+    const { email, password } = formData;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/auth/login",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Invalid email or password.");
+        setLoading(false);
+        return;
+      }
+
+      // Save JWT token
+      localStorage.setItem("token", data.token);
+
+      // Save logged-in user
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
+
+      // Login successful
+      alert("Login successful! 🎉");
+
+      // Go to Dashboard
+      window.location.href = "/dashboard";
+
+    } catch (error) {
+      console.error("Login error:", error);
+
+      setError(
+        "Unable to connect to server. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -64,7 +139,10 @@ function Login() {
 
               <input
                 type="email"
+                name="email"
                 placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
 
@@ -85,7 +163,9 @@ function Login() {
                   type="button"
                   className="forgot-password"
                   onClick={() => {
-                    alert("Password reset will be added soon.");
+                    alert(
+                      "Password reset will be added later."
+                    );
                   }}
                 >
                   Forgot password?
@@ -95,7 +175,10 @@ function Login() {
 
               <input
                 type="password"
+                name="password"
                 placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
                 required
               />
 
@@ -121,13 +204,30 @@ function Login() {
             </div>
 
 
+            {/* ================= ERROR ================= */}
+
+            {error && (
+              <p
+                className="login-error"
+                style={{
+                  color: "#c44d2d",
+                  fontSize: "14px",
+                  marginBottom: "15px",
+                }}
+              >
+                {error}
+              </p>
+            )}
+
+
             {/* ================= LOGIN BUTTON ================= */}
 
             <button
               type="submit"
               className="login-button"
+              disabled={loading}
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
 
           </form>

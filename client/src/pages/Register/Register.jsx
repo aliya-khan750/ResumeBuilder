@@ -1,11 +1,90 @@
+import { useState } from "react";
 import "./Register.css";
 
 function Register() {
-  const handleRegister = (e) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // ================= HANDLE INPUT =================
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setError("");
+  };
+
+  // ================= REGISTER =================
+
+  const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Actual registration backend + MongoDB ke saath baad mein connect karenge.
-    alert("Registration functionality will be connected soon.");
+    const {
+      name,
+      email,
+      password,
+      confirmPassword,
+    } = formData;
+
+    // Password match check
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/auth/register",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Registration failed.");
+        setLoading(false);
+        return;
+      }
+
+      alert("Account created successfully! 🎉");
+
+      // Go to Login
+      window.location.href = "/login";
+    } catch (error) {
+      console.error("Registration error:", error);
+
+      setError(
+        "Unable to connect to server. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -63,7 +142,10 @@ function Register() {
 
               <input
                 type="text"
+                name="name"
                 placeholder="Enter your full name"
+                value={formData.name}
+                onChange={handleChange}
                 required
               />
 
@@ -80,7 +162,10 @@ function Register() {
 
               <input
                 type="email"
+                name="email"
                 placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
 
@@ -97,7 +182,10 @@ function Register() {
 
               <input
                 type="password"
+                name="password"
                 placeholder="Create a password"
+                value={formData.password}
+                onChange={handleChange}
                 required
               />
 
@@ -114,7 +202,10 @@ function Register() {
 
               <input
                 type="password"
+                name="confirmPassword"
                 placeholder="Confirm your password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
                 required
               />
 
@@ -141,13 +232,32 @@ function Register() {
             </div>
 
 
+            {/* Error */}
+
+            {error && (
+              <p
+                className="register-error"
+                style={{
+                  color: "#c44d2d",
+                  marginBottom: "15px",
+                  fontSize: "14px",
+                }}
+              >
+                {error}
+              </p>
+            )}
+
+
             {/* Register Button */}
 
             <button
               type="submit"
               className="register-button"
+              disabled={loading}
             >
-              Create Account
+              {loading
+                ? "Creating Account..."
+                : "Create Account"}
             </button>
 
           </form>
