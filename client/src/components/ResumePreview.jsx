@@ -6,7 +6,7 @@ function ResumePreview() {
   const { resumeData } = useResume();
 
   const {
-    personal,
+    personal = {},
     education = [],
     experience = [],
     skills = {},
@@ -17,6 +17,48 @@ function ResumePreview() {
     references = [],
     customSections = [],
   } = resumeData;
+
+  /* =====================================================
+     CHECK WHETHER OBJECT HAS REAL CONTENT
+  ===================================================== */
+
+  const hasContent = (item) => {
+    if (!item || typeof item !== "object") {
+      return false;
+    }
+
+    return Object.values(item).some(
+      (value) =>
+        value !== null &&
+        value !== undefined &&
+        String(value).trim() !== ""
+    );
+  };
+
+  /* =====================================================
+     FILTER EMPTY ITEMS
+  ===================================================== */
+
+  const validEducation = education.filter(hasContent);
+
+  const validExperience = experience.filter(hasContent);
+
+  const validProjects = projects.filter(hasContent);
+
+  const validCertifications =
+    certifications.filter(hasContent);
+
+  const validAchievements =
+    achievements.filter(hasContent);
+
+  const validLanguages =
+    languages.filter(hasContent);
+
+  const validReferences =
+    references.filter(hasContent);
+
+  const validCustomSections =
+    customSections.filter(hasContent);
 
 
   /* =====================================================
@@ -31,89 +73,306 @@ function ResumePreview() {
       return;
     }
 
+    let pdfResume = null;
+
     try {
+
       /* =================================================
          FILE NAME
       ================================================= */
 
-      const cleanName = personal.fullName?.trim()
-        ? personal.fullName
-            .trim()
-            .replace(/[^a-zA-Z0-9 ]/g, "")
-            .replace(/\s+/g, "_")
-        : "My";
+      const cleanName =
+        personal.fullName?.trim()
+          ? personal.fullName
+              .trim()
+              .replace(/[^a-zA-Z0-9 ]/g, "")
+              .replace(/\s+/g, "_")
+          : "My";
 
       const fileName = `${cleanName}_Resume.pdf`;
 
 
       /* =================================================
-         SAVE ORIGINAL STYLES
+         CLONE RESUME
       ================================================= */
 
-      const originalStyles = {
-        width: resume.style.width,
-        height: resume.style.height,
-        minWidth: resume.style.minWidth,
-        minHeight: resume.style.minHeight,
-        maxWidth: resume.style.maxWidth,
-        maxHeight: resume.style.maxHeight,
-        padding: resume.style.padding,
-        boxSizing: resume.style.boxSizing,
-        transform: resume.style.transform,
-        boxShadow: resume.style.boxShadow,
-        overflow: resume.style.overflow,
-        fontSize: resume.style.fontSize,
-        lineHeight: resume.style.lineHeight,
-      };
+      pdfResume = resume.cloneNode(true);
 
 
       /* =================================================
-         TEMPORARY A4 SIZE
-
-         A4 at 96 DPI:
-         794px × 1123px
+         IMPORTANT PDF CLASS
       ================================================= */
 
-      resume.style.width = "794px";
-      resume.style.height = "1123px";
-
-      resume.style.minWidth = "794px";
-      resume.style.minHeight = "1123px";
-
-      resume.style.maxWidth = "794px";
-      resume.style.maxHeight = "1123px";
-
-      resume.style.padding = "55px 65px";
-
-      resume.style.boxSizing = "border-box";
-
-      resume.style.transform = "none";
-
-      resume.style.boxShadow = "none";
-
-      resume.style.overflow = "hidden";
-
-      resume.style.fontSize = "11px";
-
-      resume.style.lineHeight = "1.4";
+      pdfResume.classList.add("pdf-version");
 
 
       /* =================================================
-         FORCE WHITE BACKGROUND
+         GIVE CLONE UNIQUE ID
       ================================================= */
 
-      resume.style.backgroundColor = "#ffffff";
-
-      resume.style.color = "#111111";
+      pdfResume.id = "resume-paper-pdf";
 
 
       /* =================================================
-         WAIT FOR BROWSER RENDER
+         REMOVE DOWNLOAD BUTTON
+      ================================================= */
+
+      pdfResume
+        .querySelectorAll(".download-button")
+        .forEach((button) => {
+          button.remove();
+        });
+
+
+      /* =================================================
+         PDF A4 SIZE
+
+         794px ≈ 210mm
+         Height is NOT forced.
+
+         Content decides the height.
+      ================================================= */
+
+      pdfResume.style.width = "794px";
+
+      pdfResume.style.minWidth = "794px";
+
+      pdfResume.style.maxWidth = "794px";
+
+      pdfResume.style.height = "auto";
+
+      pdfResume.style.minHeight = "1123px";
+
+      pdfResume.style.maxHeight = "none";
+
+
+      /* =================================================
+         PDF PADDING
+      ================================================= */
+
+      pdfResume.style.padding =
+        "55px 60px";
+
+      pdfResume.style.boxSizing =
+        "border-box";
+
+
+      /* =================================================
+         PDF FONT
+      ================================================= */
+
+      pdfResume.style.fontFamily =
+        "Arial, Helvetica, sans-serif";
+
+      pdfResume.style.fontSize = "13px";
+
+      pdfResume.style.lineHeight = "1.45";
+
+
+      /* =================================================
+         PDF COLORS
+      ================================================= */
+
+      pdfResume.style.backgroundColor =
+        "#ffffff";
+
+      pdfResume.style.color =
+        "#111111";
+
+
+      /* =================================================
+         REMOVE SCREEN STYLES
+      ================================================= */
+
+      pdfResume.style.transform =
+        "none";
+
+      pdfResume.style.boxShadow =
+        "none";
+
+      pdfResume.style.overflow =
+        "visible";
+
+
+      /* =================================================
+         POSITION OFF SCREEN
+
+         Do NOT use z-index: -1.
+         That can make html2canvas capture blank.
+      ================================================= */
+
+      pdfResume.style.position =
+        "absolute";
+
+      pdfResume.style.left =
+        "-10000px";
+
+      pdfResume.style.top =
+        "0";
+
+      pdfResume.style.zIndex =
+        "9999";
+
+
+      /* =================================================
+         ADD CLONE TO BODY
+      ================================================= */
+
+      document.body.appendChild(pdfResume);
+
+
+      /* =================================================
+         FORCE PDF FONT SIZES
+      ================================================= */
+
+      const pdfStyle = document.createElement("style");
+
+      pdfStyle.id =
+        "temporary-pdf-style";
+
+      pdfStyle.innerHTML = `
+        #resume-paper-pdf {
+          width: 794px !important;
+          min-width: 794px !important;
+          max-width: 794px !important;
+
+          height: auto !important;
+          min-height: 1123px !important;
+          max-height: none !important;
+
+          padding: 55px 60px !important;
+
+          box-sizing: border-box !important;
+
+          background: #ffffff !important;
+          color: #111111 !important;
+
+          font-family: Arial, Helvetica, sans-serif !important;
+
+          font-size: 13px !important;
+          line-height: 1.45 !important;
+
+          overflow: visible !important;
+
+          transform: none !important;
+          box-shadow: none !important;
+        }
+
+
+        #resume-paper-pdf .resume-header {
+          padding-bottom: 10px !important;
+          margin-bottom: 14px !important;
+        }
+
+
+        #resume-paper-pdf .resume-header h1 {
+          font-size: 28px !important;
+          line-height: 1.2 !important;
+          margin-bottom: 7px !important;
+        }
+
+
+        #resume-paper-pdf .resume-header > p {
+          font-size: 14px !important;
+          line-height: 1.3 !important;
+        }
+
+
+        #resume-paper-pdf .resume-contact,
+        #resume-paper-pdf .resume-links {
+          font-size: 11px !important;
+          line-height: 1.4 !important;
+        }
+
+
+        #resume-paper-pdf .resume-section {
+          margin-bottom: 12px !important;
+
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+        }
+
+
+        #resume-paper-pdf .resume-section h2 {
+          font-size: 14px !important;
+          line-height: 1.25 !important;
+
+          margin-bottom: 6px !important;
+          padding-bottom: 4px !important;
+        }
+
+
+        #resume-paper-pdf .resume-section p {
+          font-size: 12px !important;
+          line-height: 1.45 !important;
+
+          margin: 4px 0 !important;
+        }
+
+
+        #resume-paper-pdf .resume-section li {
+          font-size: 12px !important;
+          line-height: 1.45 !important;
+
+          margin-bottom: 3px !important;
+        }
+
+
+        #resume-paper-pdf .resume-entry {
+          margin-bottom: 8px !important;
+
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+        }
+
+
+        #resume-paper-pdf .entry-title {
+          font-size: 13px !important;
+          line-height: 1.35 !important;
+        }
+
+
+        #resume-paper-pdf .entry-subtitle {
+          font-size: 11px !important;
+          line-height: 1.35 !important;
+        }
+
+
+        #resume-paper-pdf .skills-content p {
+          font-size: 12px !important;
+          line-height: 1.45 !important;
+        }
+
+
+        #resume-paper-pdf .project-title {
+          font-size: 13px !important;
+          line-height: 1.35 !important;
+        }
+
+
+        #resume-paper-pdf .tech-stack {
+          font-size: 11px !important;
+          line-height: 1.4 !important;
+        }
+
+
+        #resume-paper-pdf ul {
+          margin-top: 4px !important;
+        }
+      `;
+
+      document.head.appendChild(pdfStyle);
+
+
+      /* =================================================
+         WAIT FOR BROWSER TO RENDER CLONE
       ================================================= */
 
       await new Promise((resolve) => {
         requestAnimationFrame(() => {
-          requestAnimationFrame(resolve);
+          requestAnimationFrame(() => {
+            setTimeout(resolve, 100);
+          });
         });
       });
 
@@ -123,6 +382,7 @@ function ResumePreview() {
       ================================================= */
 
       const options = {
+
         margin: 0,
 
         filename: fileName,
@@ -133,13 +393,15 @@ function ResumePreview() {
         },
 
         html2canvas: {
+
           scale: 2,
 
           useCORS: true,
 
           allowTaint: true,
 
-          backgroundColor: "#ffffff",
+          backgroundColor:
+            "#ffffff",
 
           logging: false,
 
@@ -149,10 +411,15 @@ function ResumePreview() {
 
           windowWidth: 794,
 
-          windowHeight: 1123,
+          windowHeight:
+            Math.max(
+              pdfResume.scrollHeight,
+              1123
+            ),
         },
 
         jsPDF: {
+
           unit: "mm",
 
           format: "a4",
@@ -163,7 +430,11 @@ function ResumePreview() {
         },
 
         pagebreak: {
-          mode: ["css", "legacy"],
+
+          mode: [
+            "css",
+            "legacy",
+          ],
         },
       };
 
@@ -174,36 +445,32 @@ function ResumePreview() {
 
       await html2pdf()
         .set(options)
-        .from(resume)
+        .from(pdfResume)
         .save();
 
 
       /* =================================================
-         RESTORE LIVE PREVIEW
+         CLEANUP PDF CLONE
       ================================================= */
 
-      resume.style.width = originalStyles.width;
-      resume.style.height = originalStyles.height;
+      if (
+        pdfResume &&
+        pdfResume.parentNode
+      ) {
+        pdfResume.parentNode.removeChild(
+          pdfResume
+        );
+      }
 
-      resume.style.minWidth = originalStyles.minWidth;
-      resume.style.minHeight = originalStyles.minHeight;
 
-      resume.style.maxWidth = originalStyles.maxWidth;
-      resume.style.maxHeight = originalStyles.maxHeight;
-
-      resume.style.padding = originalStyles.padding;
-
-      resume.style.boxSizing = originalStyles.boxSizing;
-
-      resume.style.transform = originalStyles.transform;
-
-      resume.style.boxShadow = originalStyles.boxShadow;
-
-      resume.style.overflow = originalStyles.overflow;
-
-      resume.style.fontSize = originalStyles.fontSize;
-
-      resume.style.lineHeight = originalStyles.lineHeight;
+      if (
+        pdfStyle &&
+        pdfStyle.parentNode
+      ) {
+        pdfStyle.parentNode.removeChild(
+          pdfStyle
+        );
+      }
 
     } catch (error) {
 
@@ -211,6 +478,36 @@ function ResumePreview() {
         "PDF generation error:",
         error
       );
+
+
+      /* =================================================
+         CLEANUP AFTER ERROR
+      ================================================= */
+
+      if (
+        pdfResume &&
+        pdfResume.parentNode
+      ) {
+        pdfResume.parentNode.removeChild(
+          pdfResume
+        );
+      }
+
+
+      const existingStyle =
+        document.getElementById(
+          "temporary-pdf-style"
+        );
+
+      if (
+        existingStyle &&
+        existingStyle.parentNode
+      ) {
+        existingStyle.parentNode.removeChild(
+          existingStyle
+        );
+      }
+
 
       alert(
         "Unable to generate PDF. Please try again."
@@ -221,7 +518,6 @@ function ResumePreview() {
 
   return (
     <div className="resume-preview-wrapper">
-
 
       {/* =================================================
           DOWNLOAD BUTTON
@@ -245,7 +541,6 @@ function ResumePreview() {
         className="resume-paper"
       >
 
-
         {/* =================================================
             HEADER
         ================================================= */}
@@ -253,8 +548,10 @@ function ResumePreview() {
         <header className="resume-header">
 
           <h1>
-            {personal.fullName || "YOUR NAME"}
+            {personal.fullName ||
+              "YOUR NAME"}
           </h1>
+
 
           {personal.jobTitle && (
             <p>
@@ -271,11 +568,13 @@ function ResumePreview() {
               </span>
             )}
 
+
             {personal.phone && (
               <span>
                 {personal.phone}
               </span>
             )}
+
 
             {personal.email && (
               <span>
@@ -294,6 +593,7 @@ function ResumePreview() {
               </span>
             )}
 
+
             {personal.github && (
               <span>
                 {personal.github}
@@ -309,7 +609,7 @@ function ResumePreview() {
             PROFESSIONAL SUMMARY
         ================================================= */}
 
-        {personal.summary && (
+        {personal.summary?.trim() && (
 
           <section className="resume-section">
 
@@ -330,7 +630,7 @@ function ResumePreview() {
             EDUCATION
         ================================================= */}
 
-        {education.length > 0 && (
+        {validEducation.length > 0 && (
 
           <section className="resume-section">
 
@@ -338,76 +638,76 @@ function ResumePreview() {
               EDUCATION
             </h2>
 
-            {education.map((item, index) => (
 
-              <div
-                className="resume-entry"
-                key={index}
-              >
+            {validEducation.map(
+              (item, index) => (
 
-                {item.degree && (
+                <div
+                  className="resume-entry"
+                  key={index}
+                >
 
-                  <div className="entry-title">
+                  {item.degree && (
+                    <div className="entry-title">
 
-                    <strong>
-                      {item.degree}
-                    </strong>
+                      <strong>
+                        {item.degree}
+                      </strong>
 
-                  </div>
-
-                )}
-
-
-                {(item.institution ||
-                  item.location) && (
-
-                  <div className="entry-subtitle">
-
-                    {item.institution && (
-                      <span>
-                        {item.institution}
-                      </span>
-                    )}
-
-                    {item.location && (
-                      <span>
-                        {item.location}
-                      </span>
-                    )}
-
-                  </div>
-
-                )}
+                    </div>
+                  )}
 
 
-                {(item.startYear ||
-                  item.endYear ||
-                  item.grade) && (
+                  {(item.institution ||
+                    item.location) && (
 
-                  <p>
+                    <div className="entry-subtitle">
 
-                    {item.startYear}
+                      {item.institution && (
+                        <span>
+                          {item.institution}
+                        </span>
+                      )}
 
-                    {item.startYear &&
-                      item.endYear &&
-                      " - "}
 
-                    {item.endYear}
+                      {item.location && (
+                        <span>
+                          {item.location}
+                        </span>
+                      )}
 
-                    {item.grade && (
-                      <>
-                        {" | "}
-                        {item.grade}
-                      </>
-                    )}
+                    </div>
+                  )}
 
-                  </p>
 
-                )}
+                  {(item.startYear ||
+                    item.endYear ||
+                    item.grade) && (
 
-              </div>
+                    <p>
 
-            ))}
+                      {item.startYear}
+
+                      {item.startYear &&
+                        item.endYear &&
+                        " - "}
+
+                      {item.endYear}
+
+                      {item.grade && (
+                        <>
+                          {" | "}
+                          {item.grade}
+                        </>
+                      )}
+
+                    </p>
+                  )}
+
+                </div>
+
+              )
+            )}
 
           </section>
 
@@ -418,9 +718,9 @@ function ResumePreview() {
             TECHNICAL SKILLS
         ================================================= */}
 
-        {(skills.technicalSkills ||
-          skills.toolsTechnologies ||
-          skills.softSkills) && (
+        {(skills.technicalSkills?.trim() ||
+          skills.toolsTechnologies?.trim() ||
+          skills.softSkills?.trim()) && (
 
           <section className="resume-section">
 
@@ -428,9 +728,10 @@ function ResumePreview() {
               TECHNICAL SKILLS
             </h2>
 
+
             <div className="skills-content">
 
-              {skills.technicalSkills && (
+              {skills.technicalSkills?.trim() && (
 
                 <p>
 
@@ -444,7 +745,8 @@ function ResumePreview() {
 
               )}
 
-              {skills.toolsTechnologies && (
+
+              {skills.toolsTechnologies?.trim() && (
 
                 <p>
 
@@ -458,7 +760,8 @@ function ResumePreview() {
 
               )}
 
-              {skills.softSkills && (
+
+              {skills.softSkills?.trim() && (
 
                 <p>
 
@@ -483,7 +786,7 @@ function ResumePreview() {
             EXPERIENCE
         ================================================= */}
 
-        {experience.length > 0 && (
+        {validExperience.length > 0 && (
 
           <section className="resume-section">
 
@@ -491,90 +794,88 @@ function ResumePreview() {
               EXPERIENCE
             </h2>
 
-            {experience.map((item, index) => (
 
-              <div
-                className="resume-entry"
-                key={index}
-              >
+            {validExperience.map(
+              (item, index) => (
 
-                {item.jobTitle && (
+                <div
+                  className="resume-entry"
+                  key={index}
+                >
 
-                  <div className="entry-title">
+                  {item.jobTitle && (
+                    <div className="entry-title">
 
-                    <strong>
-                      {item.jobTitle}
-                    </strong>
+                      <strong>
+                        {item.jobTitle}
+                      </strong>
 
-                  </div>
-
-                )}
-
-
-                {(item.company ||
-                  item.location) && (
-
-                  <div className="entry-subtitle">
-
-                    {item.company && (
-                      <span>
-                        {item.company}
-                      </span>
-                    )}
-
-                    {item.location && (
-                      <span>
-                        {item.location}
-                      </span>
-                    )}
-
-                  </div>
-
-                )}
+                    </div>
+                  )}
 
 
-                {(item.employmentType ||
-                  item.startDate ||
-                  item.endDate) && (
+                  {(item.company ||
+                    item.location) && (
 
-                  <p>
+                    <div className="entry-subtitle">
 
-                    {item.employmentType}
-
-                    {item.startDate && (
-                      <>
-                        {" | "}
-                        {item.startDate}
-                      </>
-                    )}
-
-                    {item.endDate && (
-                      <>
-                        {" - "}
-                        {item.endDate}
-                      </>
-                    )}
-
-                  </p>
-
-                )}
+                      {item.company && (
+                        <span>
+                          {item.company}
+                        </span>
+                      )}
 
 
-                {item.description && (
+                      {item.location && (
+                        <span>
+                          {item.location}
+                        </span>
+                      )}
 
-                  <ul>
+                    </div>
+                  )}
 
-                    <li>
-                      {item.description}
-                    </li>
 
-                  </ul>
+                  {(item.employmentType ||
+                    item.startDate ||
+                    item.endDate) && (
 
-                )}
+                    <p>
 
-              </div>
+                      {item.employmentType}
 
-            ))}
+                      {item.startDate && (
+                        <>
+                          {" | "}
+                          {item.startDate}
+                        </>
+                      )}
+
+                      {item.endDate && (
+                        <>
+                          {" - "}
+                          {item.endDate}
+                        </>
+                      )}
+
+                    </p>
+                  )}
+
+
+                  {item.description && (
+                    <ul>
+
+                      <li>
+                        {item.description}
+                      </li>
+
+                    </ul>
+                  )}
+
+                </div>
+
+              )
+            )}
 
           </section>
 
@@ -585,7 +886,7 @@ function ResumePreview() {
             PROJECTS
         ================================================= */}
 
-        {projects.length > 0 && (
+        {validProjects.length > 0 && (
 
           <section className="resume-section">
 
@@ -593,71 +894,74 @@ function ResumePreview() {
               PROJECTS
             </h2>
 
-            {projects.map((project, index) => (
 
-              <div
-                className="resume-entry"
-                key={index}
-              >
+            {validProjects.map(
+              (project, index) => (
 
-                {project.projectName && (
+                <div
+                  className="resume-entry"
+                  key={index}
+                >
 
-                  <div className="project-title">
+                  {project.projectName && (
 
-                    <strong>
-                      {project.projectName}
-                    </strong>
+                    <div className="project-title">
 
-                  </div>
+                      <strong>
+                        {project.projectName}
+                      </strong>
 
-                )}
+                    </div>
 
-
-                {project.technologies && (
-
-                  <p className="tech-stack">
-
-                    <strong>
-                      Tech Stack:
-                    </strong>{" "}
-
-                    {project.technologies}
-
-                  </p>
-
-                )}
+                  )}
 
 
-                {project.projectLink && (
+                  {project.technologies && (
 
-                  <p className="tech-stack">
+                    <p className="tech-stack">
 
-                    <strong>
-                      Link:
-                    </strong>{" "}
+                      <strong>
+                        Tech Stack:
+                      </strong>{" "}
 
-                    {project.projectLink}
+                      {project.technologies}
 
-                  </p>
+                    </p>
 
-                )}
+                  )}
 
 
-                {project.description && (
+                  {project.projectLink && (
 
-                  <ul>
+                    <p className="tech-stack">
 
-                    <li>
-                      {project.description}
-                    </li>
+                      <strong>
+                        Link:
+                      </strong>{" "}
 
-                  </ul>
+                      {project.projectLink}
 
-                )}
+                    </p>
 
-              </div>
+                  )}
 
-            ))}
+
+                  {project.description && (
+
+                    <ul>
+
+                      <li>
+                        {project.description}
+                      </li>
+
+                    </ul>
+
+                  )}
+
+                </div>
+
+              )
+            )}
 
           </section>
 
@@ -668,7 +972,7 @@ function ResumePreview() {
             CERTIFICATIONS
         ================================================= */}
 
-        {certifications.length > 0 && (
+        {validCertifications.length > 0 && (
 
           <section className="resume-section">
 
@@ -676,57 +980,61 @@ function ResumePreview() {
               CERTIFICATIONS
             </h2>
 
-            {certifications.map((item, index) => (
 
-              <div
-                className="resume-entry"
-                key={index}
-              >
+            {validCertifications.map(
+              (item, index) => (
 
-                {item.name && (
+                <div
+                  className="resume-entry"
+                  key={index}
+                >
 
-                  <div className="entry-title">
+                  {item.name && (
 
-                    <strong>
-                      {item.name}
-                    </strong>
+                    <div className="entry-title">
 
-                  </div>
+                      <strong>
+                        {item.name}
+                      </strong>
 
-                )}
+                    </div>
 
-
-                {(item.organization ||
-                  item.date) && (
-
-                  <div className="entry-subtitle">
-
-                    {item.organization && (
-                      <span>
-                        {item.organization}
-                      </span>
-                    )}
-
-                    {item.date && (
-                      <span>
-                        {item.date}
-                      </span>
-                    )}
-
-                  </div>
-
-                )}
+                  )}
 
 
-                {item.link && (
-                  <p>
-                    {item.link}
-                  </p>
-                )}
+                  {(item.organization ||
+                    item.date) && (
 
-              </div>
+                    <div className="entry-subtitle">
 
-            ))}
+                      {item.organization && (
+                        <span>
+                          {item.organization}
+                        </span>
+                      )}
+
+
+                      {item.date && (
+                        <span>
+                          {item.date}
+                        </span>
+                      )}
+
+                    </div>
+
+                  )}
+
+
+                  {item.link && (
+                    <p>
+                      {item.link}
+                    </p>
+                  )}
+
+                </div>
+
+              )
+            )}
 
           </section>
 
@@ -737,7 +1045,7 @@ function ResumePreview() {
             ACHIEVEMENTS
         ================================================= */}
 
-        {achievements.length > 0 && (
+        {validAchievements.length > 0 && (
 
           <section className="resume-section">
 
@@ -745,41 +1053,44 @@ function ResumePreview() {
               ACHIEVEMENTS
             </h2>
 
-            {achievements.map((item, index) => (
 
-              <div
-                className="resume-entry"
-                key={index}
-              >
+            {validAchievements.map(
+              (item, index) => (
 
-                {item.title && (
+                <div
+                  className="resume-entry"
+                  key={index}
+                >
 
-                  <div className="entry-title">
+                  {item.title && (
 
-                    <strong>
-                      {item.title}
-                    </strong>
+                    <div className="entry-title">
 
-                  </div>
+                      <strong>
+                        {item.title}
+                      </strong>
 
-                )}
+                    </div>
+
+                  )}
 
 
-                {item.description && (
+                  {item.description && (
 
-                  <ul>
+                    <ul>
 
-                    <li>
-                      {item.description}
-                    </li>
+                      <li>
+                        {item.description}
+                      </li>
 
-                  </ul>
+                    </ul>
 
-                )}
+                  )}
 
-              </div>
+                </div>
 
-            ))}
+              )
+            )}
 
           </section>
 
@@ -790,7 +1101,7 @@ function ResumePreview() {
             LANGUAGES
         ================================================= */}
 
-        {languages.length > 0 && (
+        {validLanguages.length > 0 && (
 
           <section className="resume-section">
 
@@ -798,26 +1109,30 @@ function ResumePreview() {
               LANGUAGES
             </h2>
 
-            {languages.map((item, index) => (
 
-              <p key={index}>
+            {validLanguages.map(
+              (item, index) => (
 
-                {item.language && (
-                  <strong>
-                    {item.language}
-                  </strong>
-                )}
+                <p key={index}>
 
-                {item.proficiency && (
-                  <>
-                    {" — "}
-                    {item.proficiency}
-                  </>
-                )}
+                  {item.language && (
+                    <strong>
+                      {item.language}
+                    </strong>
+                  )}
 
-              </p>
 
-            ))}
+                  {item.proficiency && (
+                    <>
+                      {" — "}
+                      {item.proficiency}
+                    </>
+                  )}
+
+                </p>
+
+              )
+            )}
 
           </section>
 
@@ -828,7 +1143,7 @@ function ResumePreview() {
             REFERENCES
         ================================================= */}
 
-        {references.length > 0 && (
+        {validReferences.length > 0 && (
 
           <section className="resume-section">
 
@@ -836,57 +1151,63 @@ function ResumePreview() {
               REFERENCES
             </h2>
 
-            {references.map((item, index) => (
 
-              <div
-                className="resume-entry"
-                key={index}
-              >
+            {validReferences.map(
+              (item, index) => (
 
-                {item.name && (
+                <div
+                  className="resume-entry"
+                  key={index}
+                >
 
-                  <div className="entry-title">
+                  {item.name && (
 
-                    <strong>
-                      {item.name}
-                    </strong>
+                    <div className="entry-title">
 
-                  </div>
+                      <strong>
+                        {item.name}
+                      </strong>
 
-                )}
+                    </div>
 
-                {item.designation && (
-                  <p>
-                    {item.designation}
-                  </p>
-                )}
+                  )}
 
-                {item.company && (
-                  <p>
-                    {item.company}
-                  </p>
-                )}
 
-                {(item.email ||
-                  item.phone) && (
+                  {item.designation && (
+                    <p>
+                      {item.designation}
+                    </p>
+                  )}
 
-                  <p>
 
-                    {item.email}
+                  {item.company && (
+                    <p>
+                      {item.company}
+                    </p>
+                  )}
 
-                    {item.email &&
-                      item.phone &&
-                      " | "}
 
-                    {item.phone}
+                  {(item.email ||
+                    item.phone) && (
 
-                  </p>
+                    <p>
 
-                )}
+                      {item.email}
 
-              </div>
+                      {item.email &&
+                        item.phone &&
+                        " | "}
 
-            ))}
+                      {item.phone}
+
+                    </p>
+
+                  )}
+
+                </div>
+
+              )
+            )}
 
           </section>
 
@@ -897,29 +1218,32 @@ function ResumePreview() {
             CUSTOM SECTIONS
         ================================================= */}
 
-        {customSections.length > 0 &&
-          customSections.map((item, index) => (
+        {validCustomSections.length > 0 &&
+          validCustomSections.map(
+            (item, index) => (
 
-            <section
-              className="resume-section"
-              key={index}
-            >
+              <section
+                className="resume-section"
+                key={index}
+              >
 
-              {item.title && (
-                <h2>
-                  {item.title.toUpperCase()}
-                </h2>
-              )}
+                {item.title && (
+                  <h2>
+                    {item.title.toUpperCase()}
+                  </h2>
+                )}
 
-              {item.content && (
-                <p>
-                  {item.content}
-                </p>
-              )}
 
-            </section>
+                {item.content && (
+                  <p>
+                    {item.content}
+                  </p>
+                )}
 
-          ))}
+              </section>
+
+            )
+          )}
 
       </div>
 

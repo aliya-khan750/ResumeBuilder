@@ -1,14 +1,19 @@
-import BuilderLayout from "./layouts/BuilderLayout";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 function App() {
-  return (
-    <BuilderLayout>
-      <div className="builder-placeholder">
-        <h1>Resume Editor</h1>
-        <p>Your resume workspace will appear here.</p>
-      </div>
-    </BuilderLayout>
-  );
+  const path = window.location.pathname;
+
+  if (path === "/login") {
+    return <Login />;
+  }
+
+  if (path === "/register") {
+    return <Register />;
+  }
+
+  return <Home />;
 }
 
 export default App;

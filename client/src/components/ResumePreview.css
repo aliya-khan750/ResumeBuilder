@@ -7,71 +7,49 @@
   height: 100%;
 
   display: flex;
-
   justify-content: center;
   align-items: flex-start;
 
   overflow: hidden;
 
   box-sizing: border-box;
-
   padding: 0;
 }
 
 
 /* =====================================================
-   DOWNLOAD PDF BUTTON
+   DOWNLOAD BUTTON
 ===================================================== */
 
 .download-button {
   position: absolute;
 
-  top: 20px;
+  top: 15px;
   right: 20px;
 
-  padding: 10px 20px;
+  padding: 10px 18px;
 
   border: none;
+  border-radius: 6px;
 
-  border-radius: 7px;
+  background: #b84d2c;
+  color: white;
 
-  background: #b44a2d;
-
-  color: #ffffff;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  font-size: 14px;
-
+  font-size: 13px;
   font-weight: 600;
 
   cursor: pointer;
 
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
-
-  z-index: 10;
+  z-index: 20;
 }
-
 
 .download-button:hover {
-  background: #963c24;
-
-  transform: translateY(-1px);
-}
-
-
-.download-button:active {
-  transform: translateY(0);
+  background: #963d22;
 }
 
 
 /* =====================================================
-   RESUME PAPER
+   RESUME PAPER - SCREEN PREVIEW
 ===================================================== */
 
 .resume-paper {
@@ -97,16 +75,14 @@
     Helvetica,
     sans-serif;
 
-  font-size: 8px;
+  font-size: 9px;
 
-  line-height: 1.35;
+  line-height: 1.4;
 
   padding: 30px 34px;
 
   box-shadow:
     0 4px 18px rgba(0, 0, 0, 0.12);
-
-  transform: none;
 
   overflow: hidden;
 }
@@ -119,9 +95,9 @@
 .resume-header {
   text-align: center;
 
-  padding-bottom: 3%;
+  padding-bottom: 8px;
 
-  margin-bottom: 3%;
+  margin-bottom: 10px;
 
   border-bottom: 1px solid #111111;
 }
@@ -134,11 +110,13 @@
 .resume-header h1 {
   margin: 0 0 5px;
 
-  font-size: clamp(21px, 3vw, 29px);
+  font-size: 23px;
+
+  line-height: 1.15;
 
   font-weight: 700;
 
-  letter-spacing: 1.4px;
+  letter-spacing: 1px;
 }
 
 
@@ -150,6 +128,8 @@
   margin: 0 0 5px;
 
   font-size: 10px;
+
+  line-height: 1.3;
 
   font-weight: 500;
 }
@@ -170,9 +150,10 @@
 
   gap: 3px 8px;
 
-  font-size: 8.5px;
-}
+  font-size: 8px;
 
+  line-height: 1.3;
+}
 
 .resume-contact span:not(:last-child)::after {
   content: "|";
@@ -192,13 +173,17 @@
 
   justify-content: center;
 
+  align-items: center;
+
   flex-wrap: wrap;
 
-  gap: 15px;
+  gap: 5px 12px;
 
-  margin-top: 4px;
+  margin-top: 3px;
 
-  font-size: 8.5px;
+  font-size: 8px;
+
+  line-height: 1.3;
 }
 
 
@@ -207,7 +192,10 @@
 ===================================================== */
 
 .resume-section {
-  margin-bottom: 3.5%;
+  margin-bottom: 9px;
+
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 
@@ -224,14 +212,16 @@
 
   font-size: 9.5px;
 
+  line-height: 1.2;
+
   font-weight: 700;
 
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
 
 /* =====================================================
-   PARAGRAPH
+   NORMAL TEXT
 ===================================================== */
 
 .resume-section p {
@@ -239,16 +229,7 @@
 
   font-size: 8.5px;
 
-  line-height: 1.4;
-}
-
-
-/* =====================================================
-   PLACEHOLDER
-===================================================== */
-
-.placeholder-text {
-  color: #333333;
+  line-height: 1.35;
 }
 
 
@@ -257,7 +238,10 @@
 ===================================================== */
 
 .resume-entry {
-  margin-bottom: 3%;
+  margin-bottom: 6px;
+
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 
@@ -269,8 +253,9 @@
   margin-bottom: 2px;
 
   font-size: 9px;
-}
 
+  line-height: 1.3;
+}
 
 .entry-title strong {
   font-weight: 700;
@@ -290,42 +275,48 @@
 
   gap: 10px;
 
-  font-size: 8.2px;
+  font-size: 8px;
+
+  line-height: 1.3;
 
   font-style: italic;
 }
 
 
 /* =====================================================
-   LISTS
+   LIST
 ===================================================== */
 
 .resume-section ul {
-  margin: 4px 0 0;
+  margin: 3px 0 0;
 
-  padding-left: 15px;
+  padding-left: 14px;
 }
-
 
 .resume-section li {
   margin-bottom: 2px;
 
   font-size: 8.5px;
 
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 
 /* =====================================================
-   TECHNICAL SKILLS
+   SKILLS
 ===================================================== */
+
+.skills-content {
+  width: 100%;
+}
 
 .skills-content p {
   margin: 3px 0;
 
   font-size: 8.5px;
-}
 
+  line-height: 1.35;
+}
 
 .skills-content strong {
   font-weight: 700;
@@ -340,18 +331,20 @@
   margin-bottom: 2px;
 
   font-size: 9px;
-}
 
+  line-height: 1.3;
+}
 
 .project-title strong {
   font-weight: 700;
 }
 
-
 .tech-stack {
   margin: 2px 0 !important;
 
-  font-size: 8.2px !important;
+  font-size: 8px !important;
+
+  line-height: 1.3;
 }
 
 
@@ -361,7 +354,6 @@
 
 .preview-container {
   width: 100%;
-
   height: 100%;
 
   overflow: hidden;
@@ -371,60 +363,7 @@
 
 
 /* =====================================================
-   PREVIEW WRAPPER INSIDE CONTAINER
-===================================================== */
-
-.preview-container .resume-preview-wrapper {
-  width: 100%;
-
-  height: 100%;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: flex-start;
-
-  overflow: hidden;
-
-  box-sizing: border-box;
-}
-
-
-/* =====================================================
-   LARGE LAPTOP
-===================================================== */
-
-@media (max-width: 1400px) {
-
-  .resume-paper {
-    width: 100%;
-
-    max-width: 590px;
-  }
-
-}
-
-
-/* =====================================================
-   SMALL LAPTOP
-===================================================== */
-
-@media (max-width: 1200px) {
-
-  .resume-paper {
-    width: 100%;
-
-    max-width: 550px;
-
-    padding: 6.5% 7.5%;
-  }
-
-}
-
-
-/* =====================================================
-   TABLET
+   RESPONSIVE
 ===================================================== */
 
 @media (max-width: 1000px) {
@@ -433,16 +372,13 @@
     overflow: auto;
 
     justify-content: center;
+
+    padding: 15px;
   }
 
   .resume-paper {
-    width: 90%;
-
-    max-width: 590px;
-
     flex-shrink: 0;
   }
-
 }
 
 
@@ -459,57 +395,29 @@
   }
 
   .resume-paper {
-    width: 95%;
+    width: 430px;
 
-    max-width: 500px;
+    min-width: 430px;
 
-    padding: 7% 8%;
+    max-width: 430px;
   }
-
-  .download-button {
-    position: fixed;
-
-    top: 10px;
-
-    right: 10px;
-
-    padding: 9px 15px;
-
-    font-size: 12px;
-  }
-
 }
 
 
 /* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
-
-@media (max-width: 400px) {
-
-  .resume-paper {
-    width: 96%;
-
-    padding: 7% 7%;
-  }
-
-}
-
-
-/* =====================================================
-   PRINT / PDF
+   PDF PRINT
 ===================================================== */
 
 @media print {
 
   .download-button {
-    display: none;
+    display: none !important;
   }
 
   .resume-preview-wrapper {
     width: 210mm;
 
-    height: 297mm;
+    height: auto;
 
     padding: 0;
 
@@ -519,11 +427,17 @@
   .resume-paper {
     width: 210mm;
 
+    height: auto;
+
+    min-width: 210mm;
+
+    min-height: 297mm;
+
     max-width: none;
 
-    height: 297mm;
+    max-height: none;
 
-    aspect-ratio: auto;
+    margin: 0;
 
     padding: 15mm 16mm;
 
@@ -531,7 +445,201 @@
 
     overflow: visible;
 
+    font-size: 13px;
+
+    line-height: 1.4;
+  }
+
+  .resume-header h1 {
+    font-size: 28px;
+  }
+
+  .resume-header > p {
+    font-size: 14px;
+  }
+
+  .resume-contact,
+  .resume-links {
     font-size: 11px;
   }
 
+  .resume-section h2 {
+    font-size: 14px;
+  }
+
+  .resume-section p,
+  .resume-section li {
+    font-size: 12px;
+  }
+
+  .entry-title {
+    font-size: 13px;
+  }
+
+  .entry-subtitle {
+    font-size: 11px;
+  }
+
+  .skills-content p {
+    font-size: 12px;
+  }
+
+  .project-title {
+    font-size: 13px;
+  }
+
+  .tech-stack {
+    font-size: 11px !important;
+  }
+
+  .resume-section,
+  .resume-entry {
+    break-inside: avoid;
+
+    page-break-inside: avoid;
+  }
+}
+
+
+/* =====================================================
+   PDF CLONE
+===================================================== */
+
+#resume-paper {
+  background: #ffffff;
+
+  color: #111111;
+}
+
+
+/* =====================================================
+   PDF FONT SIZES
+===================================================== */
+
+#resume-paper.pdf-version {
+  width: 794px !important;
+
+  min-width: 794px !important;
+
+  max-width: 794px !important;
+
+  height: auto !important;
+
+  min-height: 1123px !important;
+
+  max-height: none !important;
+
+  padding: 55px 60px !important;
+
+  box-sizing: border-box !important;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif !important;
+
+  font-size: 13px !important;
+
+  line-height: 1.45 !important;
+
+  overflow: visible !important;
+
+  box-shadow: none !important;
+
+  transform: none !important;
+}
+
+
+/* PDF name */
+
+#resume-paper.pdf-version .resume-header h1 {
+  font-size: 28px !important;
+
+  line-height: 1.2 !important;
+}
+
+
+/* PDF job title */
+
+#resume-paper.pdf-version .resume-header > p {
+  font-size: 14px !important;
+}
+
+
+/* PDF contact */
+
+#resume-paper.pdf-version .resume-contact,
+#resume-paper.pdf-version .resume-links {
+  font-size: 11px !important;
+}
+
+
+/* PDF headings */
+
+#resume-paper.pdf-version .resume-section h2 {
+  font-size: 14px !important;
+
+  line-height: 1.25 !important;
+}
+
+
+/* PDF paragraphs */
+
+#resume-paper.pdf-version .resume-section p {
+  font-size: 12px !important;
+
+  line-height: 1.45 !important;
+}
+
+
+/* PDF list */
+
+#resume-paper.pdf-version .resume-section li {
+  font-size: 12px !important;
+
+  line-height: 1.45 !important;
+}
+
+
+/* PDF entry */
+
+#resume-paper.pdf-version .entry-title {
+  font-size: 13px !important;
+}
+
+#resume-paper.pdf-version .entry-subtitle {
+  font-size: 11px !important;
+}
+
+
+/* PDF skills */
+
+#resume-paper.pdf-version .skills-content p {
+  font-size: 12px !important;
+}
+
+
+/* PDF projects */
+
+#resume-paper.pdf-version .project-title {
+  font-size: 13px !important;
+}
+
+#resume-paper.pdf-version .tech-stack {
+  font-size: 11px !important;
+}
+
+
+/* =====================================================
+   PDF PAGE BREAK CONTROL
+===================================================== */
+
+#resume-paper.pdf-version .resume-section {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+#resume-paper.pdf-version .resume-entry {
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
