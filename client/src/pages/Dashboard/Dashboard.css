@@ -1,197 +1,610 @@
 .dashboard-page {
+
   min-height: 100vh;
+
   background: #f8f3ed;
+
   color: #2d2521;
+
 }
+
+
+/* ================= NAVBAR ================= */
 
 .dashboard-navbar {
+
   height: 76px;
+
   padding: 0 7%;
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   background: #fffaf5;
+
   border-bottom: 1px solid #eadfd5;
+
 }
+
 
 .dashboard-logo {
+
   display: flex;
+
   align-items: center;
+
   gap: 10px;
+
   font-size: 20px;
+
   font-weight: 700;
+
 }
+
 
 .dashboard-logo-icon {
+
   width: 38px;
+
   height: 38px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   background: #b95432;
+
   color: white;
+
   border-radius: 10px;
+
   font-weight: 700;
+
 }
+
 
 .dashboard-nav-right {
+
   display: flex;
+
   align-items: center;
+
   gap: 20px;
+
 }
+
 
 .dashboard-user-name {
+
   font-size: 14px;
+
   font-weight: 600;
+
 }
+
 
 .dashboard-logout {
+
   border: 1px solid #d9c9bd;
+
   background: transparent;
+
   padding: 9px 18px;
+
   border-radius: 8px;
+
   cursor: pointer;
+
   font-weight: 600;
+
 }
+
+
+/* ================= MAIN ================= */
 
 .dashboard-main {
+
   max-width: 1150px;
+
   margin: 0 auto;
+
   padding: 70px 30px;
+
 }
+
+
+/* ================= WELCOME ================= */
 
 .dashboard-badge {
+
   display: inline-block;
+
   color: #b95432;
+
   font-size: 13px;
+
   font-weight: 700;
+
   letter-spacing: 1px;
+
   margin-bottom: 12px;
+
 }
+
 
 .dashboard-welcome h1 {
+
   font-size: 42px;
+
   margin: 0 0 12px;
+
 }
+
 
 .dashboard-welcome p {
+
   max-width: 600px;
+
   color: #746861;
+
   font-size: 16px;
+
   line-height: 1.7;
+
 }
+
+
+/* ================= ACTIONS ================= */
 
 .dashboard-actions {
+
   margin-top: 45px;
+
 }
+
 
 .dashboard-create-card {
+
   background: #fffaf5;
+
   border: 1px solid #eadfd5;
+
   border-radius: 18px;
+
   padding: 28px;
+
   display: flex;
+
   align-items: center;
+
   gap: 22px;
+
   box-shadow: 0 10px 30px rgba(70, 45, 30, 0.06);
+
 }
+
 
 .create-icon {
+
   width: 55px;
+
   height: 55px;
+
   border-radius: 14px;
+
   background: #b95432;
+
   color: white;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   font-size: 28px;
+
 }
+
 
 .create-content {
+
   flex: 1;
+
 }
+
 
 .create-content h2 {
+
   margin: 0 0 7px;
+
   font-size: 20px;
+
 }
+
 
 .create-content p {
+
   margin: 0;
+
   color: #746861;
+
 }
+
 
 .create-resume-button,
+
 .empty-resumes button {
+
   background: #b95432;
+
   color: white;
+
   border: none;
+
   padding: 12px 20px;
+
   border-radius: 9px;
+
   font-weight: 600;
+
   cursor: pointer;
+
 }
+
+
+.create-resume-button:hover,
+
+.empty-resumes button:hover {
+
+  background: #a24729;
+
+}
+
+
+/* ================= RECENT RESUMES ================= */
 
 .recent-resumes {
+
   margin-top: 55px;
+
 }
+
 
 .recent-header h2 {
+
   margin: 0 0 5px;
+
 }
+
 
 .recent-header p {
+
   margin: 0;
+
   color: #746861;
+
 }
+
+
+/* ================= EMPTY RESUMES ================= */
 
 .empty-resumes {
+
   margin-top: 20px;
+
   background: #fffaf5;
+
   border: 1px dashed #d9c9bd;
+
   border-radius: 16px;
+
   padding: 60px 20px;
+
   text-align: center;
+
 }
+
 
 .empty-icon {
+
   font-size: 40px;
+
   margin-bottom: 15px;
+
 }
+
 
 .empty-resumes h3 {
+
   margin: 0 0 8px;
+
 }
+
 
 .empty-resumes p {
+
   color: #746861;
+
   margin-bottom: 20px;
+
 }
 
+
+/* ================================================= */
+/* ================= RESUME LIST =================== */
+/* ================================================= */
+
+.resume-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+  margin-top: 24px;
+
+}
+
+
+/* ================= RESUME CARD ================= */
+
+.resume-card {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 20px 22px;
+
+  background: #fffaf5;
+
+  border: 1px solid #eadfd5;
+
+  border-radius: 14px;
+
+  box-shadow: 0 8px 25px rgba(70, 45, 30, 0.04);
+
+  transition: all 0.25s ease;
+
+}
+
+
+.resume-card:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 12px 30px rgba(70, 45, 30, 0.08);
+
+}
+
+
+/* ================= RESUME ICON ================= */
+
+.resume-card-icon {
+
+  width: 48px;
+
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #b95432;
+
+  color: white;
+
+  border-radius: 10px;
+
+  font-size: 22px;
+
+  flex-shrink: 0;
+
+}
+
+
+/* ================= RESUME CONTENT ================= */
+
+.resume-card-content {
+
+  flex: 1;
+
+}
+
+
+.resume-card-content h3 {
+
+  margin: 0 0 6px;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  color: #2d2521;
+
+}
+
+
+.resume-card-content p {
+
+  margin: 0;
+
+  font-size: 13px;
+
+  color: #746861;
+
+}
+
+
+/* ================= RESUME ACTIONS ================= */
+
+.resume-card-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+
+/* ================= OPEN BUTTON ================= */
+
+.resume-card-actions button:first-child {
+
+  padding: 9px 18px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #b95432;
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+}
+
+
+.resume-card-actions button:first-child:hover {
+
+  background: #a24729;
+
+}
+
+
+/* ================= DELETE BUTTON ================= */
+
+.resume-card-actions button:last-child {
+
+  padding: 9px 18px;
+
+  border: 1px solid #d9c9bd;
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #b95432;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+}
+
+
+.resume-card-actions button:last-child:hover {
+
+  background: #fff0eb;
+
+  border-color: #b95432;
+
+}
+
+
+/* ================= MOBILE ================= */
+
 @media (max-width: 700px) {
+
   .dashboard-navbar {
+
     padding: 0 20px;
+
   }
+
 
   .dashboard-main {
+
     padding: 45px 20px;
+
   }
+
 
   .dashboard-welcome h1 {
+
     font-size: 32px;
+
   }
+
 
   .dashboard-create-card {
+
     flex-direction: column;
+
     align-items: flex-start;
+
   }
+
 
   .create-resume-button {
+
     width: 100%;
+
   }
 
+
   .dashboard-user-name {
+
     display: none;
+
   }
+
+
+  /* Resume card mobile */
+
+  .resume-card {
+
+    flex-wrap: wrap;
+
+    padding: 18px;
+
+  }
+
+
+  .resume-card-content {
+
+    min-width: 200px;
+
+  }
+
+
+  .resume-card-actions {
+
+    width: 100%;
+
+    margin-top: 8px;
+
+  }
+
+
+  .resume-card-actions button {
+
+    flex: 1;
+
+  }
+
 }

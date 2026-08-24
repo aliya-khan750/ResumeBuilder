@@ -1,0 +1,367 @@
+.templates-page {
+  min-height: 100vh;
+  background: #f8f3ed;
+  color: #2d2521;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.templates-navbar {
+  height: 76px;
+  padding: 0 7%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #fffaf5;
+  border-bottom: 1px solid #eadfd5;
+}
+
+
+.templates-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+.templates-logo-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #b95432;
+  color: white;
+
+  border-radius: 10px;
+
+  font-weight: 700;
+}
+
+
+.templates-back-button {
+  padding: 9px 17px;
+
+  border: 1px solid #d9c9bd;
+  border-radius: 8px;
+
+  background: transparent;
+  color: #2d2521;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+.templates-back-button:hover {
+  background: #f5e9df;
+}
+
+
+/* ================= MAIN ================= */
+
+.templates-main {
+  max-width: 1150px;
+
+  margin: 0 auto;
+
+  padding: 65px 30px;
+}
+
+
+/* ================= HEADING ================= */
+
+.templates-badge {
+  display: inline-block;
+
+  margin-bottom: 12px;
+
+  color: #b95432;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+.templates-heading h1 {
+  margin: 0 0 10px;
+
+  font-size: 42px;
+}
+
+
+.templates-heading p {
+  max-width: 600px;
+
+  margin: 0;
+
+  color: #746861;
+
+  font-size: 16px;
+
+  line-height: 1.7;
+}
+
+
+/* ================= GRID ================= */
+
+.templates-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 24px;
+
+  margin-top: 45px;
+}
+
+
+/* ================= CARD ================= */
+
+.template-card {
+  overflow: hidden;
+
+  background: #fffaf5;
+
+  border: 1px solid #eadfd5;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(70, 45, 30, 0.05);
+
+  transition: 0.25s ease;
+}
+
+
+.template-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 35px
+    rgba(70, 45, 30, 0.10);
+}
+
+
+/* ================= TEMPLATE PREVIEW ================= */
+
+.template-preview {
+  height: 320px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  background: #f1e9e1;
+}
+
+
+.mini-resume {
+  width: 185px;
+  height: 255px;
+
+  padding: 20px;
+
+  background: white;
+
+  border: 1px solid #ddd5ce;
+
+  box-shadow:
+    0 5px 15px
+    rgba(0, 0, 0, 0.08);
+}
+
+
+/* ================= MINI HEADER ================= */
+
+.mini-header {
+  padding-bottom: 10px;
+
+  border-bottom: 2px solid #222;
+}
+
+
+.mini-name {
+  font-size: 11px;
+  font-weight: 800;
+
+  color: #222;
+}
+
+
+.mini-job {
+  margin-top: 4px;
+
+  font-size: 6px;
+
+  color: #666;
+}
+
+
+/* ================= MINI SECTIONS ================= */
+
+.mini-section {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  margin-top: 15px;
+}
+
+
+.mini-section span {
+  display: block;
+
+  width: 100%;
+  height: 4px;
+
+  background: #d7d2ce;
+
+  border-radius: 2px;
+}
+
+
+.mini-section span:nth-child(2) {
+  width: 85%;
+}
+
+
+.mini-section span:nth-child(3) {
+  width: 92%;
+}
+
+
+.mini-section span:nth-child(4) {
+  width: 70%;
+}
+
+
+/* ================= INFO ================= */
+
+.template-info {
+  padding: 22px;
+}
+
+
+.template-title-row {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+
+.template-title-row h2 {
+  margin: 0;
+
+  font-size: 20px;
+}
+
+
+.template-type {
+  padding: 4px 8px;
+
+  border-radius: 20px;
+
+  background: #f5e4db;
+  color: #b95432;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+.template-info p {
+  min-height: 45px;
+
+  margin: 10px 0 18px;
+
+  color: #746861;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* ================= BUTTON ================= */
+
+.use-template-button {
+  width: 100%;
+
+  padding: 11px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #b95432;
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.use-template-button:hover {
+  background: #a24729;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 850px) {
+
+  .templates-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .templates-navbar {
+    padding: 0 20px;
+  }
+
+
+  .templates-main {
+    padding: 45px 20px;
+  }
+
+
+  .templates-heading h1 {
+    font-size: 32px;
+  }
+
+
+  .templates-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

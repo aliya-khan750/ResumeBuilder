@@ -1,4 +1,9 @@
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 const ResumeContext = createContext();
 
@@ -17,9 +22,7 @@ const initialResumeData = {
   },
 
   education: [],
-
   experience: [],
-
   projects: [],
 
   skills: {
@@ -29,13 +32,9 @@ const initialResumeData = {
   },
 
   certifications: [],
-
   achievements: [],
-
   languages: [],
-
   references: [],
-
   customSections: [],
 };
 
@@ -44,36 +43,139 @@ const initialResumeData = {
 
 export function ResumeProvider({ children }) {
 
-  const [resumeData, setResumeData] = useState(() => {
+  const [resumeData, setResumeData] = useState(
+    initialResumeData
+  );
 
-    const savedResume =
-      localStorage.getItem("resumeData");
+  const [currentResumeId, setCurrentResumeId] =
+    useState(null);
 
-    if (savedResume) {
+  const [loadingResume, setLoadingResume] =
+    useState(false);
+
+
+  /* ================= LOAD RESUME ================= */
+
+  useEffect(() => {
+
+    const loadResume = async () => {
+
+      const params = new URLSearchParams(
+        window.location.search
+      );
+
+      const resumeId = params.get("id");
+
+      // ================= NEW RESUME =================
+
+      if (!resumeId) {
+
+        setCurrentResumeId(null);
+
+        setResumeData(initialResumeData);
+
+        localStorage.removeItem("resumeData");
+
+        return;
+      }
+
+
+      // ================= EXISTING RESUME =================
+
+      const token =
+        localStorage.getItem("token");
+
+      if (!token) {
+
+        window.location.href = "/login";
+
+        return;
+      }
+
+
+      setLoadingResume(true);
+
 
       try {
 
-        return JSON.parse(savedResume);
+        const response = await fetch(
+          `http://localhost:5000/api/resumes/${resumeId}`,
+          {
+            method: "GET",
+
+            headers: {
+              Authorization:
+                `Bearer ${token}`,
+            },
+          }
+        );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          console.error(
+            "Load resume error:",
+            data.message
+          );
+
+          return;
+        }
+
+
+        // ================= SET RESUME ID =================
+
+        setCurrentResumeId(
+          data.resume._id
+        );
+
+
+        // ================= SET RESUME DATA =================
+
+        setResumeData(
+          data.resume.resumeData
+        );
+
+
+        // Also keep local copy
+        localStorage.setItem(
+          "resumeData",
+          JSON.stringify(
+            data.resume.resumeData
+          )
+        );
+
 
       } catch (error) {
 
         console.error(
-          "Error loading saved resume:",
+          "Load resume error:",
           error
         );
 
-        return initialResumeData;
+      } finally {
+
+        setLoadingResume(false);
+
       }
 
-    }
+    };
 
-    return initialResumeData;
-  });
+
+    loadResume();
+
+  }, []);
 
 
   /* ================= PERSONAL ================= */
 
-  const updatePersonal = (field, value) => {
+  const updatePersonal = (
+    field,
+    value
+  ) => {
 
     setResumeData((prev) => ({
 
@@ -89,9 +191,12 @@ export function ResumeProvider({ children }) {
   };
 
 
-  /* ================= RESUME DATA ================= */
+  /* ================= UPDATE SECTION ================= */
 
-  const updateResumeData = (section, data) => {
+  const updateResumeData = (
+    section,
+    data
+  ) => {
 
     setResumeData((prev) => ({
 
@@ -104,7 +209,16 @@ export function ResumeProvider({ children }) {
   };
 
 
-  /* ================= SAVE RESUME ================= */
+  /* ================= SET RESUME ID ================= */
+
+  const setResumeId = (id) => {
+
+    setCurrentResumeId(id);
+
+  };
+
+
+  /* ================= LOCAL SAVE ================= */
 
   const saveResume = () => {
 
@@ -124,40 +238,11 @@ export function ResumeProvider({ children }) {
       "resumeData"
     );
 
-    setResumeData({
-      personal: {
-        fullName: "",
-        jobTitle: "",
-        email: "",
-        phone: "",
-        location: "",
-        linkedin: "",
-        github: "",
-        summary: "",
-      },
+    setCurrentResumeId(null);
 
-      education: [],
-
-      experience: [],
-
-      projects: [],
-
-      skills: {
-        technicalSkills: "",
-        toolsTechnologies: "",
-        softSkills: "",
-      },
-
-      certifications: [],
-
-      achievements: [],
-
-      languages: [],
-
-      references: [],
-
-      customSections: [],
-    });
+    setResumeData(
+      initialResumeData
+    );
 
   };
 
@@ -181,6 +266,12 @@ export function ResumeProvider({ children }) {
 
         resetResume,
 
+        currentResumeId,
+
+        setResumeId,
+
+        loadingResume,
+
       }}
     >
 
@@ -200,6 +291,7 @@ export function useResume() {
   const context =
     useContext(ResumeContext);
 
+
   if (!context) {
 
     throw new Error(
@@ -207,6 +299,7 @@ export function useResume() {
     );
 
   }
+
 
   return context;
 

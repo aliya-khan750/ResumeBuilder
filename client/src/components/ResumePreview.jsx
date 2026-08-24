@@ -5,6 +5,18 @@ import html2pdf from "html2pdf.js";
 function ResumePreview() {
   const { resumeData } = useResume();
 
+  /* =====================================================
+     SELECTED TEMPLATE
+  ===================================================== */
+
+  const selectedTemplate =
+    localStorage.getItem("selectedTemplate") || "classic";
+
+
+  /* =====================================================
+     RESUME DATA
+  ===================================================== */
+
   const {
     personal = {},
     education = [],
@@ -18,8 +30,9 @@ function ResumePreview() {
     customSections = [],
   } = resumeData;
 
+
   /* =====================================================
-     CHECK WHETHER OBJECT HAS REAL CONTENT
+     CHECK CONTENT
   ===================================================== */
 
   const hasContent = (item) => {
@@ -35,8 +48,9 @@ function ResumePreview() {
     );
   };
 
+
   /* =====================================================
-     FILTER EMPTY ITEMS
+     VALID DATA
   ===================================================== */
 
   const validEducation = education.filter(hasContent);
@@ -66,14 +80,15 @@ function ResumePreview() {
   ===================================================== */
 
   const downloadPDF = async () => {
-    const resume = document.getElementById("resume-paper");
+    const resume =
+      document.getElementById("resume-paper");
 
     if (!resume) {
       alert("Resume preview not found!");
       return;
     }
 
-    let pdfResume = null;
+    let pdfStyle = null;
 
     try {
 
@@ -85,295 +100,450 @@ function ResumePreview() {
         personal.fullName?.trim()
           ? personal.fullName
               .trim()
-              .replace(/[^a-zA-Z0-9 ]/g, "")
-              .replace(/\s+/g, "_")
+              .replace(
+                /[^a-zA-Z0-9 ]/g,
+                ""
+              )
+              .replace(
+                /\s+/g,
+                "_"
+              )
           : "My";
 
-      const fileName = `${cleanName}_Resume.pdf`;
+      const fileName =
+        `${cleanName}_Resume.pdf`;
 
 
       /* =================================================
-         CLONE RESUME
+         ADD PDF CLASS
       ================================================= */
 
-      pdfResume = resume.cloneNode(true);
+      resume.classList.add("pdf-export");
 
 
       /* =================================================
-         IMPORTANT PDF CLASS
+         TEMPORARY PDF CSS
       ================================================= */
 
-      pdfResume.classList.add("pdf-version");
-
-
-      /* =================================================
-         GIVE CLONE UNIQUE ID
-      ================================================= */
-
-      pdfResume.id = "resume-paper-pdf";
-
-
-      /* =================================================
-         REMOVE DOWNLOAD BUTTON
-      ================================================= */
-
-      pdfResume
-        .querySelectorAll(".download-button")
-        .forEach((button) => {
-          button.remove();
-        });
-
-
-      /* =================================================
-         PDF A4 SIZE
-
-         794px ≈ 210mm
-         Height is NOT forced.
-
-         Content decides the height.
-      ================================================= */
-
-      pdfResume.style.width = "794px";
-
-      pdfResume.style.minWidth = "794px";
-
-      pdfResume.style.maxWidth = "794px";
-
-      pdfResume.style.height = "auto";
-
-      pdfResume.style.minHeight = "1123px";
-
-      pdfResume.style.maxHeight = "none";
-
-
-      /* =================================================
-         PDF PADDING
-      ================================================= */
-
-      pdfResume.style.padding =
-        "55px 60px";
-
-      pdfResume.style.boxSizing =
-        "border-box";
-
-
-      /* =================================================
-         PDF FONT
-      ================================================= */
-
-      pdfResume.style.fontFamily =
-        "Arial, Helvetica, sans-serif";
-
-      pdfResume.style.fontSize = "13px";
-
-      pdfResume.style.lineHeight = "1.45";
-
-
-      /* =================================================
-         PDF COLORS
-      ================================================= */
-
-      pdfResume.style.backgroundColor =
-        "#ffffff";
-
-      pdfResume.style.color =
-        "#111111";
-
-
-      /* =================================================
-         REMOVE SCREEN STYLES
-      ================================================= */
-
-      pdfResume.style.transform =
-        "none";
-
-      pdfResume.style.boxShadow =
-        "none";
-
-      pdfResume.style.overflow =
-        "visible";
-
-
-      /* =================================================
-         POSITION OFF SCREEN
-
-         Do NOT use z-index: -1.
-         That can make html2canvas capture blank.
-      ================================================= */
-
-      pdfResume.style.position =
-        "absolute";
-
-      pdfResume.style.left =
-        "-10000px";
-
-      pdfResume.style.top =
-        "0";
-
-      pdfResume.style.zIndex =
-        "9999";
-
-
-      /* =================================================
-         ADD CLONE TO BODY
-      ================================================= */
-
-      document.body.appendChild(pdfResume);
-
-
-      /* =================================================
-         FORCE PDF FONT SIZES
-      ================================================= */
-
-      const pdfStyle = document.createElement("style");
+      pdfStyle =
+        document.createElement("style");
 
       pdfStyle.id =
-        "temporary-pdf-style";
+        "resume-pdf-temporary-style";
 
       pdfStyle.innerHTML = `
-        #resume-paper-pdf {
+
+        /* ==============================================
+           PDF MAIN PAPER
+        ============================================== */
+
+        #resume-paper.pdf-export {
+
           width: 794px !important;
+
           min-width: 794px !important;
+
           max-width: 794px !important;
 
           height: auto !important;
-          min-height: 1123px !important;
+
+          min-height: 0 !important;
+
           max-height: none !important;
+
+          margin: 0 !important;
 
           padding: 55px 60px !important;
 
           box-sizing: border-box !important;
 
           background: #ffffff !important;
+
           color: #111111 !important;
 
-          font-family: Arial, Helvetica, sans-serif !important;
+          font-family:
+            Arial,
+            Helvetica,
+            sans-serif !important;
 
           font-size: 13px !important;
+
           line-height: 1.45 !important;
 
           overflow: visible !important;
 
-          transform: none !important;
           box-shadow: none !important;
+
+          transform: none !important;
+
+          opacity: 1 !important;
+
+          visibility: visible !important;
+
+          display: block !important;
+
         }
 
 
-        #resume-paper-pdf .resume-header {
+        /* ==============================================
+           HEADER
+        ============================================== */
+
+        #resume-paper.pdf-export
+        .resume-header {
+
           padding-bottom: 10px !important;
+
           margin-bottom: 14px !important;
+
         }
 
 
-        #resume-paper-pdf .resume-header h1 {
+        #resume-paper.pdf-export
+        .resume-header h1 {
+
+          margin: 0 0 7px !important;
+
           font-size: 28px !important;
+
           line-height: 1.2 !important;
-          margin-bottom: 7px !important;
+
+          letter-spacing: 1px !important;
+
         }
 
 
-        #resume-paper-pdf .resume-header > p {
+        #resume-paper.pdf-export
+        .resume-header > p {
+
+          margin: 0 0 7px !important;
+
           font-size: 14px !important;
+
           line-height: 1.3 !important;
+
         }
 
 
-        #resume-paper-pdf .resume-contact,
-        #resume-paper-pdf .resume-links {
+        /* ==============================================
+           CONTACT
+        ============================================== */
+
+        #resume-paper.pdf-export
+        .resume-contact {
+
           font-size: 11px !important;
+
           line-height: 1.4 !important;
+
+          gap: 4px 10px !important;
+
         }
 
 
-        #resume-paper-pdf .resume-section {
+        #resume-paper.pdf-export
+        .resume-links {
+
+          margin-top: 4px !important;
+
+          font-size: 11px !important;
+
+          line-height: 1.4 !important;
+
+          gap: 4px 12px !important;
+
+        }
+
+
+        /* ==============================================
+           SECTIONS
+        ============================================== */
+
+        #resume-paper.pdf-export
+        .resume-section {
+
           margin-bottom: 12px !important;
 
           break-inside: avoid !important;
+
           page-break-inside: avoid !important;
+
         }
 
 
-        #resume-paper-pdf .resume-section h2 {
+        #resume-paper.pdf-export
+        .resume-section h2 {
+
+          margin: 0 0 6px !important;
+
+          padding-bottom: 4px !important;
+
           font-size: 14px !important;
+
           line-height: 1.25 !important;
 
-          margin-bottom: 6px !important;
-          padding-bottom: 4px !important;
+          letter-spacing: 0.4px !important;
+
         }
 
 
-        #resume-paper-pdf .resume-section p {
-          font-size: 12px !important;
-          line-height: 1.45 !important;
+        #resume-paper.pdf-export
+        .resume-section p {
 
           margin: 4px 0 !important;
-        }
 
-
-        #resume-paper-pdf .resume-section li {
           font-size: 12px !important;
+
           line-height: 1.45 !important;
 
-          margin-bottom: 3px !important;
         }
 
 
-        #resume-paper-pdf .resume-entry {
+        /* ==============================================
+           ENTRIES
+        ============================================== */
+
+        #resume-paper.pdf-export
+        .resume-entry {
+
           margin-bottom: 8px !important;
 
           break-inside: avoid !important;
+
           page-break-inside: avoid !important;
+
         }
 
 
-        #resume-paper-pdf .entry-title {
+        #resume-paper.pdf-export
+        .entry-title {
+
+          margin-bottom: 2px !important;
+
           font-size: 13px !important;
+
           line-height: 1.35 !important;
+
         }
 
 
-        #resume-paper-pdf .entry-subtitle {
+        #resume-paper.pdf-export
+        .entry-subtitle {
+
           font-size: 11px !important;
+
           line-height: 1.35 !important;
+
         }
 
 
-        #resume-paper-pdf .skills-content p {
+        /* ==============================================
+           LISTS
+        ============================================== */
+
+        #resume-paper.pdf-export
+        ul {
+
+          margin: 4px 0 0 !important;
+
+          padding-left: 18px !important;
+
+        }
+
+
+        #resume-paper.pdf-export
+        li {
+
+          margin-bottom: 3px !important;
+
           font-size: 12px !important;
+
           line-height: 1.45 !important;
+
         }
 
 
-        #resume-paper-pdf .project-title {
+        /* ==============================================
+           SKILLS
+        ============================================== */
+
+        #resume-paper.pdf-export
+        .skills-content {
+
+          width: 100% !important;
+
+        }
+
+
+        #resume-paper.pdf-export
+        .skills-content p {
+
+          margin: 4px 0 !important;
+
+          font-size: 12px !important;
+
+          line-height: 1.45 !important;
+
+        }
+
+
+        /* ==============================================
+           PROJECTS
+        ============================================== */
+
+        #resume-paper.pdf-export
+        .project-title {
+
+          margin-bottom: 2px !important;
+
           font-size: 13px !important;
+
           line-height: 1.35 !important;
+
         }
 
 
-        #resume-paper-pdf .tech-stack {
+        #resume-paper.pdf-export
+        .tech-stack {
+
+          margin: 3px 0 !important;
+
           font-size: 11px !important;
+
           line-height: 1.4 !important;
+
         }
 
 
-        #resume-paper-pdf ul {
-          margin-top: 4px !important;
+        /* ==============================================
+           CLASSIC TEMPLATE
+        ============================================== */
+
+        #resume-paper.pdf-export.template-classic
+        .resume-header {
+
+          text-align: center !important;
+
+          border-bottom:
+            1px solid #111111 !important;
+
         }
+
+
+        /* ==============================================
+           MODERN TEMPLATE
+        ============================================== */
+
+        #resume-paper.pdf-export.template-modern {
+
+          font-family:
+            "Segoe UI",
+            Arial,
+            sans-serif !important;
+
+        }
+
+
+        #resume-paper.pdf-export.template-modern
+        .resume-header {
+
+          text-align: left !important;
+
+          border-bottom:
+            3px solid #A8472B !important;
+
+        }
+
+
+        #resume-paper.pdf-export.template-modern
+        .resume-header h1 {
+
+          color: #A8472B !important;
+
+        }
+
+
+        #resume-paper.pdf-export.template-modern
+        .resume-section h2 {
+
+          color: #A8472B !important;
+
+          border-bottom:
+            1px solid #d8c2b8 !important;
+
+        }
+
+
+        /* ==============================================
+           MINIMAL TEMPLATE
+        ============================================== */
+
+        #resume-paper.pdf-export.template-minimal
+        .resume-header {
+
+          text-align: left !important;
+
+          border-bottom:
+            1px solid #222222 !important;
+
+        }
+
+
+        #resume-paper.pdf-export.template-minimal
+        .resume-section h2 {
+
+          border-bottom: none !important;
+
+          color: #222222 !important;
+
+        }
+
+
+        /* ==============================================
+           PAGE BREAK CONTROL
+        ============================================== */
+
+        #resume-paper.pdf-export
+        .resume-section {
+
+          break-inside: avoid !important;
+
+          page-break-inside: avoid !important;
+
+        }
+
+
+        #resume-paper.pdf-export
+        .resume-entry {
+
+          break-inside: avoid !important;
+
+          page-break-inside: avoid !important;
+
+        }
+
       `;
+
 
       document.head.appendChild(pdfStyle);
 
 
       /* =================================================
-         WAIT FOR BROWSER TO RENDER CLONE
+         WAIT FOR BROWSER
       ================================================= */
 
       await new Promise((resolve) => {
+
         requestAnimationFrame(() => {
+
           requestAnimationFrame(() => {
-            setTimeout(resolve, 100);
+
+            setTimeout(resolve, 300);
+
           });
+
         });
+
       });
 
 
@@ -389,7 +559,7 @@ function ResumePreview() {
 
         image: {
           type: "jpeg",
-          quality: 1,
+          quality: 0.98,
         },
 
         html2canvas: {
@@ -409,13 +579,10 @@ function ResumePreview() {
 
           scrollY: 0,
 
+          width: 794,
+
           windowWidth: 794,
 
-          windowHeight:
-            Math.max(
-              pdfResume.scrollHeight,
-              1123
-            ),
         },
 
         jsPDF: {
@@ -424,18 +591,19 @@ function ResumePreview() {
 
           format: "a4",
 
-          orientation: "portrait",
+          orientation:
+            "portrait",
 
           compress: true,
+
         },
 
         pagebreak: {
 
-          mode: [
-            "css",
-            "legacy",
-          ],
+          mode: ["css"],
+
         },
+
       };
 
 
@@ -445,31 +613,25 @@ function ResumePreview() {
 
       await html2pdf()
         .set(options)
-        .from(pdfResume)
+        .from(resume)
         .save();
 
 
       /* =================================================
-         CLEANUP PDF CLONE
+         CLEANUP
       ================================================= */
 
-      if (
-        pdfResume &&
-        pdfResume.parentNode
-      ) {
-        pdfResume.parentNode.removeChild(
-          pdfResume
-        );
-      }
-
+      resume.classList.remove("pdf-export");
 
       if (
         pdfStyle &&
         pdfStyle.parentNode
       ) {
+
         pdfStyle.parentNode.removeChild(
           pdfStyle
         );
+
       }
 
     } catch (error) {
@@ -484,52 +646,64 @@ function ResumePreview() {
          CLEANUP AFTER ERROR
       ================================================= */
 
-      if (
-        pdfResume &&
-        pdfResume.parentNode
-      ) {
-        pdfResume.parentNode.removeChild(
-          pdfResume
-        );
-      }
+      resume.classList.remove("pdf-export");
 
 
       const existingStyle =
         document.getElementById(
-          "temporary-pdf-style"
+          "resume-pdf-temporary-style"
         );
+
 
       if (
         existingStyle &&
         existingStyle.parentNode
       ) {
+
         existingStyle.parentNode.removeChild(
           existingStyle
         );
+
       }
 
 
       alert(
         "Unable to generate PDF. Please try again."
       );
+
     }
+
   };
 
 
+  /* =====================================================
+     RETURN
+  ===================================================== */
+
   return (
+
     <div className="resume-preview-wrapper">
 
+
       {/* =================================================
-          DOWNLOAD BUTTON
+          DOWNLOAD BAR
+          
+          IMPORTANT:
+          This is OUTSIDE the resume paper.
+          Therefore it cannot overlap the resume.
       ================================================= */}
 
-      <button
-        type="button"
-        className="download-button"
-        onClick={downloadPDF}
-      >
-        Download PDF
-      </button>
+      <div className="download-bar">
+
+        <button
+          type="button"
+          className="download-button"
+          onClick={downloadPDF}
+        >
+          Download PDF
+        </button>
+
+      </div>
 
 
       {/* =================================================
@@ -538,8 +712,11 @@ function ResumePreview() {
 
       <div
         id="resume-paper"
-        className="resume-paper"
+        className={
+          `resume-paper template-${selectedTemplate}`
+        }
       >
+
 
         {/* =================================================
             HEADER
@@ -554,32 +731,40 @@ function ResumePreview() {
 
 
           {personal.jobTitle && (
+
             <p>
               {personal.jobTitle}
             </p>
+
           )}
 
 
           <div className="resume-contact">
 
             {personal.location && (
+
               <span>
                 {personal.location}
               </span>
+
             )}
 
 
             {personal.phone && (
+
               <span>
                 {personal.phone}
               </span>
+
             )}
 
 
             {personal.email && (
+
               <span>
                 {personal.email}
               </span>
+
             )}
 
           </div>
@@ -588,16 +773,20 @@ function ResumePreview() {
           <div className="resume-links">
 
             {personal.linkedin && (
+
               <span>
                 {personal.linkedin}
               </span>
+
             )}
 
 
             {personal.github && (
+
               <span>
                 {personal.github}
               </span>
+
             )}
 
           </div>
@@ -648,6 +837,7 @@ function ResumePreview() {
                 >
 
                   {item.degree && (
+
                     <div className="entry-title">
 
                       <strong>
@@ -655,6 +845,7 @@ function ResumePreview() {
                       </strong>
 
                     </div>
+
                   )}
 
 
@@ -664,19 +855,24 @@ function ResumePreview() {
                     <div className="entry-subtitle">
 
                       {item.institution && (
+
                         <span>
                           {item.institution}
                         </span>
+
                       )}
 
 
                       {item.location && (
+
                         <span>
                           {item.location}
                         </span>
+
                       )}
 
                     </div>
+
                   )}
 
 
@@ -695,13 +891,16 @@ function ResumePreview() {
                       {item.endYear}
 
                       {item.grade && (
+
                         <>
                           {" | "}
                           {item.grade}
                         </>
+
                       )}
 
                     </p>
+
                   )}
 
                 </div>
@@ -804,6 +1003,7 @@ function ResumePreview() {
                 >
 
                   {item.jobTitle && (
+
                     <div className="entry-title">
 
                       <strong>
@@ -811,6 +1011,7 @@ function ResumePreview() {
                       </strong>
 
                     </div>
+
                   )}
 
 
@@ -820,19 +1021,24 @@ function ResumePreview() {
                     <div className="entry-subtitle">
 
                       {item.company && (
+
                         <span>
                           {item.company}
                         </span>
+
                       )}
 
 
                       {item.location && (
+
                         <span>
                           {item.location}
                         </span>
+
                       )}
 
                     </div>
+
                   )}
 
 
@@ -845,24 +1051,30 @@ function ResumePreview() {
                       {item.employmentType}
 
                       {item.startDate && (
+
                         <>
                           {" | "}
                           {item.startDate}
                         </>
+
                       )}
 
                       {item.endDate && (
+
                         <>
                           {" - "}
                           {item.endDate}
                         </>
+
                       )}
 
                     </p>
+
                   )}
 
 
                   {item.description && (
+
                     <ul>
 
                       <li>
@@ -870,6 +1082,7 @@ function ResumePreview() {
                       </li>
 
                     </ul>
+
                   )}
 
                 </div>
@@ -1008,16 +1221,20 @@ function ResumePreview() {
                     <div className="entry-subtitle">
 
                       {item.organization && (
+
                         <span>
                           {item.organization}
                         </span>
+
                       )}
 
 
                       {item.date && (
+
                         <span>
                           {item.date}
                         </span>
+
                       )}
 
                     </div>
@@ -1026,9 +1243,11 @@ function ResumePreview() {
 
 
                   {item.link && (
+
                     <p>
                       {item.link}
                     </p>
+
                   )}
 
                 </div>
@@ -1116,17 +1335,21 @@ function ResumePreview() {
                 <p key={index}>
 
                   {item.language && (
+
                     <strong>
                       {item.language}
                     </strong>
+
                   )}
 
 
                   {item.proficiency && (
+
                     <>
                       {" — "}
                       {item.proficiency}
                     </>
+
                   )}
 
                 </p>
@@ -1174,16 +1397,20 @@ function ResumePreview() {
 
 
                   {item.designation && (
+
                     <p>
                       {item.designation}
                     </p>
+
                   )}
 
 
                   {item.company && (
+
                     <p>
                       {item.company}
                     </p>
+
                   )}
 
 
@@ -1228,16 +1455,20 @@ function ResumePreview() {
               >
 
                 {item.title && (
+
                   <h2>
                     {item.title.toUpperCase()}
                   </h2>
+
                 )}
 
 
                 {item.content && (
+
                   <p>
                     {item.content}
                   </p>
+
                 )}
 
               </section>

@@ -11,61 +11,226 @@ import {
 } from "lucide-react";
 
 function Sidebar() {
+
+  // ================= CREATE NEW RESUME =================
+
+  const handleCreateResume = () => {
+    window.location.href = "/builder";
+  };
+
+
+  // ================= LOGOUT =================
+
+  const handleLogout = () => {
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("currentResumeId");
+    localStorage.removeItem("resumeData");
+
+    window.location.href = "/login";
+  };
+
+
   return (
+
     <aside className="sidebar">
 
-      <button className="create-resume-btn">
+
+      {/* ================= CREATE NEW RESUME ================= */}
+
+      <button
+        type="button"
+        className="create-resume-btn"
+        onClick={handleCreateResume}
+      >
+
         <Plus size={19} />
-        <span>Create New Resume</span>
+
+        <span>
+          Create New Resume
+        </span>
+
       </button>
+
+
+      {/* ================= NAVIGATION ================= */}
 
       <nav className="sidebar-nav">
 
-        <a href="#" className="sidebar-item">
+
+        {/* ================= DASHBOARD ================= */}
+
+        <button
+          type="button"
+          className="sidebar-item"
+          onClick={() => {
+            window.location.href = "/dashboard";
+          }}
+        >
+
           <LayoutDashboard size={19} />
-          <span>Dashboard</span>
-        </a>
 
-        <a href="#" className="sidebar-item">
+          <span>
+            Dashboard
+          </span>
+
+        </button>
+
+
+        {/* ================= MY RESUMES ================= */}
+
+        <button
+          type="button"
+          className="sidebar-item"
+          onClick={() => {
+            window.location.href = "/my-resumes";
+          }}
+        >
+
           <FileText size={19} />
-          <span>My Resumes</span>
-        </a>
 
-        <a href="#" className="sidebar-item active">
+          <span>
+            My Resumes
+          </span>
+
+        </button>
+
+
+        {/* ================= RESUME BUILDER ================= */}
+
+        <button
+          type="button"
+          className="sidebar-item active"
+          onClick={() => {
+            window.location.href = "/builder";
+          }}
+        >
+
           <FileText size={19} />
-          <span>Resume Builder</span>
-        </a>
 
-        <a href="#" className="sidebar-item">
+          <span>
+            Resume Builder
+          </span>
+
+        </button>
+
+
+        {/* ================= TEMPLATES ================= */}
+
+        <button
+          type="button"
+          className="sidebar-item"
+          onClick={() => {
+            window.location.href = "/templates";
+          }}
+        >
+
           <Palette size={19} />
-          <span>Templates</span>
-        </a>
 
-        <a href="#" className="sidebar-item">
+          <span>
+            Templates
+          </span>
+
+        </button>
+
+
+        {/* ================= AI ASSISTANT ================= */}
+
+        <button
+          type="button"
+          className="sidebar-item"
+          onClick={() => {
+            alert("AI Assistant will be added soon.");
+          }}
+        >
+
           <Sparkles size={19} />
-          <span>AI Assistant</span>
-          <span className="new-badge">New</span>
-        </a>
 
-        <a href="#" className="sidebar-item">
+          <span>
+            AI Assistant
+          </span>
+
+          <span className="new-badge">
+            New
+          </span>
+
+        </button>
+
+
+        {/* ================= ANALYTICS ================= */}
+
+        <button
+          type="button"
+          className="sidebar-item"
+          onClick={() => {
+            alert("Analytics will be added soon.");
+          }}
+        >
+
           <BarChart3 size={19} />
-          <span>Analytics</span>
-        </a>
 
-        <a href="#" className="sidebar-item">
+          <span>
+            Analytics
+          </span>
+
+        </button>
+
+
+        {/* ================= SETTINGS ================= */}
+
+        <button
+          type="button"
+          className="sidebar-item"
+          onClick={() => {
+            alert("Settings will be added soon.");
+          }}
+        >
+
           <Settings size={19} />
-          <span>Settings</span>
-        </a>
 
-        <a href="#" className="sidebar-item">
+          <span>
+            Settings
+          </span>
+
+        </button>
+
+
+        {/* ================= PROFILE ================= */}
+
+        <button
+          type="button"
+          className="sidebar-item"
+          onClick={() => {
+            alert("Profile will be added soon.");
+          }}
+        >
+
           <User size={19} />
-          <span>Profile</span>
-        </a>
 
-        <a href="#" className="sidebar-item">
+          <span>
+            Profile
+          </span>
+
+        </button>
+
+
+        {/* ================= LOGOUT ================= */}
+
+        <button
+          type="button"
+          className="sidebar-item"
+          onClick={handleLogout}
+        >
+
           <LogOut size={19} />
-          <span>Logout</span>
-        </a>
+
+          <span>
+            Logout
+          </span>
+
+        </button>
+
 
       </nav>
 

@@ -4,7 +4,9 @@ const express = require("express");
 const cors = require("cors");
 
 const connectDB = require("./config/db");
+
 const authRoutes = require("./routes/authRoutes");
+const resumeRoutes = require("./routes/resumeRoutes");
 
 const app = express();
 
@@ -22,6 +24,10 @@ app.use(express.json());
 /* ================= AUTH ROUTES ================= */
 
 app.use("/api/auth", authRoutes);
+
+/* ================= RESUME ROUTES ================= */
+
+app.use("/api/resumes", resumeRoutes);
 
 /* ================= TEST ROUTE ================= */
 
