@@ -1,0 +1,487 @@
+/* =====================================================
+   AI PAGE
+===================================================== */
+
+.ai-page {
+  width: 100%;
+
+  min-height: 100%;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  background: #faf7f2;
+
+  color: #111111;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.ai-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 28px;
+}
+
+
+.ai-header-icon {
+  width: 48px;
+
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #b84d2c;
+
+  color: #ffffff;
+}
+
+
+.ai-header h1 {
+  margin: 0 0 4px;
+
+  font-size: 28px;
+
+  font-weight: 700;
+}
+
+
+.ai-header p {
+  margin: 0;
+
+  color: #777777;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   AI TOOLS
+===================================================== */
+
+.ai-tools {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 14px;
+
+  margin-bottom: 25px;
+}
+
+
+.ai-tool-card {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  padding: 16px;
+
+  border: 1px solid #e4d8cf;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.ai-tool-card:hover {
+  border-color: #b84d2c;
+
+  transform: translateY(-2px);
+}
+
+
+.ai-tool-card.selected {
+  border-color: #b84d2c;
+
+  background: #fff7f2;
+
+  box-shadow:
+    0 0 0 1px #b84d2c;
+}
+
+
+.ai-tool-icon {
+  min-width: 38px;
+
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 7px;
+
+  background: #f3e4dc;
+
+  color: #b84d2c;
+}
+
+
+.ai-tool-content h3 {
+  margin: 0 0 5px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+
+.ai-tool-content p {
+  margin: 0;
+
+  color: #777777;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+
+/* =====================================================
+   WORKSPACE
+===================================================== */
+
+.ai-workspace {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 20px;
+}
+
+
+/* =====================================================
+   PANEL
+===================================================== */
+
+.ai-panel {
+  min-height: 400px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 22px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #e2d8d0;
+
+  border-radius: 10px;
+}
+
+
+.ai-panel-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 16px;
+}
+
+
+.ai-panel-header h2 {
+  margin: 0 0 4px;
+
+  font-size: 17px;
+}
+
+
+.ai-panel-header p {
+  margin: 0;
+
+  color: #777777;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   TEXTAREA
+===================================================== */
+
+.ai-textarea {
+  width: 100%;
+
+  flex: 1;
+
+  min-height: 260px;
+
+  resize: vertical;
+
+  padding: 14px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #d8c8bd;
+
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #222222;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+.ai-textarea:focus {
+  border-color: #b84d2c;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(184, 77, 44, 0.1);
+}
+
+
+/* =====================================================
+   GENERATE BUTTON
+===================================================== */
+
+.ai-generate-button {
+  height: 43px;
+
+  margin-top: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #b84d2c;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.ai-generate-button:hover {
+  background: #963d22;
+}
+
+
+.ai-generate-button:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   COPY BUTTON
+===================================================== */
+
+.copy-button {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 7px 11px;
+
+  border: 1px solid #d8c8bd;
+
+  border-radius: 5px;
+
+  background: #ffffff;
+
+  color: #555555;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+
+.copy-button:hover {
+  border-color: #b84d2c;
+
+  color: #b84d2c;
+}
+
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+.ai-result {
+  flex: 1;
+
+  min-height: 260px;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  border-radius: 7px;
+
+  background: #faf7f2;
+
+  border: 1px dashed #d8c8bd;
+}
+
+
+.ai-result.has-result {
+  border-style: solid;
+
+  border-color: #e0d2c8;
+
+  background: #ffffff;
+}
+
+
+.ai-result-text {
+  white-space: pre-line;
+
+  color: #333333;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   EMPTY RESULT
+===================================================== */
+
+.ai-empty {
+  height: 100%;
+
+  min-height: 220px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  color: #b5a69d;
+}
+
+
+.ai-empty svg {
+  margin-bottom: 12px;
+
+  color: #b84d2c;
+}
+
+
+.ai-empty h3 {
+  margin: 0 0 6px;
+
+  color: #555555;
+
+  font-size: 14px;
+}
+
+
+.ai-empty p {
+  margin: 0;
+
+  color: #999999;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+  .ai-tools {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .ai-page {
+    padding: 20px;
+  }
+
+  .ai-workspace {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .ai-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-header h1 {
+    font-size: 24px;
+  }
+
+}

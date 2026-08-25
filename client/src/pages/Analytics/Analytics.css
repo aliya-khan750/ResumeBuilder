@@ -1,0 +1,373 @@
+/* =====================================================
+   ANALYTICS PAGE
+===================================================== */
+
+.analytics-page {
+  min-height: 100%;
+  padding: 34px;
+  background: #faf7f2;
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.analytics-header {
+  margin-bottom: 30px;
+}
+
+.analytics-header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.analytics-header-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #bd4b2b;
+  color: white;
+
+  border-radius: 10px;
+}
+
+.analytics-header h1 {
+  margin: 0;
+
+  font-size: 30px;
+  font-weight: 700;
+  color: #111;
+}
+
+.analytics-header p {
+  margin: 5px 0 0;
+
+  font-size: 14px;
+  color: #777;
+}
+
+
+/* =====================================================
+   STAT CARDS
+===================================================== */
+
+.analytics-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 22px;
+}
+
+.analytics-stat-card {
+  background: #fff;
+
+  border: 1px solid #e5d8ce;
+  border-radius: 12px;
+
+  padding: 22px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.analytics-stat-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 25px rgba(80, 45, 30, 0.08);
+}
+
+.analytics-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.analytics-stat-icon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f5e5dc;
+  color: #bd4b2b;
+
+  border-radius: 9px;
+}
+
+.analytics-arrow {
+  color: #aaa;
+}
+
+.analytics-stat-card h2 {
+  margin: 18px 0 4px;
+
+  font-size: 30px;
+  color: #111;
+}
+
+.analytics-stat-card h3 {
+  margin: 0;
+
+  font-size: 15px;
+  color: #222;
+}
+
+.analytics-stat-card p {
+  margin: 5px 0 0;
+
+  font-size: 12px;
+  color: #888;
+}
+
+
+/* =====================================================
+   MAIN GRID
+===================================================== */
+
+.analytics-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 22px;
+
+  margin-bottom: 22px;
+}
+
+
+/* =====================================================
+   GENERAL CARD
+===================================================== */
+
+.analytics-card {
+  background: #fff;
+
+  border: 1px solid #e5d8ce;
+  border-radius: 12px;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+}
+
+.analytics-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+
+  color: #bd4b2b;
+}
+
+.analytics-card-header h2 {
+  margin: 0;
+
+  color: #111;
+
+  font-size: 19px;
+}
+
+.analytics-card-header p {
+  margin: 5px 0 0;
+
+  color: #888;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress-wrapper {
+  display: flex;
+  align-items: center;
+
+  gap: 25px;
+
+  padding: 10px 0 5px;
+}
+
+.progress-circle {
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 12px solid #f0ddd3;
+
+  flex-shrink: 0;
+}
+
+.progress-circle span {
+  font-size: 24px;
+  font-weight: 700;
+  color: #bd4b2b;
+}
+
+.progress-info h3 {
+  margin: 0 0 8px;
+
+  font-size: 17px;
+  color: #222;
+}
+
+.progress-info p {
+  margin: 0;
+
+  max-width: 220px;
+
+  line-height: 1.6;
+
+  font-size: 13px;
+  color: #888;
+}
+
+
+/* =====================================================
+   AI ACTIVITY
+===================================================== */
+
+.ai-activity-empty {
+  min-height: 170px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  text-align: center;
+
+  color: #bd4b2b;
+}
+
+.ai-activity-empty h3 {
+  margin: 12px 0 5px;
+
+  font-size: 16px;
+  color: #222;
+}
+
+.ai-activity-empty p {
+  margin: 0 0 16px;
+
+  font-size: 13px;
+  color: #888;
+}
+
+.ai-activity-empty button,
+.analytics-empty button {
+  border: none;
+
+  background: #bd4b2b;
+  color: white;
+
+  padding: 10px 18px;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ai-activity-empty button:hover,
+.analytics-empty button:hover {
+  background: #a94024;
+}
+
+
+/* =====================================================
+   RECENT RESUMES
+===================================================== */
+
+.recent-resumes {
+  min-height: 260px;
+}
+
+.analytics-empty {
+  min-height: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  text-align: center;
+
+  color: #bd4b2b;
+}
+
+.analytics-empty h3 {
+  margin: 12px 0 5px;
+
+  font-size: 16px;
+  color: #222;
+}
+
+.analytics-empty p {
+  margin: 0 0 16px;
+
+  font-size: 13px;
+  color: #888;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .analytics-stats {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .analytics-page {
+    padding: 20px;
+  }
+
+  .analytics-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .analytics-header h1 {
+    font-size: 25px;
+  }
+
+}

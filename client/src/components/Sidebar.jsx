@@ -10,16 +10,24 @@ import {
   Plus,
 } from "lucide-react";
 
+
 function Sidebar() {
 
-  // ================= CREATE NEW RESUME =================
+
+  // =====================================================
+  // CREATE NEW RESUME
+  // =====================================================
 
   const handleCreateResume = () => {
+
     window.location.href = "/builder";
+
   };
 
 
-  // ================= LOGOUT =================
+  // =====================================================
+  // LOGOUT
+  // =====================================================
 
   const handleLogout = () => {
 
@@ -29,6 +37,18 @@ function Sidebar() {
     localStorage.removeItem("resumeData");
 
     window.location.href = "/login";
+
+  };
+
+
+  // =====================================================
+  // NAVIGATION
+  // =====================================================
+
+  const navigateTo = (path) => {
+
+    window.location.href = path;
+
   };
 
 
@@ -37,7 +57,9 @@ function Sidebar() {
     <aside className="sidebar">
 
 
-      {/* ================= CREATE NEW RESUME ================= */}
+      {/* =================================================
+          CREATE NEW RESUME
+      ================================================= */}
 
       <button
         type="button"
@@ -54,19 +76,23 @@ function Sidebar() {
       </button>
 
 
-      {/* ================= NAVIGATION ================= */}
+      {/* =================================================
+          NAVIGATION
+      ================================================= */}
 
       <nav className="sidebar-nav">
 
 
-        {/* ================= DASHBOARD ================= */}
+        {/* =================================================
+            DASHBOARD
+        ================================================= */}
 
         <button
           type="button"
           className="sidebar-item"
-          onClick={() => {
-            window.location.href = "/dashboard";
-          }}
+          onClick={() =>
+            navigateTo("/dashboard")
+          }
         >
 
           <LayoutDashboard size={19} />
@@ -78,14 +104,16 @@ function Sidebar() {
         </button>
 
 
-        {/* ================= MY RESUMES ================= */}
+        {/* =================================================
+            MY RESUMES
+        ================================================= */}
 
         <button
           type="button"
           className="sidebar-item"
-          onClick={() => {
-            window.location.href = "/my-resumes";
-          }}
+          onClick={() =>
+            navigateTo("/my-resumes")
+          }
         >
 
           <FileText size={19} />
@@ -97,14 +125,16 @@ function Sidebar() {
         </button>
 
 
-        {/* ================= RESUME BUILDER ================= */}
+        {/* =================================================
+            RESUME BUILDER
+        ================================================= */}
 
         <button
           type="button"
-          className="sidebar-item active"
-          onClick={() => {
-            window.location.href = "/builder";
-          }}
+          className="sidebar-item"
+          onClick={() =>
+            navigateTo("/builder")
+          }
         >
 
           <FileText size={19} />
@@ -116,14 +146,16 @@ function Sidebar() {
         </button>
 
 
-        {/* ================= TEMPLATES ================= */}
+        {/* =================================================
+            TEMPLATES
+        ================================================= */}
 
         <button
           type="button"
           className="sidebar-item"
-          onClick={() => {
-            window.location.href = "/templates";
-          }}
+          onClick={() =>
+            navigateTo("/templates")
+          }
         >
 
           <Palette size={19} />
@@ -135,14 +167,16 @@ function Sidebar() {
         </button>
 
 
-        {/* ================= AI ASSISTANT ================= */}
+        {/* =================================================
+            AI ASSISTANT
+        ================================================= */}
 
         <button
           type="button"
           className="sidebar-item"
-          onClick={() => {
-            alert("AI Assistant will be added soon.");
-          }}
+          onClick={() =>
+            navigateTo("/ai-assistant")
+          }
         >
 
           <Sparkles size={19} />
@@ -158,14 +192,16 @@ function Sidebar() {
         </button>
 
 
-        {/* ================= ANALYTICS ================= */}
+        {/* =================================================
+            ANALYTICS
+        ================================================= */}
 
         <button
           type="button"
           className="sidebar-item"
-          onClick={() => {
-            alert("Analytics will be added soon.");
-          }}
+          onClick={() =>
+            navigateTo("/analytics")
+          }
         >
 
           <BarChart3 size={19} />
@@ -177,14 +213,16 @@ function Sidebar() {
         </button>
 
 
-        {/* ================= SETTINGS ================= */}
+        {/* =================================================
+            SETTINGS
+        ================================================= */}
 
         <button
           type="button"
           className="sidebar-item"
-          onClick={() => {
-            alert("Settings will be added soon.");
-          }}
+          onClick={() =>
+            navigateTo("/settings")
+          }
         >
 
           <Settings size={19} />
@@ -196,14 +234,16 @@ function Sidebar() {
         </button>
 
 
-        {/* ================= PROFILE ================= */}
+        {/* =================================================
+            PROFILE
+        ================================================= */}
 
         <button
           type="button"
           className="sidebar-item"
-          onClick={() => {
-            alert("Profile will be added soon.");
-          }}
+          onClick={() =>
+            navigateTo("/profile")
+          }
         >
 
           <User size={19} />
@@ -215,7 +255,9 @@ function Sidebar() {
         </button>
 
 
-        {/* ================= LOGOUT ================= */}
+        {/* =================================================
+            LOGOUT
+        ================================================= */}
 
         <button
           type="button"
@@ -235,7 +277,9 @@ function Sidebar() {
       </nav>
 
     </aside>
+
   );
 }
+
 
 export default Sidebar;

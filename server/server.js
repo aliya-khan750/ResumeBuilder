@@ -7,38 +7,84 @@ const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
 const PORT = 5000;
 
-/* ================= DATABASE ================= */
+
+// =====================================================
+// DATABASE
+// =====================================================
 
 connectDB();
 
-/* ================= MIDDLEWARE ================= */
+
+// =====================================================
+// MIDDLEWARE
+// =====================================================
 
 app.use(cors());
+
 app.use(express.json());
 
-/* ================= AUTH ROUTES ================= */
 
-app.use("/api/auth", authRoutes);
+// =====================================================
+// AUTH ROUTES
+// =====================================================
 
-/* ================= RESUME ROUTES ================= */
+app.use(
+  "/api/auth",
+  authRoutes
+);
 
-app.use("/api/resumes", resumeRoutes);
 
-/* ================= TEST ROUTE ================= */
+// =====================================================
+// RESUME ROUTES
+// =====================================================
+
+app.use(
+  "/api/resumes",
+  resumeRoutes
+);
+
+
+// =====================================================
+// AI ROUTES
+// =====================================================
+
+app.use(
+  "/api/ai",
+  aiRoutes
+);
+
+
+// =====================================================
+// TEST ROUTE
+// =====================================================
 
 app.get("/", (req, res) => {
+
   res.json({
-    message: "ResumeCraft API is running 🚀",
+    message:
+      "ResumeCraft API is running 🚀",
   });
+
 });
 
-/* ================= SERVER ================= */
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// =====================================================
+// SERVER
+// =====================================================
+
+app.listen(
+  PORT,
+  () => {
+
+    console.log(
+      `Server running on http://localhost:${PORT}`
+    );
+
+  }
+);

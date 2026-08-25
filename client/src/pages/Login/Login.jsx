@@ -58,19 +58,23 @@ function Login() {
         return;
       }
 
-      // Save JWT token
+      // ================= SAVE JWT TOKEN =================
+
       localStorage.setItem("token", data.token);
 
-      // Save logged-in user
+      // ================= SAVE LOGGED-IN USER =================
+
       localStorage.setItem(
         "user",
         JSON.stringify(data.user)
       );
 
-      // Login successful
+      // ================= LOGIN SUCCESS =================
+
       alert("Login successful! 🎉");
 
-      // Go to Dashboard
+      // ================= GO TO DASHBOARD =================
+
       window.location.href = "/dashboard";
 
     } catch (error) {
@@ -83,6 +87,18 @@ function Login() {
       setLoading(false);
     }
   };
+
+  // =====================================================
+  // FORGOT PASSWORD
+  // =====================================================
+
+  const handleForgotPassword = () => {
+    window.location.href = "/forgot-password";
+  };
+
+  // =====================================================
+  // RETURN
+  // =====================================================
 
   return (
     <div className="login-page">
@@ -98,6 +114,7 @@ function Login() {
           }}
           style={{ cursor: "pointer" }}
         >
+
           <div className="login-logo-icon">
             R
           </div>
@@ -105,6 +122,7 @@ function Login() {
           <span>
             ResumeCraft
           </span>
+
         </div>
 
 
@@ -159,19 +177,18 @@ function Login() {
                   Password
                 </label>
 
+                {/* ================= FORGOT PASSWORD ================= */}
+
                 <button
                   type="button"
                   className="forgot-password"
-                  onClick={() => {
-                    alert(
-                      "Password reset will be added later."
-                    );
-                  }}
+                  onClick={handleForgotPassword}
                 >
                   Forgot password?
                 </button>
 
               </div>
+
 
               <input
                 type="password"
@@ -227,7 +244,9 @@ function Login() {
               className="login-button"
               disabled={loading}
             >
-              {loading ? "Logging in..." : "Login"}
+              {loading
+                ? "Logging in..."
+                : "Login"}
             </button>
 
           </form>
