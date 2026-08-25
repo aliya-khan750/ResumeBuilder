@@ -91,7 +91,7 @@ function Sidebar() {
           type="button"
           className="sidebar-item"
           onClick={() =>
-            navigateTo("/dashboard")
+            navigateTo("/")
           }
         >
 
