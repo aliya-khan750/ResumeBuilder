@@ -9,6 +9,9 @@ import {
   LogOut,
   Save,
   Edit3,
+  Settings,
+  LayoutDashboard,
+  ChevronLeft,
 } from "lucide-react";
 
 import "./Profile.css";
@@ -78,6 +81,33 @@ function Profile() {
 
 
   // =====================================================
+  // NAVIGATION
+  // =====================================================
+
+  const handleDashboard = () => {
+
+    window.location.href =
+      "/dashboard";
+
+  };
+
+
+  const handleSettings = () => {
+
+    window.location.href =
+      "/settings";
+
+  };
+
+
+  const handleBack = () => {
+
+    window.history.back();
+
+  };
+
+
+  // =====================================================
   // SAVE PROFILE
   // =====================================================
 
@@ -102,15 +132,22 @@ function Profile() {
     try {
 
       const updatedUser = {
+
         ...user,
+
         name: name.trim(),
+
         email,
+
       };
 
 
       localStorage.setItem(
+
         "user",
+
         JSON.stringify(updatedUser)
+
       );
 
 
@@ -199,6 +236,14 @@ function Profile() {
       "resumeData"
     );
 
+    /*
+      IMPORTANT:
+      theme is NOT removed.
+
+      Therefore light/dark preference
+      stays saved in localStorage.
+    */
+
     window.location.href =
       "/login";
 
@@ -212,7 +257,9 @@ function Profile() {
   const getInitial = () => {
 
     if (!name.trim()) {
+
       return "U";
+
     }
 
     return name
@@ -268,6 +315,66 @@ function Profile() {
 
 
       {/* =================================================
+          TOP NAVIGATION
+      ================================================= */}
+
+      <div className="profile-navigation">
+
+
+        {/* BACK */}
+
+        <button
+          type="button"
+          className="profile-nav-button"
+          onClick={handleBack}
+        >
+
+          <ChevronLeft size={18} />
+
+          Back
+
+        </button>
+
+
+        <div className="profile-nav-actions">
+
+
+          {/* DASHBOARD */}
+
+          <button
+            type="button"
+            className="profile-nav-button"
+            onClick={handleDashboard}
+          >
+
+            <LayoutDashboard size={17} />
+
+            Dashboard
+
+          </button>
+
+
+          {/* SETTINGS */}
+
+          <button
+            type="button"
+            className="profile-nav-button"
+            onClick={handleSettings}
+          >
+
+            <Settings size={17} />
+
+            Settings
+
+          </button>
+
+
+        </div>
+
+      </div>
+
+
+      {/* =================================================
           HEADER
       ================================================= */}
 
@@ -308,10 +415,8 @@ function Profile() {
 
         <div className="profile-top">
 
-          {/* IMPORTANT:
-              Unique class name so it does not conflict
-              with Navbar's .profile-avatar
-          */}
+
+          {/* PROFILE AVATAR */}
 
           <div className="profile-page-avatar">
 
@@ -319,6 +424,8 @@ function Profile() {
 
           </div>
 
+
+          {/* PROFILE INFO */}
 
           <div className="profile-top-info">
 
@@ -332,6 +439,8 @@ function Profile() {
 
           </div>
 
+
+          {/* EDIT BUTTON */}
 
           {!isEditing && (
 
@@ -395,6 +504,7 @@ function Profile() {
         ================================================= */}
 
         <div className="profile-section">
+
 
           <div className="profile-section-title">
 
@@ -471,6 +581,9 @@ function Profile() {
 
             <div className="profile-actions">
 
+
+              {/* CANCEL */}
+
               <button
                 type="button"
                 className="profile-cancel-button"
@@ -481,6 +594,8 @@ function Profile() {
 
               </button>
 
+
+              {/* SAVE */}
 
               <button
                 type="button"
@@ -494,6 +609,7 @@ function Profile() {
 
               </button>
 
+
             </div>
 
           )}
@@ -506,6 +622,7 @@ function Profile() {
         ================================================= */}
 
         <div className="profile-section">
+
 
           <div className="profile-section-title">
 
@@ -585,6 +702,7 @@ function Profile() {
 
         <div className="profile-section">
 
+
           <div className="profile-section-title">
 
             <h2>
@@ -605,6 +723,7 @@ function Profile() {
           >
 
             <div className="profile-security-left">
+
 
               <div className="profile-info-icon">
 
@@ -628,7 +747,7 @@ function Profile() {
             </div>
 
 
-            <span>
+            <span className="profile-security-arrow">
               →
             </span>
 
@@ -656,6 +775,7 @@ function Profile() {
           </button>
 
         </div>
+
 
       </div>
 

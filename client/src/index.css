@@ -95,6 +95,9 @@ a {
   border-bottom: 1px solid var(--border);
 
   flex-shrink: 0;
+
+  position: relative;
+  z-index: 100;
 }
 
 .navbar-left,
@@ -162,11 +165,25 @@ a {
   color: var(--text);
 
   transition: 0.2s ease;
+
+  position: relative;
 }
 
 .icon-button:hover {
   background: var(--cream-dark);
   color: var(--primary);
+}
+
+
+/* =====================================================
+   PROFILE WRAPPER
+===================================================== */
+
+.profile-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
 }
 
 
@@ -188,6 +205,10 @@ a {
   color: var(--text);
 
   font-weight: 500;
+
+  white-space: nowrap;
+
+  transition: 0.2s ease;
 }
 
 .profile-button:hover {
@@ -209,6 +230,429 @@ a {
 
   font-size: 14px;
   font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   PROFILE ARROW
+===================================================== */
+
+.profile-button svg {
+  transition: transform 0.2s ease;
+}
+
+.profile-button .profile-arrow-open {
+  transform: rotate(180deg);
+}
+
+
+/* =====================================================
+   PROFILE DROPDOWN
+===================================================== */
+
+.profile-dropdown {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 250px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  box-shadow:
+    0 12px 35px rgba(43, 33, 29, 0.18);
+
+  overflow: hidden;
+
+  z-index: 9999;
+
+  animation: profileOpen 0.18s ease;
+}
+
+
+/* =====================================================
+   PROFILE DROPDOWN ANIMATION
+===================================================== */
+
+@keyframes profileOpen {
+
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =====================================================
+   PROFILE DROPDOWN USER
+===================================================== */
+
+.profile-dropdown-user {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 15px;
+}
+
+.profile-dropdown-avatar {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.profile-dropdown-user > div:last-child {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.profile-dropdown-user strong {
+  color: var(--text);
+
+  font-size: 14px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-dropdown-user span {
+  color: var(--text-light);
+
+  font-size: 12px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =====================================================
+   PROFILE DIVIDER
+===================================================== */
+
+.profile-divider {
+  width: 100%;
+  height: 1px;
+
+  background: var(--border);
+}
+
+
+/* =====================================================
+   PROFILE DROPDOWN ITEM
+===================================================== */
+
+.profile-dropdown-item {
+  width: 100%;
+  min-height: 44px;
+
+  padding: 0 15px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  border: none;
+
+  background: transparent;
+  color: var(--text);
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-align: left;
+
+  transition: 0.2s ease;
+}
+
+.profile-dropdown-item:hover {
+  background: var(--cream-dark);
+
+  color: var(--primary);
+}
+
+
+/* =====================================================
+   DROPDOWN ITEM ICON
+===================================================== */
+
+.dropdown-item-icon {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 15px;
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   LOGOUT ITEM
+===================================================== */
+
+.logout-item {
+  color: #b33b2e;
+}
+
+.logout-item:hover {
+  background: #fff0ed;
+  color: #a52e22;
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.notification-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+
+/* =====================================================
+   NOTIFICATION BUTTON
+===================================================== */
+
+.notification-button {
+  position: relative;
+}
+
+
+/* =====================================================
+   NOTIFICATION DOT
+===================================================== */
+
+.notification-dot {
+  position: absolute;
+
+  top: 7px;
+  right: 7px;
+
+  width: 7px;
+  height: 7px;
+
+  background: var(--primary);
+
+  border: 2px solid var(--cream);
+
+  border-radius: 50%;
+}
+
+
+/* =====================================================
+   NOTIFICATION DROPDOWN
+===================================================== */
+
+.notification-dropdown {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 330px;
+  max-width: calc(100vw - 24px);
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  box-shadow:
+    0 12px 35px rgba(43, 33, 29, 0.15);
+
+  overflow: hidden;
+
+  z-index: 9999;
+
+  animation: notificationOpen 0.18s ease;
+}
+
+
+/* =====================================================
+   NOTIFICATION ANIMATION
+===================================================== */
+
+@keyframes notificationOpen {
+
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =====================================================
+   NOTIFICATION HEADER
+===================================================== */
+
+.notification-header {
+  min-height: 52px;
+
+  padding: 14px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--border);
+
+  color: var(--text);
+}
+
+.notification-header strong {
+  font-size: 15px;
+}
+
+.notification-header span {
+  min-width: 22px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 6px;
+
+  border-radius: 20px;
+
+  background: var(--primary);
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   NOTIFICATION ITEM
+===================================================== */
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  padding: 14px 16px;
+
+  border-bottom: 1px solid var(--border);
+
+  transition: background 0.2s ease;
+}
+
+.notification-item:hover {
+  background: var(--cream-dark);
+}
+
+
+/* =====================================================
+   NOTIFICATION ICON
+===================================================== */
+
+.notification-icon {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--primary-light);
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   NOTIFICATION TEXT
+===================================================== */
+
+.notification-item strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--text);
+
+  font-size: 13px;
+}
+
+.notification-item p {
+  margin: 0;
+
+  color: var(--text-light);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   NOTIFICATION FOOTER
+===================================================== */
+
+.notification-empty {
+  padding: 12px 16px;
+
+  text-align: center;
+
+  color: var(--text-light);
+
+  font-size: 12px;
+
+  background: var(--cream);
 }
 
 
@@ -482,19 +926,25 @@ a {
   .navbar {
     height: 64px;
 
-    padding: 0 12px;
+    padding: 0 10px;
   }
 
   .navbar-left {
-    gap: 8px;
+    gap: 5px;
+
+    min-width: 0;
   }
 
   .navbar-right {
-    gap: 4px;
+    gap: 2px;
+
+    min-width: 0;
   }
 
   .brand {
-    font-size: 18px;
+    font-size: 17px;
+
+    gap: 7px;
   }
 
   .brand-mark {
@@ -505,17 +955,66 @@ a {
   }
 
   .icon-button {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
 
   .profile-button {
-    padding: 4px 5px;
+    padding: 3px 4px;
+
+    gap: 4px;
   }
 
   .profile-avatar {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Hide username on mobile */
+
+  .profile-button > span {
+    display: none;
+  }
+
+
+  /* ---------------------------------------------
+     PROFILE DROPDOWN MOBILE
+  --------------------------------------------- */
+
+  .profile-dropdown {
+    position: fixed;
+
+    top: 69px;
+    right: 10px;
+    left: auto;
+
+    width: 250px;
+    max-width: calc(100vw - 20px);
+
+    border-radius: 12px;
+  }
+
+
+  /* ---------------------------------------------
+     NOTIFICATION MOBILE
+  --------------------------------------------- */
+
+  .notification-dropdown {
+    position: fixed;
+
+    top: 69px;
+    right: 10px;
+    left: auto;
+
+    width: 320px;
+    max-width: calc(100vw - 20px);
+
+    border-radius: 12px;
+  }
+
+  .notification-dot {
+    top: 5px;
+    right: 5px;
   }
 
 
@@ -610,19 +1109,61 @@ a {
 @media (max-width: 500px) {
 
   .navbar {
-    padding: 0 10px;
+    padding: 0 7px;
   }
 
   .brand {
-    font-size: 17px;
+    font-size: 16px;
+
+    gap: 5px;
+  }
+
+  .navbar-left {
+    gap: 3px;
   }
 
   .navbar-right {
-    gap: 2px;
+    gap: 0;
+  }
+
+  .icon-button {
+    width: 32px;
+    height: 32px;
   }
 
   .profile-button {
-    gap: 4px;
+    padding: 2px;
+  }
+
+  .profile-avatar {
+    width: 29px;
+    height: 29px;
+  }
+
+
+  /* Profile dropdown */
+
+  .profile-dropdown {
+    top: 67px;
+
+    right: 8px;
+
+    width: 245px;
+
+    max-width: calc(100vw - 16px);
+  }
+
+
+  /* Notification dropdown */
+
+  .notification-dropdown {
+    top: 67px;
+
+    right: 8px;
+
+    width: 310px;
+
+    max-width: calc(100vw - 16px);
   }
 
   .main-content {
@@ -631,130 +1172,594 @@ a {
 
 }
 
+
 /* =====================================================
    DARK MODE
 ===================================================== */
 
 html.dark {
-  --cream: #171311;
-  --cream-dark: #241c19;
-  --beige: #302620;
 
-  --white: #211b18;
+  --white: #1f1a17;
+  --cream: #15110f;
+  --cream-dark: #241c18;
+  --beige: #30251f;
 
   --text: #f5eee8;
-  --text-light: #b8aaa1;
-  --border: #443831;
+  --text-light: #b8aaa0;
+  --border: #44372f;
 
-  --primary: #C96A4D;
-  --primary-dark: #A8472B;
-  --primary-light: #8E3822;
+  --primary: #c96a4d;
+  --primary-dark: #a8472b;
+  --primary-light: #8f4937;
 }
 
 
-/* BODY */
+/* =====================================================
+   DARK BODY
+===================================================== */
 
 html.dark,
 html.dark body {
+
   background: var(--cream);
   color: var(--text);
 }
 
 
-/* NAVBAR */
+/* =====================================================
+   NAVBAR
+===================================================== */
 
 html.dark .navbar {
-  background: var(--cream);
-  border-color: var(--border);
-}
 
-
-/* SIDEBAR */
-
-html.dark .sidebar {
-  background: var(--cream);
-  border-color: var(--border);
-}
-
-
-/* MAIN */
-
-html.dark .builder-app,
-html.dark .builder-main {
-  background: var(--cream);
-}
-
-
-/* EDITOR */
-
-html.dark .editor-section,
-html.dark .accordion-section {
-  background: var(--white);
-  border-color: var(--border);
-}
-
-
-/* INPUTS */
-
-html.dark .form-group input,
-html.dark .form-group textarea,
-html.dark .form-group select {
   background: #181310;
-  color: var(--text);
-  border-color: var(--border);
+
+  border-bottom-color: var(--border);
 }
 
+html.dark .brand {
 
-/* PLACEHOLDER */
-
-html.dark .form-group input::placeholder,
-html.dark .form-group textarea::placeholder {
-  color: #8f8178;
+  color: var(--primary);
 }
-
-
-/* ACCORDION */
-
-html.dark .accordion-header {
-  background: var(--white);
-}
-
-html.dark .accordion-header:hover {
-  background: var(--cream-dark);
-}
-
-
-/* PREVIEW */
-
-html.dark .builder-preview {
-  background: #171311;
-}
-
-
-/* SIDEBAR ITEMS */
-
-html.dark .sidebar-item {
-  color: var(--text);
-}
-
-html.dark .sidebar-item:hover {
-  background: var(--cream-dark);
-}
-
-
-/* ICON BUTTON */
 
 html.dark .icon-button {
+
   color: var(--text);
 }
 
 html.dark .icon-button:hover {
+
+  background: var(--cream-dark);
+
+  color: var(--primary);
+}
+
+html.dark .profile-button {
+
+  color: var(--text);
+}
+
+html.dark .profile-button:hover {
+
   background: var(--cream-dark);
 }
 
 
-/* PROFILE */
+/* =====================================================
+   DARK PROFILE DROPDOWN
+===================================================== */
 
-html.dark .profile-button {
+html.dark .profile-dropdown {
+
+  background: #211a17;
+
+  border-color: #4a3b33;
+
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.5);
+}
+
+
+html.dark .profile-dropdown-user {
+
+  background: #211a17;
+}
+
+
+html.dark .profile-dropdown-user strong {
+
+  color: #f5eee8;
+}
+
+
+html.dark .profile-dropdown-user span {
+
+  color: #b8aaa0;
+}
+
+
+html.dark .profile-dropdown-avatar {
+
+  background: #c96a4d;
+
+  color: #ffffff;
+}
+
+
+html.dark .profile-divider {
+
+  background: #44372f;
+}
+
+
+html.dark .profile-dropdown-item {
+
+  background: transparent;
+
+  color: #f5eee8;
+}
+
+
+html.dark .profile-dropdown-item:hover {
+
+  background: #2a211c;
+
+  color: #e89072;
+}
+
+
+html.dark .logout-item {
+
+  color: #ef8b7d;
+}
+
+
+html.dark .logout-item:hover {
+
+  background: #3a211e;
+
+  color: #ff9f91;
+}
+
+
+/* =====================================================
+   DARK NOTIFICATION
+===================================================== */
+
+html.dark .notification-dropdown {
+
+  background: #211a17;
+
+  border-color: #4a3b33;
+
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.45);
+}
+
+html.dark .notification-header {
+
+  background: #211a17;
+
+  border-bottom-color: #44372f;
+
+  color: #f5eee8;
+}
+
+html.dark .notification-header span {
+
+  background: #c96a4d;
+
+  color: #ffffff;
+}
+
+html.dark .notification-item {
+
+  background: #211a17;
+
+  border-bottom-color: #44372f;
+}
+
+html.dark .notification-item:hover {
+
+  background: #2a211c;
+}
+
+html.dark .notification-item strong {
+
+  color: #f5eee8;
+}
+
+html.dark .notification-item p {
+
+  color: #b8aaa0;
+}
+
+html.dark .notification-icon {
+
+  background: #8f4937;
+
+  color: #ffffff;
+}
+
+html.dark .notification-empty {
+
+  background: #181310;
+
+  color: #b8aaa0;
+}
+
+html.dark .notification-dot {
+
+  background: #e89072;
+
+  border-color: #181310;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+html.dark .sidebar {
+
+  background: #181310;
+
+  border-right-color: var(--border);
+}
+
+html.dark .sidebar-item {
+
   color: var(--text);
+}
+
+html.dark .sidebar-item:hover {
+
+  background: var(--cream-dark);
+
+  color: var(--primary);
+}
+
+html.dark .sidebar-item.active {
+
+  background: #5d3024;
+
+  color: #ffffff;
+}
+
+html.dark .new-badge {
+
+  background: #5d3024;
+
+  color: #f5c5b5;
+}
+
+
+/* =====================================================
+   BUILDER
+===================================================== */
+
+html.dark .builder-app,
+html.dark .builder-body,
+html.dark .builder-main {
+
+  background: #15110f;
+
+  color: var(--text);
+}
+
+
+/* =====================================================
+   EDITOR HEADER
+===================================================== */
+
+html.dark .editor-header h2 {
+
+  color: #f5eee8;
+}
+
+
+/* =====================================================
+   EDITOR SECTION
+===================================================== */
+
+html.dark .editor-section {
+
+  background: #1f1a17;
+
+  border-color: var(--border);
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+html.dark .section-title h3 {
+
+  color: #f5eee8;
+}
+
+html.dark .section-title p {
+
+  color: #b8aaa0;
+}
+
+html.dark .section-title span {
+
+  color: #f5eee8;
+}
+
+
+/* =====================================================
+   FORM LABEL
+===================================================== */
+
+html.dark .form-group label {
+
+  color: #eee4dc;
+}
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+html.dark .form-group input,
+html.dark .form-group textarea,
+html.dark .form-group select {
+
+  background: #171310;
+
+  color: #f5eee8;
+
+  border-color: #55443a;
+}
+
+
+/* =====================================================
+   PLACEHOLDER
+===================================================== */
+
+html.dark .form-group input::placeholder,
+html.dark .form-group textarea::placeholder {
+
+  color: #8f8178;
+}
+
+
+/* =====================================================
+   INPUT FOCUS
+===================================================== */
+
+html.dark .form-group input:focus,
+html.dark .form-group textarea:focus,
+html.dark .form-group select:focus {
+
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 2px rgba(201, 106, 77, 0.18);
+}
+
+
+/* =====================================================
+   SELECT OPTIONS
+===================================================== */
+
+html.dark .form-group select option {
+
+  background: #171310;
+
+  color: #f5eee8;
+}
+
+
+/* =====================================================
+   ACCORDION
+===================================================== */
+
+html.dark .accordion-section {
+
+  background: #1f1a17;
+
+  border-color: var(--border);
+}
+
+html.dark .accordion-header {
+
+  background: #1f1a17;
+
+  color: var(--text);
+}
+
+html.dark .accordion-header:hover {
+
+  background: #2a211c;
+}
+
+html.dark .accordion-header h3 {
+
+  color: #f5eee8;
+}
+
+html.dark .accordion-header p {
+
+  color: #b8aaa0;
+}
+
+html.dark .accordion-header > span {
+
+  color: #f5eee8;
+}
+
+html.dark .accordion-content {
+
+  border-top-color: #3c3029;
+}
+
+
+/* =====================================================
+   ADD BUTTON
+===================================================== */
+
+html.dark .add-button {
+
+  color: #e89072;
+
+  border-color: #c96a4d;
+}
+
+html.dark .add-button:hover {
+
+  background: #c96a4d;
+
+  color: #ffffff;
+}
+
+
+/* =====================================================
+   PREVIEW AREA
+===================================================== */
+
+html.dark .builder-preview {
+
+  background: #241e1a;
+}
+
+html.dark .preview-heading h2 {
+
+  color: #f5eee8;
+}
+
+html.dark .preview-heading p {
+
+  color: #b8aaa0;
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+html.dark .builder-editor::-webkit-scrollbar-thumb {
+
+  background: #55443a;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+html.dark .main-content {
+
+  background: #15110f;
+
+  color: var(--text);
+}
+
+html.dark .main-content h1 {
+
+  color: #f5eee8;
+}
+
+html.dark .main-content p {
+
+  color: #b8aaa0;
+}
+
+
+/* =====================================================
+   DARK MODE - EXTRA ELEMENTS
+===================================================== */
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+
+  color-scheme: dark;
+}
+
+
+/* =====================================================
+   SAVE MESSAGE
+===================================================== */
+
+.save-message {
+
+  color: var(--primary);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+html.dark .save-message {
+
+  color: #e89072;
+}
+
+
+/* =====================================================
+   MOBILE SAVE MESSAGE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .save-message {
+    position: absolute;
+
+    top: 67px;
+    right: 10px;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    background: var(--cream-dark);
+
+    z-index: 1000;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE NAVBAR SAFETY
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .brand {
+    font-size: 15px;
+  }
+
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .navbar-right {
+    gap: 0;
+  }
+
+  .icon-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .profile-avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .profile-dropdown {
+    right: 6px;
+
+    width: calc(100vw - 12px);
+
+    max-width: 245px;
+  }
+
 }

@@ -4,11 +4,18 @@
 
 .settings-page {
   min-height: 100%;
+  width: 100%;
+
   padding: 34px;
 
   background: #faf7f2;
+  color: #241f1c;
 
   box-sizing: border-box;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 
@@ -34,20 +41,20 @@
   justify-content: center;
 
   background: #bd4b2b;
-
-  color: #fff;
+  color: #ffffff;
 
   border-radius: 10px;
+
+  flex-shrink: 0;
 }
 
 .settings-header h1 {
   margin: 0;
 
   font-size: 30px;
-
   font-weight: 700;
 
-  color: #111;
+  color: #111111;
 }
 
 .settings-header p {
@@ -55,7 +62,7 @@
 
   font-size: 14px;
 
-  color: #777;
+  color: #777777;
 }
 
 
@@ -64,7 +71,9 @@
 ===================================================== */
 
 .settings-section {
-  background: #fff;
+  width: 100%;
+
+  background: #ffffff;
 
   border: 1px solid #e5d8ce;
 
@@ -73,6 +82,12 @@
   margin-bottom: 22px;
 
   overflow: hidden;
+
+  box-sizing: border-box;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .settings-section-header {
@@ -86,7 +101,7 @@
 
   font-size: 18px;
 
-  color: #222;
+  color: #222222;
 }
 
 .settings-section-header p {
@@ -94,7 +109,7 @@
 
   font-size: 13px;
 
-  color: #888;
+  color: #888888;
 }
 
 
@@ -106,9 +121,7 @@
   width: 100%;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   gap: 20px;
@@ -119,16 +132,17 @@
 
   border-bottom: 1px solid #eee5df;
 
-  background: #fff;
+  background: #ffffff;
 
-  color: #888;
+  color: #888888;
 
   text-align: left;
 
   cursor: pointer;
 
   transition:
-    background 0.2s ease;
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .settings-item:last-child {
@@ -140,8 +154,9 @@
 }
 
 .settings-item-left {
-  display: flex;
+  min-width: 0;
 
+  display: flex;
   align-items: center;
 
   gap: 15px;
@@ -160,7 +175,6 @@
   border-radius: 9px;
 
   background: #f5e5dc;
-
   color: #bd4b2b;
 }
 
@@ -169,7 +183,7 @@
 
   font-size: 15px;
 
-  color: #222;
+  color: #222222;
 }
 
 .settings-item p {
@@ -177,7 +191,9 @@
 
   font-size: 12px;
 
-  color: #888;
+  color: #888888;
+
+  line-height: 1.5;
 }
 
 
@@ -190,7 +206,7 @@
 }
 
 .settings-item-static:hover {
-  background: #fff;
+  background: #ffffff;
 }
 
 
@@ -205,6 +221,8 @@
   height: 25px;
 
   flex-shrink: 0;
+
+  display: block;
 }
 
 .settings-toggle input {
@@ -212,6 +230,8 @@
 
   width: 0;
   height: 0;
+
+  position: absolute;
 }
 
 .settings-toggle-slider {
@@ -225,7 +245,8 @@
 
   border-radius: 30px;
 
-  transition: 0.2s;
+  transition:
+    background 0.2s ease;
 }
 
 .settings-toggle-slider::before {
@@ -239,11 +260,12 @@
   left: 3px;
   top: 3px;
 
-  background: #fff;
+  background: #ffffff;
 
   border-radius: 50%;
 
-  transition: 0.2s;
+  transition:
+    transform 0.2s ease;
 }
 
 .settings-toggle input:checked
@@ -280,7 +302,7 @@
 
   font-size: 15px;
 
-  color: #222;
+  color: #222222;
 }
 
 .security-message p {
@@ -292,7 +314,7 @@
 
   line-height: 1.6;
 
-  color: #888;
+  color: #888888;
 }
 
 
@@ -310,7 +332,6 @@
   display: inline-flex;
 
   align-items: center;
-
   justify-content: center;
 
   gap: 8px;
@@ -321,7 +342,7 @@
 
   border-radius: 7px;
 
-  background: #fff;
+  background: #ffffff;
 
   color: #bd4b2b;
 
@@ -333,36 +354,436 @@
 
   transition:
     background 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .logout-settings-button:hover {
   background: #bd4b2b;
 
-  color: #fff;
+  color: #ffffff;
+
+  border-color: #bd4b2b;
 }
 
 
 /* =====================================================
-   RESPONSIVE
+   DARK MODE
+===================================================== */
+
+html.dark .settings-page {
+  background: #15110f;
+
+  color: #f5eee8;
+}
+
+
+/* =====================================================
+   DARK HEADER
+===================================================== */
+
+html.dark .settings-header-icon {
+  background: #a8472b;
+
+  color: #ffffff;
+}
+
+html.dark .settings-header h1 {
+  color: #f5eee8;
+}
+
+html.dark .settings-header p {
+  color: #b8aaa0;
+}
+
+
+/* =====================================================
+   DARK SETTINGS SECTION
+===================================================== */
+
+html.dark .settings-section {
+  background: #1f1a17;
+
+  border-color: #44372f;
+}
+
+html.dark .settings-section-header {
+  border-bottom-color: #44372f;
+}
+
+html.dark .settings-section-header h2 {
+  color: #f5eee8;
+}
+
+html.dark .settings-section-header p {
+  color: #b8aaa0;
+}
+
+
+/* =====================================================
+   DARK SETTINGS ITEM
+===================================================== */
+
+html.dark .settings-item {
+  background: #1f1a17;
+
+  border-bottom-color: #44372f;
+
+  color: #b8aaa0;
+}
+
+html.dark .settings-item:hover {
+  background: #2a211c;
+}
+
+html.dark .settings-item-static:hover {
+  background: #1f1a17;
+}
+
+html.dark .settings-item h3 {
+  color: #f5eee8;
+}
+
+html.dark .settings-item p {
+  color: #b8aaa0;
+}
+
+
+/* =====================================================
+   DARK ICON
+===================================================== */
+
+html.dark .settings-item-icon {
+  background: #5d3024;
+
+  color: #e89072;
+}
+
+
+/* =====================================================
+   DARK TOGGLE
+===================================================== */
+
+html.dark .settings-toggle-slider {
+  background: #55443a;
+}
+
+html.dark .settings-toggle input:checked
++ .settings-toggle-slider {
+  background: #c96a4d;
+}
+
+
+/* =====================================================
+   DARK SECURITY
+===================================================== */
+
+html.dark .security-message {
+  background: #241c18;
+
+  color: #e89072;
+
+  border-top: 1px solid #44372f;
+}
+
+html.dark .security-message h3 {
+  color: #f5eee8;
+}
+
+html.dark .security-message p {
+  color: #b8aaa0;
+}
+
+
+/* =====================================================
+   DARK DANGER SECTION
+===================================================== */
+
+html.dark .danger-section {
+  border-color: #5a3b30;
+}
+
+html.dark .logout-settings-button {
+  background: #211a17;
+
+  border-color: #694438;
+
+  color: #e89072;
+}
+
+html.dark .logout-settings-button:hover {
+  background: #a8472b;
+
+  border-color: #a8472b;
+
+  color: #ffffff;
+}
+
+
+/* =====================================================
+   DARK MODE - FOCUS
+===================================================== */
+
+html.dark .settings-item:focus-visible,
+html.dark .logout-settings-button:focus-visible {
+  outline: 2px solid #c96a4d;
+
+  outline-offset: 2px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .settings-page {
+    padding: 26px;
+  }
+
+  .settings-header {
+    margin-bottom: 25px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
 ===================================================== */
 
 @media (max-width: 700px) {
 
   .settings-page {
-    padding: 20px;
+    width: 100%;
+
+    padding: 20px 16px;
+
+    min-height: calc(100vh - 64px);
+  }
+
+
+  /* HEADER */
+
+  .settings-header {
+    gap: 12px;
+
+    margin-bottom: 22px;
+  }
+
+  .settings-header-icon {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 9px;
   }
 
   .settings-header h1 {
     font-size: 25px;
   }
 
+  .settings-header p {
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+
+  /* SECTION */
+
+  .settings-section {
+    margin-bottom: 16px;
+
+    border-radius: 10px;
+  }
+
+  .settings-section-header {
+    padding: 18px;
+  }
+
+  .settings-section-header h2 {
+    font-size: 17px;
+  }
+
+  .settings-section-header p {
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+
+  /* ITEM */
+
   .settings-item {
-    padding: 17px;
+    padding: 16px 17px;
+
+    gap: 12px;
+  }
+
+  .settings-item-left {
+    gap: 12px;
+  }
+
+  .settings-item-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .settings-item h3 {
+    font-size: 14px;
   }
 
   .settings-item p {
-    line-height: 1.4;
+    font-size: 11px;
+
+    line-height: 1.45;
+  }
+
+
+  /* SECURITY */
+
+  .security-message {
+    padding: 18px;
+
+    gap: 12px;
+  }
+
+  .security-message h3 {
+    font-size: 14px;
+  }
+
+  .security-message p {
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+
+  /* LOGOUT */
+
+  .logout-settings-button {
+    margin: 16px 17px;
+
+    padding: 10px 16px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+
+  .settings-page {
+    padding: 16px 12px;
+  }
+
+  .settings-header {
+    gap: 10px;
+  }
+
+  .settings-header-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .settings-header h1 {
+    font-size: 22px;
+  }
+
+  .settings-header p {
+    font-size: 11px;
+  }
+
+  .settings-section-header {
+    padding: 16px;
+  }
+
+  .settings-item {
+    padding: 14px;
+  }
+
+  .settings-item-left {
+    gap: 10px;
+  }
+
+  .settings-item-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .settings-item h3 {
+    font-size: 13px;
+  }
+
+  .settings-item p {
+    font-size: 10.5px;
+  }
+
+  .settings-toggle {
+    width: 43px;
+    height: 24px;
+  }
+
+  .settings-toggle-slider::before {
+    width: 18px;
+    height: 18px;
+  }
+
+  .settings-toggle input:checked
+  + .settings-toggle-slider::before {
+    transform: translateX(19px);
+  }
+
+  .security-message {
+    padding: 16px;
+  }
+
+  .logout-settings-button {
+    margin: 14px;
+
+    width: calc(100% - 28px);
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .settings-page {
+    padding: 14px 10px;
+  }
+
+  .settings-header h1 {
+    font-size: 20px;
+  }
+
+  .settings-header p {
+    font-size: 10px;
+  }
+
+  .settings-item {
+    padding: 13px 12px;
+  }
+
+  .settings-item-left {
+    gap: 9px;
+  }
+
+  .settings-item-icon {
+    width: 33px;
+    height: 33px;
+  }
+
+  .settings-item p {
+    font-size: 10px;
   }
 
 }

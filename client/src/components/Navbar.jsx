@@ -11,7 +11,7 @@ import {
 import { useState, useEffect } from "react";
 
 
-function Navbar() {
+function Navbar({ onMenuClick }) {
 
   const {
     resumeData,
@@ -20,12 +20,24 @@ function Navbar() {
   } = useResume();
 
 
+  // =====================================================
+  // STATES
+  // =====================================================
+
   const [saving, setSaving] = useState(false);
 
   const [saveMessage, setSaveMessage] = useState("");
 
+  const [showNotifications, setShowNotifications] =
+    useState(false);
 
-  // ================= THEME =================
+  const [profileOpen, setProfileOpen] =
+    useState(false);
+
+
+  // =====================================================
+  // GLOBAL DARK MODE
+  // =====================================================
 
   const [darkMode, setDarkMode] = useState(() => {
 
@@ -34,57 +46,183 @@ function Navbar() {
   });
 
 
-  // ================= APPLY THEME =================
+  // =====================================================
+  // APPLY GLOBAL THEME
+  // =====================================================
 
   useEffect(() => {
 
+    const root =
+      document.documentElement;
+
     if (darkMode) {
 
-      document.documentElement.classList.add("dark");
+      root.classList.add("dark");
 
-      localStorage.setItem("theme", "dark");
+      localStorage.setItem(
+        "theme",
+        "dark"
+      );
 
     } else {
 
-      document.documentElement.classList.remove("dark");
+      root.classList.remove("dark");
 
-      localStorage.setItem("theme", "light");
+      localStorage.setItem(
+        "theme",
+        "light"
+      );
 
     }
 
   }, [darkMode]);
 
 
-  // ================= TOGGLE THEME =================
+  // =====================================================
+  // THEME TOGGLE
+  // =====================================================
 
   const handleThemeToggle = () => {
 
-    setDarkMode((previous) => !previous);
+    setDarkMode(
+      (previous) => !previous
+    );
+
+    // Close other dropdowns
+    setShowNotifications(false);
+    setProfileOpen(false);
 
   };
 
 
-  // ================= LOGGED-IN USER =================
+  // =====================================================
+  // LOGGED-IN USER
+  // =====================================================
 
-  const user = JSON.parse(
-    localStorage.getItem("user") || "null"
-  );
+  const user = (() => {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("user") || "null"
+      );
+
+    } catch {
+
+      return null;
+
+    }
+
+  })();
 
 
-  // ================= SAVE RESUME =================
+  // =====================================================
+  // LOGOUT
+  // =====================================================
+
+  const handleLogout = () => {
+
+    localStorage.removeItem("token");
+
+    localStorage.removeItem("user");
+
+    localStorage.removeItem(
+      "currentResumeId"
+    );
+
+    localStorage.removeItem(
+      "resumeData"
+    );
+
+    // Keep theme preference.
+    // So if user logs in again,
+    // selected theme can remain.
+
+    window.location.href = "/login";
+
+  };
+
+
+  // =====================================================
+  // PROFILE DROPDOWN
+  // =====================================================
+
+  const handleProfileClick = () => {
+
+    setProfileOpen(
+      (previous) => !previous
+    );
+
+    setShowNotifications(false);
+
+  };
+
+
+  // =====================================================
+  // NOTIFICATIONS
+  // =====================================================
+
+  const handleNotificationClick = () => {
+
+    setShowNotifications(
+      (previous) => !previous
+    );
+
+    setProfileOpen(false);
+
+  };
+
+
+  // =====================================================
+  // GO TO PROFILE
+  // =====================================================
+
+  const handleGoToProfile = () => {
+
+    setProfileOpen(false);
+
+    window.location.href =
+      "/profile";
+
+  };
+
+
+  // =====================================================
+  // GO TO SETTINGS
+  // =====================================================
+
+  const handleGoToSettings = () => {
+
+    setProfileOpen(false);
+
+    window.location.href =
+      "/settings";
+
+  };
+
+
+  // =====================================================
+  // SAVE RESUME
+  // =====================================================
 
   const handleSave = async () => {
 
-    const token = localStorage.getItem("token");
+    const token =
+      localStorage.getItem("token");
 
 
-    // Check login
+    // ===================================================
+    // CHECK LOGIN
+    // ===================================================
 
     if (!token) {
 
-      alert("Please login first.");
+      alert(
+        "Please login first."
+      );
 
-      window.location.href = "/login";
+      window.location.href =
+        "/login";
 
       return;
 
@@ -98,17 +236,19 @@ function Navbar() {
 
     try {
 
+      // =================================================
+      // RESUME TITLE
+      // =================================================
 
-      // ================= RESUME TITLE =================
-
-      const title = resumeData.personal?.fullName
-
-        ? `${resumeData.personal.fullName}'s Resume`
-
-        : "My Resume";
+      const title =
+        resumeData.personal?.fullName
+          ? `${resumeData.personal.fullName}'s Resume`
+          : "My Resume";
 
 
-      // ================= URL + METHOD =================
+      // =================================================
+      // API URL
+      // =================================================
 
       let url =
         "https://resumecraft-server-v3tm.onrender.com/api/resumes";
@@ -117,7 +257,9 @@ function Navbar() {
       let method = "POST";
 
 
-      // ================= EXISTING RESUME =================
+      // =================================================
+      // EXISTING RESUME
+      // =================================================
 
       if (currentResumeId) {
 
@@ -129,51 +271,53 @@ function Navbar() {
       }
 
 
-      // ================= API REQUEST =================
+      // =================================================
+      // API REQUEST
+      // =================================================
 
-      const response = await fetch(
+      const response =
+        await fetch(
+          url,
+          {
+            method,
 
-        url,
+            headers: {
 
-        {
+              "Content-Type":
+                "application/json",
 
-          method,
+              Authorization:
+                `Bearer ${token}`,
 
-          headers: {
+            },
 
-            "Content-Type": "application/json",
+            body:
+              JSON.stringify({
+                title,
+                resumeData,
+              }),
 
-            Authorization:
-              `Bearer ${token}`,
+          }
+        );
 
-          },
 
-          body: JSON.stringify({
-
-            title,
-
-            resumeData,
-
-          }),
-
-        }
-
-      );
-
+      // =================================================
+      // RESPONSE
+      // =================================================
 
       const data =
         await response.json();
 
 
-      // ================= ERROR =================
+      // =================================================
+      // ERROR
+      // =================================================
 
       if (!response.ok) {
 
         setSaveMessage(
-
           data.message ||
           "Failed to save resume."
-
         );
 
         return;
@@ -181,13 +325,13 @@ function Navbar() {
       }
 
 
-      // ================= NEW RESUME =================
+      // =================================================
+      // NEW RESUME ID
+      // =================================================
 
       if (
-
         method === "POST" &&
         data.resume
-
       ) {
 
         setResumeId(
@@ -197,9 +341,13 @@ function Navbar() {
       }
 
 
-      // ================= SUCCESS =================
+      // =================================================
+      // SUCCESS
+      // =================================================
 
-      setSaveMessage("Saved ✓");
+      setSaveMessage(
+        "Saved ✓"
+      );
 
 
       setTimeout(() => {
@@ -231,42 +379,61 @@ function Navbar() {
   };
 
 
+  // =====================================================
+  // USER INITIAL
+  // =====================================================
+
+  const userInitial =
+    user?.name
+      ? user.name
+          .charAt(0)
+          .toUpperCase()
+      : "U";
+
+
+  // =====================================================
+  // RENDER
+  // =====================================================
+
   return (
 
     <header className="navbar">
 
 
-      {/* ================= LEFT ================= */}
+      {/* =================================================
+          LEFT
+      ================================================= */}
 
       <div className="navbar-left">
 
 
+        {/* =================================================
+            BRAND
+        ================================================= */}
+
         <div className="brand">
 
           <div className="brand-mark">
-
             R
-
           </div>
 
-
           <span>
-
             ResumeCraft
-
           </span>
 
         </div>
 
 
+        {/* =================================================
+            MOBILE MENU
+        ================================================= */}
+
         <button
-
           type="button"
-
           className="icon-button"
-
           aria-label="Open menu"
-
+          title="Open menu"
+          onClick={onMenuClick}
         >
 
           <Menu size={22} />
@@ -277,17 +444,19 @@ function Navbar() {
       </div>
 
 
-      {/* ================= RIGHT ================= */}
+      {/* =================================================
+          RIGHT
+      ================================================= */}
 
       <div className="navbar-right">
 
 
-        {/* ================= THEME ================= */}
+        {/* =================================================
+            THEME
+        ================================================= */}
 
         <button
-
           type="button"
-
           className="icon-button"
 
           aria-label={
@@ -303,7 +472,6 @@ function Navbar() {
           }
 
           onClick={handleThemeToggle}
-
         >
 
           {darkMode ? (
@@ -319,27 +487,154 @@ function Navbar() {
         </button>
 
 
-        {/* ================= NOTIFICATIONS ================= */}
+        {/* =================================================
+            NOTIFICATIONS
+        ================================================= */}
+
+        <div className="notification-wrapper">
+
+          <button
+            type="button"
+
+            className="
+              icon-button
+              notification-button
+            "
+
+            aria-label="Notifications"
+
+            title="Notifications"
+
+            aria-expanded={
+              showNotifications
+            }
+
+            onClick={
+              handleNotificationClick
+            }
+          >
+
+            <Bell size={20} />
+
+
+            {/* Notification dot */}
+
+            <span
+              className="notification-dot"
+            />
+
+          </button>
+
+
+          {/* =================================================
+              NOTIFICATION DROPDOWN
+          ================================================= */}
+
+          {showNotifications && (
+
+            <div
+              className="notification-dropdown"
+            >
+
+
+              {/* HEADER */}
+
+              <div
+                className="notification-header"
+              >
+
+                <strong>
+                  Notifications
+                </strong>
+
+                <span>
+                  2
+                </span>
+
+              </div>
+
+
+              {/* NOTIFICATION 1 */}
+
+              <div
+                className="notification-item"
+              >
+
+                <div
+                  className="notification-icon"
+                >
+                  ✓
+                </div>
+
+
+                <div>
+
+                  <strong>
+                    Welcome to ResumeCraft
+                  </strong>
+
+                  <p>
+                    Your resume builder is ready
+                    to use.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              {/* NOTIFICATION 2 */}
+
+              <div
+                className="notification-item"
+              >
+
+                <div
+                  className="notification-icon"
+                >
+                  📄
+                </div>
+
+
+                <div>
+
+                  <strong>
+                    Create your resume
+                  </strong>
+
+                  <p>
+                    Start adding your
+                    professional information.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              {/* FOOTER */}
+
+              <div
+                className="notification-empty"
+              >
+
+                You're all caught up 🎉
+
+              </div>
+
+
+            </div>
+
+          )}
+
+        </div>
+
+
+        {/* =================================================
+            SAVE
+        ================================================= */}
 
         <button
-
-          type="button"
-
-          className="icon-button"
-
-          aria-label="Notifications"
-
-        >
-
-          <Bell size={20} />
-
-        </button>
-
-
-        {/* ================= SAVE ================= */}
-
-        <button
-
           type="button"
 
           className="save-button"
@@ -347,23 +642,24 @@ function Navbar() {
           onClick={handleSave}
 
           disabled={saving}
-
         >
 
           {saving
-
             ? "Saving..."
-
             : "Save"}
 
         </button>
 
 
-        {/* ================= SAVE STATUS ================= */}
+        {/* =================================================
+            SAVE STATUS
+        ================================================= */}
 
         {saveMessage && (
 
-          <span className="save-message">
+          <span
+            className="save-message"
+          >
 
             {saveMessage}
 
@@ -372,42 +668,227 @@ function Navbar() {
         )}
 
 
-        {/* ================= PROFILE ================= */}
+        {/* =================================================
+            PROFILE WRAPPER
+        ================================================= */}
 
-        <button
-
-          type="button"
-
-          className="profile-button"
-
+        <div
+          className="profile-wrapper"
         >
 
-          <div className="profile-avatar">
 
-            {user?.name
+          {/* =================================================
+              PROFILE BUTTON
+          ================================================= */}
 
-              ? user.name
-                  .charAt(0)
-                  .toUpperCase()
+          <button
+            type="button"
 
-              : "U"}
+            className="profile-button"
 
-          </div>
+            onClick={
+              handleProfileClick
+            }
+
+            aria-expanded={
+              profileOpen
+            }
+
+            aria-label="Open profile menu"
+
+            title="Profile menu"
+          >
+
+            <div
+              className="profile-avatar"
+            >
+
+              {userInitial}
+
+            </div>
 
 
-          <span>
+            <span>
 
-            {user?.name || "User"}
+              {user?.name || "User"}
 
-          </span>
+            </span>
 
 
-          <ChevronDown size={17} />
+            <ChevronDown
+              size={17}
 
-        </button>
+              className={
+                profileOpen
+                  ? "profile-arrow-open"
+                  : ""
+              }
+            />
+
+          </button>
+
+
+          {/* =================================================
+              PROFILE DROPDOWN
+          ================================================= */}
+
+          {profileOpen && (
+
+            <div
+              className="profile-dropdown"
+            >
+
+
+              {/* USER INFORMATION */}
+
+              <div
+                className="profile-dropdown-user"
+              >
+
+                <div
+                  className="
+                    profile-dropdown-avatar
+                  "
+                >
+
+                  {userInitial}
+
+                </div>
+
+
+                <div>
+
+                  <strong>
+
+                    {user?.name ||
+                      "User"}
+
+                  </strong>
+
+
+                  <span>
+
+                    {user?.email ||
+                      "Account"}
+
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              {/* DIVIDER */}
+
+              <div
+                className="profile-divider"
+              />
+
+
+              {/* PROFILE */}
+
+              <button
+                type="button"
+
+                className="
+                  profile-dropdown-item
+                "
+
+                onClick={
+                  handleGoToProfile
+                }
+              >
+
+                <span
+                  className="
+                    dropdown-item-icon
+                  "
+                >
+                  👤
+                </span>
+
+                <span>
+                  Profile
+                </span>
+
+              </button>
+
+
+              {/* SETTINGS */}
+
+              <button
+                type="button"
+
+                className="
+                  profile-dropdown-item
+                "
+
+                onClick={
+                  handleGoToSettings
+                }
+              >
+
+                <span
+                  className="
+                    dropdown-item-icon
+                  "
+                >
+                  ⚙️
+                </span>
+
+                <span>
+                  Settings
+                </span>
+
+              </button>
+
+
+              {/* DIVIDER */}
+
+              <div
+                className="profile-divider"
+              />
+
+
+              {/* LOGOUT */}
+
+              <button
+                type="button"
+
+                className="
+                  profile-dropdown-item
+                  logout-item
+                "
+
+                onClick={
+                  handleLogout
+                }
+              >
+
+                <span
+                  className="
+                    dropdown-item-icon
+                  "
+                >
+                  🚪
+                </span>
+
+                <span>
+                  Logout
+                </span>
+
+              </button>
+
+
+            </div>
+
+          )}
+
+        </div>
 
 
       </div>
+
 
     </header>
 

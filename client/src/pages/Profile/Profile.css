@@ -4,11 +4,77 @@
 
 .profile-page {
   min-height: 100%;
+  width: 100%;
+
   padding: 34px;
 
   background: #faf7f2;
+  color: #241f1c;
 
   box-sizing: border-box;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* =====================================================
+   TOP NAVIGATION
+===================================================== */
+
+.profile-navigation {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 22px;
+}
+
+.profile-nav-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.profile-nav-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 8px 13px;
+
+  border: 1px solid #d8c9bf;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #5e514a;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.profile-nav-button:hover {
+  background: #f5e5dc;
+
+  border-color: #bd4b2b;
+
+  color: #bd4b2b;
 }
 
 
@@ -37,9 +103,11 @@
 
   background: #bd4b2b;
 
-  color: #fff;
+  color: #ffffff;
 
   border-radius: 10px;
+
+  flex-shrink: 0;
 }
 
 .profile-header h1 {
@@ -49,7 +117,7 @@
 
   font-weight: 700;
 
-  color: #111;
+  color: #111111;
 }
 
 .profile-header p {
@@ -57,7 +125,7 @@
 
   font-size: 14px;
 
-  color: #777;
+  color: #777777;
 }
 
 
@@ -66,15 +134,19 @@
 ===================================================== */
 
 .profile-card {
+  width: 100%;
+
   max-width: 900px;
 
-  background: #fff;
+  background: #ffffff;
 
   border: 1px solid #e5d8ce;
 
   border-radius: 12px;
 
   overflow: hidden;
+
+  box-sizing: border-box;
 }
 
 
@@ -97,8 +169,6 @@
 
 /* =====================================================
    PROFILE PAGE AVATAR
-   IMPORTANT:
-   Unique class name to avoid conflict with Navbar
 ===================================================== */
 
 .profile-page-avatar {
@@ -119,7 +189,7 @@
 
   background: #bd4b2b;
 
-  color: #fff;
+  color: #ffffff;
 
   font-size: 27px;
 
@@ -135,6 +205,8 @@
 
 .profile-top-info {
   flex: 1;
+
+  min-width: 0;
 }
 
 .profile-top-info h2 {
@@ -142,7 +214,9 @@
 
   font-size: 21px;
 
-  color: #222;
+  color: #222222;
+
+  word-break: break-word;
 }
 
 .profile-top-info p {
@@ -150,7 +224,9 @@
 
   font-size: 13px;
 
-  color: #888;
+  color: #888888;
+
+  word-break: break-word;
 }
 
 
@@ -162,7 +238,6 @@
   display: inline-flex;
 
   align-items: center;
-
   justify-content: center;
 
   gap: 7px;
@@ -173,7 +248,7 @@
 
   border-radius: 7px;
 
-  background: #fff;
+  background: #ffffff;
 
   color: #bd4b2b;
 
@@ -184,12 +259,14 @@
   cursor: pointer;
 
   transition: 0.2s ease;
+
+  flex-shrink: 0;
 }
 
 .profile-edit-button:hover {
   background: #bd4b2b;
 
-  color: #fff;
+  color: #ffffff;
 }
 
 
@@ -250,7 +327,7 @@
 
   font-size: 18px;
 
-  color: #222;
+  color: #222222;
 }
 
 .profile-section-title p {
@@ -258,7 +335,7 @@
 
   font-size: 13px;
 
-  color: #888;
+  color: #888888;
 }
 
 
@@ -287,7 +364,7 @@
 
   font-weight: 600;
 
-  color: #333;
+  color: #333333;
 }
 
 .profile-field label svg {
@@ -307,23 +384,29 @@
 
   outline: none;
 
-  background: #fff;
+  background: #ffffff;
 
-  color: #222;
+  color: #222222;
 
   font-size: 14px;
 
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .profile-field input:focus {
   border-color: #bd4b2b;
+
+  box-shadow:
+    0 0 0 2px rgba(189, 75, 43, 0.1);
 }
 
 .profile-field input:disabled {
   background: #f8f5f2;
 
-  color: #777;
+  color: #777777;
 
   cursor: not-allowed;
 }
@@ -335,7 +418,7 @@
 
   font-size: 11px;
 
-  color: #999;
+  color: #999999;
 }
 
 
@@ -358,7 +441,6 @@
   display: inline-flex;
 
   align-items: center;
-
   justify-content: center;
 
   gap: 7px;
@@ -377,9 +459,13 @@
 .profile-cancel-button {
   border: 1px solid #d8d0ca;
 
-  background: #fff;
+  background: #ffffff;
 
-  color: #666;
+  color: #666666;
+}
+
+.profile-cancel-button:hover {
+  background: #f5f1ed;
 }
 
 .profile-save-button {
@@ -387,11 +473,13 @@
 
   background: #bd4b2b;
 
-  color: #fff;
+  color: #ffffff;
 }
 
 .profile-save-button:hover {
   background: #a94024;
+
+  border-color: #a94024;
 }
 
 
@@ -447,18 +535,22 @@
   flex-direction: column;
 
   gap: 4px;
+
+  min-width: 0;
 }
 
 .profile-info-item span {
   font-size: 11px;
 
-  color: #999;
+  color: #999999;
 }
 
 .profile-info-item strong {
   font-size: 13px;
 
-  color: #333;
+  color: #333333;
+
+  word-break: break-word;
 }
 
 
@@ -472,8 +564,9 @@
   display: flex;
 
   align-items: center;
-
   justify-content: space-between;
+
+  gap: 15px;
 
   padding: 15px;
 
@@ -483,13 +576,15 @@
 
   background: #fffdfb;
 
-  color: #777;
+  color: #777777;
 
   text-align: left;
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .profile-security-button:hover {
@@ -504,6 +599,8 @@
   align-items: center;
 
   gap: 13px;
+
+  min-width: 0;
 }
 
 .profile-security-left div:last-child {
@@ -512,18 +609,30 @@
   flex-direction: column;
 
   gap: 4px;
+
+  min-width: 0;
 }
 
 .profile-security-left strong {
   font-size: 13px;
 
-  color: #333;
+  color: #333333;
 }
 
 .profile-security-left span {
   font-size: 11px;
 
-  color: #999;
+  color: #999999;
+
+  line-height: 1.4;
+}
+
+.profile-security-arrow {
+  flex-shrink: 0;
+
+  font-size: 20px;
+
+  color: #bd4b2b;
 }
 
 
@@ -539,7 +648,6 @@
   display: inline-flex;
 
   align-items: center;
-
   justify-content: center;
 
   gap: 8px;
@@ -550,7 +658,7 @@
 
   border-radius: 7px;
 
-  background: #fff;
+  background: #ffffff;
 
   color: #bd4b2b;
 
@@ -560,48 +668,418 @@
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .profile-logout-button:hover {
   background: #bd4b2b;
 
-  color: #fff;
+  color: #ffffff;
+
+  border-color: #bd4b2b;
 }
 
 
 /* =====================================================
-   RESPONSIVE
+   DARK MODE
+===================================================== */
+
+html.dark .profile-page {
+  background: #15110f;
+
+  color: #f5eee8;
+}
+
+
+/* =====================================================
+   DARK TOP NAVIGATION
+===================================================== */
+
+html.dark .profile-nav-button {
+  background: #211a17;
+
+  border-color: #4a3b33;
+
+  color: #d8cbc3;
+}
+
+html.dark .profile-nav-button:hover {
+  background: #2a211c;
+
+  border-color: #c96a4d;
+
+  color: #e89072;
+}
+
+
+/* =====================================================
+   DARK HEADER
+===================================================== */
+
+html.dark .profile-header-icon {
+  background: #a8472b;
+
+  color: #ffffff;
+}
+
+html.dark .profile-header h1 {
+  color: #f5eee8;
+}
+
+html.dark .profile-header p {
+  color: #b8aaa0;
+}
+
+
+/* =====================================================
+   DARK PROFILE CARD
+===================================================== */
+
+html.dark .profile-card {
+  background: #1f1a17;
+
+  border-color: #44372f;
+}
+
+
+/* =====================================================
+   DARK PROFILE TOP
+===================================================== */
+
+html.dark .profile-top {
+  border-bottom-color: #44372f;
+}
+
+html.dark .profile-top-info h2 {
+  color: #f5eee8;
+}
+
+html.dark .profile-top-info p {
+  color: #b8aaa0;
+}
+
+html.dark .profile-page-avatar {
+  background: #a8472b;
+
+  color: #ffffff;
+}
+
+
+/* =====================================================
+   DARK EDIT BUTTON
+===================================================== */
+
+html.dark .profile-edit-button {
+  background: #211a17;
+
+  border-color: #694438;
+
+  color: #e89072;
+}
+
+html.dark .profile-edit-button:hover {
+  background: #a8472b;
+
+  border-color: #a8472b;
+
+  color: #ffffff;
+}
+
+
+/* =====================================================
+   DARK SUCCESS
+===================================================== */
+
+html.dark .profile-success {
+  background: #1d3325;
+
+  color: #8bd3a0;
+}
+
+
+/* =====================================================
+   DARK ERROR
+===================================================== */
+
+html.dark .profile-error {
+  background: #3a201b;
+
+  color: #f19a82;
+}
+
+
+/* =====================================================
+   DARK PROFILE SECTION
+===================================================== */
+
+html.dark .profile-section {
+  border-bottom-color: #44372f;
+}
+
+html.dark .profile-section-title h2 {
+  color: #f5eee8;
+}
+
+html.dark .profile-section-title p {
+  color: #b8aaa0;
+}
+
+
+/* =====================================================
+   DARK FORM
+===================================================== */
+
+html.dark .profile-field label {
+  color: #eee4dc;
+}
+
+html.dark .profile-field label svg {
+  color: #e89072;
+}
+
+html.dark .profile-field input {
+  background: #171310;
+
+  border-color: #55443a;
+
+  color: #f5eee8;
+}
+
+html.dark .profile-field input:focus {
+  border-color: #c96a4d;
+
+  box-shadow:
+    0 0 0 2px rgba(201, 106, 77, 0.18);
+}
+
+html.dark .profile-field input:disabled {
+  background: #211a17;
+
+  color: #9f9189;
+
+  border-color: #44372f;
+}
+
+html.dark .profile-field input::placeholder {
+  color: #81746c;
+}
+
+html.dark .profile-field small {
+  color: #8f8178;
+}
+
+
+/* =====================================================
+   DARK ACTIONS
+===================================================== */
+
+html.dark .profile-cancel-button {
+  background: #211a17;
+
+  border-color: #55443a;
+
+  color: #c7bbb4;
+}
+
+html.dark .profile-cancel-button:hover {
+  background: #2a211c;
+}
+
+html.dark .profile-save-button {
+  background: #a8472b;
+
+  border-color: #a8472b;
+}
+
+html.dark .profile-save-button:hover {
+  background: #c96a4d;
+
+  border-color: #c96a4d;
+}
+
+
+/* =====================================================
+   DARK ACCOUNT INFORMATION
+===================================================== */
+
+html.dark .profile-info-item {
+  background: #211a17;
+
+  border-color: #44372f;
+}
+
+html.dark .profile-info-icon {
+  background: #5d3024;
+
+  color: #e89072;
+}
+
+html.dark .profile-info-item span {
+  color: #91837b;
+}
+
+html.dark .profile-info-item strong {
+  color: #eee4dc;
+}
+
+
+/* =====================================================
+   DARK SECURITY
+===================================================== */
+
+html.dark .profile-security-button {
+  background: #211a17;
+
+  border-color: #44372f;
+
+  color: #b8aaa0;
+}
+
+html.dark .profile-security-button:hover {
+  background: #2a211c;
+
+  border-color: #694438;
+}
+
+html.dark .profile-security-left strong {
+  color: #f5eee8;
+}
+
+html.dark .profile-security-left span {
+  color: #9f9189;
+}
+
+html.dark .profile-security-arrow {
+  color: #e89072;
+}
+
+
+/* =====================================================
+   DARK LOGOUT
+===================================================== */
+
+html.dark .profile-logout-button {
+  background: #211a17;
+
+  border-color: #694438;
+
+  color: #e89072;
+}
+
+html.dark .profile-logout-button:hover {
+  background: #a8472b;
+
+  border-color: #a8472b;
+
+  color: #ffffff;
+}
+
+
+/* =====================================================
+   FOCUS ACCESSIBILITY
+===================================================== */
+
+.profile-nav-button:focus-visible,
+.profile-edit-button:focus-visible,
+.profile-cancel-button:focus-visible,
+.profile-save-button:focus-visible,
+.profile-security-button:focus-visible,
+.profile-logout-button:focus-visible {
+  outline: 2px solid #c96a4d;
+
+  outline-offset: 2px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .profile-page {
+    padding: 26px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
 ===================================================== */
 
 @media (max-width: 700px) {
 
   .profile-page {
-    padding: 20px;
+    width: 100%;
+
+    min-height: calc(100vh - 64px);
+
+    padding: 18px 16px;
+  }
+
+
+  /* NAVIGATION */
+
+  .profile-navigation {
+    margin-bottom: 20px;
+  }
+
+  .profile-nav-actions {
+    gap: 5px;
+  }
+
+  .profile-nav-button {
+    padding: 8px 10px;
+
+    font-size: 12px;
+  }
+
+
+  /* HEADER */
+
+  .profile-header {
+    gap: 12px;
+
+    margin-bottom: 22px;
+  }
+
+  .profile-header-icon {
+    width: 44px;
+    height: 44px;
   }
 
   .profile-header h1 {
     font-size: 25px;
   }
 
+  .profile-header p {
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+
+  /* CARD */
+
+  .profile-card {
+    max-width: 100%;
+
+    border-radius: 10px;
+  }
+
+
+  /* TOP */
+
   .profile-top {
+    padding: 22px 18px;
+
     flex-wrap: wrap;
-  }
 
-  .profile-edit-button {
-    width: 100%;
-  }
-
-  .profile-info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .profile-section {
-    padding: 22px 20px;
-  }
-
-  .profile-top {
-    padding: 22px 20px;
+    gap: 14px;
   }
 
   .profile-page-avatar {
@@ -612,6 +1090,245 @@
     min-height: 64px;
 
     font-size: 24px;
+  }
+
+  .profile-top-info {
+    flex: 1;
+
+    min-width: calc(100% - 80px);
+  }
+
+  .profile-top-info h2 {
+    font-size: 19px;
+  }
+
+  .profile-top-info p {
+    font-size: 12px;
+  }
+
+  .profile-edit-button {
+    width: 100%;
+
+    margin-top: 4px;
+  }
+
+
+  /* MESSAGES */
+
+  .profile-success,
+  .profile-error {
+    margin: 16px 18px 0;
+  }
+
+
+  /* SECTIONS */
+
+  .profile-section {
+    padding: 22px 18px;
+  }
+
+  .profile-section-title {
+    margin-bottom: 18px;
+  }
+
+  .profile-section-title h2 {
+    font-size: 17px;
+  }
+
+  .profile-section-title p {
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+
+  /* INFO GRID */
+
+  .profile-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  /* LOGOUT */
+
+  .profile-logout-section {
+    padding: 20px 18px;
+  }
+
+  .profile-logout-button {
+    width: 100%;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+
+  .profile-page {
+    padding: 14px 11px;
+  }
+
+
+  /* NAVIGATION */
+
+  .profile-navigation {
+    align-items: stretch;
+  }
+
+  .profile-nav-actions {
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
+  }
+
+  .profile-nav-button {
+    padding: 7px 8px;
+
+    font-size: 11px;
+
+    gap: 5px;
+  }
+
+
+  /* HEADER */
+
+  .profile-header {
+    gap: 9px;
+  }
+
+  .profile-header-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profile-header h1 {
+    font-size: 22px;
+  }
+
+  .profile-header p {
+    font-size: 11px;
+  }
+
+
+  /* TOP */
+
+  .profile-top {
+    padding: 18px 14px;
+  }
+
+  .profile-page-avatar {
+    width: 58px;
+    height: 58px;
+
+    min-width: 58px;
+    min-height: 58px;
+
+    font-size: 22px;
+  }
+
+  .profile-top-info {
+    min-width: calc(100% - 72px);
+  }
+
+
+  /* SECTION */
+
+  .profile-section {
+    padding: 19px 14px;
+  }
+
+
+  /* FIELD */
+
+  .profile-field input {
+    padding: 10px 11px;
+
+    font-size: 13px;
+  }
+
+
+  /* ACTIONS */
+
+  .profile-actions {
+    flex-direction: column-reverse;
+
+    width: 100%;
+  }
+
+  .profile-cancel-button,
+  .profile-save-button {
+    width: 100%;
+  }
+
+
+  /* SECURITY */
+
+  .profile-security-button {
+    padding: 13px;
+  }
+
+  .profile-security-left {
+    gap: 10px;
+  }
+
+  .profile-security-left span {
+    font-size: 10px;
+  }
+
+
+  /* LOGOUT */
+
+  .profile-logout-section {
+    padding: 18px 14px;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .profile-page {
+    padding: 12px 9px;
+  }
+
+  .profile-nav-button {
+    padding: 6px;
+
+    font-size: 10px;
+  }
+
+  .profile-header h1 {
+    font-size: 20px;
+  }
+
+  .profile-header p {
+    font-size: 10px;
+  }
+
+  .profile-top {
+    padding: 16px 12px;
+  }
+
+  .profile-section {
+    padding: 17px 12px;
+  }
+
+  .profile-page-avatar {
+    width: 54px;
+    height: 54px;
+
+    min-width: 54px;
+    min-height: 54px;
+
+    font-size: 20px;
   }
 
 }

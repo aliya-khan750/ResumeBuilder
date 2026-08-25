@@ -8,10 +8,11 @@ import {
   User,
   LogOut,
   Plus,
+  X,
 } from "lucide-react";
 
 
-function Sidebar() {
+function Sidebar({ isOpen, onClose }) {
 
 
   // =====================================================
@@ -19,6 +20,10 @@ function Sidebar() {
   // =====================================================
 
   const handleCreateResume = () => {
+
+    if (onClose) {
+      onClose();
+    }
 
     window.location.href = "/builder";
 
@@ -47,238 +52,285 @@ function Sidebar() {
 
   const navigateTo = (path) => {
 
+    if (onClose) {
+      onClose();
+    }
+
     window.location.href = path;
 
   };
 
 
   return (
-
-    <aside className="sidebar">
+    <>
 
 
       {/* =================================================
-          CREATE NEW RESUME
+          MOBILE OVERLAY
       ================================================= */}
 
-      <button
-        type="button"
-        className="create-resume-btn"
-        onClick={handleCreateResume}
+      {isOpen && (
+
+        <div
+          className="sidebar-overlay"
+          onClick={onClose}
+        />
+
+      )}
+
+
+      {/* =================================================
+          SIDEBAR
+      ================================================= */}
+
+      <aside
+        className={`sidebar ${
+          isOpen ? "sidebar-open" : ""
+        }`}
       >
 
-        <Plus size={19} />
-
-        <span>
-          Create New Resume
-        </span>
-
-      </button>
-
-
-      {/* =================================================
-          NAVIGATION
-      ================================================= */}
-
-      <nav className="sidebar-nav">
-
 
         {/* =================================================
-            DASHBOARD
+            MOBILE CLOSE BUTTON
         ================================================= */}
 
         <button
           type="button"
-          className="sidebar-item"
-          onClick={() =>
-            navigateTo("/")
-          }
+          className="mobile-sidebar-close"
+          onClick={onClose}
+          aria-label="Close menu"
         >
 
-          <LayoutDashboard size={19} />
+          <X size={22} />
+
+        </button>
+
+
+        {/* =================================================
+            CREATE NEW RESUME
+        ================================================= */}
+
+        <button
+          type="button"
+          className="create-resume-btn"
+          onClick={handleCreateResume}
+        >
+
+          <Plus size={19} />
 
           <span>
-            Dashboard
+            Create New Resume
           </span>
 
         </button>
 
 
         {/* =================================================
-            MY RESUMES
+            NAVIGATION
         ================================================= */}
 
-        <button
-          type="button"
-          className="sidebar-item"
-          onClick={() =>
-            navigateTo("/my-resumes")
-          }
-        >
-
-          <FileText size={19} />
-
-          <span>
-            My Resumes
-          </span>
-
-        </button>
+        <nav className="sidebar-nav">
 
 
-        {/* =================================================
-            RESUME BUILDER
-        ================================================= */}
+          {/* =================================================
+              DASHBOARD
+          ================================================= */}
 
-        <button
-          type="button"
-          className="sidebar-item"
-          onClick={() =>
-            navigateTo("/builder")
-          }
-        >
+          <button
+            type="button"
+            className="sidebar-item"
+            onClick={() =>
+              navigateTo("/dashboard")
+            }
+          >
 
-          <FileText size={19} />
+            <LayoutDashboard size={19} />
 
-          <span>
-            Resume Builder
-          </span>
+            <span>
+              Dashboard
+            </span>
 
-        </button>
-
-
-        {/* =================================================
-            TEMPLATES
-        ================================================= */}
-
-        <button
-          type="button"
-          className="sidebar-item"
-          onClick={() =>
-            navigateTo("/templates")
-          }
-        >
-
-          <Palette size={19} />
-
-          <span>
-            Templates
-          </span>
-
-        </button>
+          </button>
 
 
-        {/* =================================================
-            AI ASSISTANT
-        ================================================= */}
+          {/* =================================================
+              MY RESUMES
+          ================================================= */}
 
-        <button
-          type="button"
-          className="sidebar-item"
-          onClick={() =>
-            navigateTo("/ai-assistant")
-          }
-        >
+          <button
+            type="button"
+            className="sidebar-item"
+            onClick={() =>
+              navigateTo("/my-resumes")
+            }
+          >
 
-          <Sparkles size={19} />
+            <FileText size={19} />
 
-          <span>
-            AI Assistant
-          </span>
+            <span>
+              My Resumes
+            </span>
 
-          <span className="new-badge">
-            New
-          </span>
-
-        </button>
+          </button>
 
 
-        {/* =================================================
-            ANALYTICS
-        ================================================= */}
+          {/* =================================================
+              RESUME BUILDER
+          ================================================= */}
 
-        <button
-          type="button"
-          className="sidebar-item"
-          onClick={() =>
-            navigateTo("/analytics")
-          }
-        >
+          <button
+            type="button"
+            className="sidebar-item"
+            onClick={() =>
+              navigateTo("/builder")
+            }
+          >
 
-          <BarChart3 size={19} />
+            <FileText size={19} />
 
-          <span>
-            Analytics
-          </span>
+            <span>
+              Resume Builder
+            </span>
 
-        </button>
-
-
-        {/* =================================================
-            SETTINGS
-        ================================================= */}
-
-        <button
-          type="button"
-          className="sidebar-item"
-          onClick={() =>
-            navigateTo("/settings")
-          }
-        >
-
-          <Settings size={19} />
-
-          <span>
-            Settings
-          </span>
-
-        </button>
+          </button>
 
 
-        {/* =================================================
-            PROFILE
-        ================================================= */}
+          {/* =================================================
+              TEMPLATES
+          ================================================= */}
 
-        <button
-          type="button"
-          className="sidebar-item"
-          onClick={() =>
-            navigateTo("/profile")
-          }
-        >
+          <button
+            type="button"
+            className="sidebar-item"
+            onClick={() =>
+              navigateTo("/templates")
+            }
+          >
 
-          <User size={19} />
+            <Palette size={19} />
 
-          <span>
-            Profile
-          </span>
+            <span>
+              Templates
+            </span>
 
-        </button>
-
-
-        {/* =================================================
-            LOGOUT
-        ================================================= */}
-
-        <button
-          type="button"
-          className="sidebar-item"
-          onClick={handleLogout}
-        >
-
-          <LogOut size={19} />
-
-          <span>
-            Logout
-          </span>
-
-        </button>
+          </button>
 
 
-      </nav>
+          {/* =================================================
+              AI ASSISTANT
+          ================================================= */}
 
-    </aside>
+          <button
+            type="button"
+            className="sidebar-item"
+            onClick={() =>
+              navigateTo("/ai-assistant")
+            }
+          >
 
+            <Sparkles size={19} />
+
+            <span>
+              AI Assistant
+            </span>
+
+            <span className="new-badge">
+              New
+            </span>
+
+          </button>
+
+
+          {/* =================================================
+              ANALYTICS
+          ================================================= */}
+
+          <button
+            type="button"
+            className="sidebar-item"
+            onClick={() =>
+              navigateTo("/analytics")
+            }
+          >
+
+            <BarChart3 size={19} />
+
+            <span>
+              Analytics
+            </span>
+
+          </button>
+
+
+          {/* =================================================
+              SETTINGS
+          ================================================= */}
+
+          <button
+            type="button"
+            className="sidebar-item"
+            onClick={() =>
+              navigateTo("/settings")
+            }
+          >
+
+            <Settings size={19} />
+
+            <span>
+              Settings
+            </span>
+
+          </button>
+
+
+          {/* =================================================
+              PROFILE
+          ================================================= */}
+
+          <button
+            type="button"
+            className="sidebar-item"
+            onClick={() =>
+              navigateTo("/profile")
+            }
+          >
+
+            <User size={19} />
+
+            <span>
+              Profile
+            </span>
+
+          </button>
+
+
+          {/* =================================================
+              LOGOUT
+          ================================================= */}
+
+          <button
+            type="button"
+            className="sidebar-item"
+            onClick={handleLogout}
+          >
+
+            <LogOut size={19} />
+
+            <span>
+              Logout
+            </span>
+
+          </button>
+
+
+        </nav>
+
+
+      </aside>
+
+    </>
   );
+
 }
 
 

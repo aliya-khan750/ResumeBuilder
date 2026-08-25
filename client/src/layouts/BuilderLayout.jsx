@@ -1,33 +1,82 @@
+import { useState } from "react";
+
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import EditorPanel from "../components/EditorPanel";
 import ResumePreview from "../components/ResumePreview";
 
+
 function BuilderLayout() {
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+
+  // =====================================================
+  // TOGGLE MOBILE SIDEBAR
+  // =====================================================
+
+  const toggleSidebar = () => {
+
+    setSidebarOpen((previous) => !previous);
+
+  };
+
+
+  // =====================================================
+  // CLOSE SIDEBAR
+  // =====================================================
+
+  const closeSidebar = () => {
+
+    setSidebarOpen(false);
+
+  };
+
+
   return (
+
     <div className="builder-app">
 
-      {/* ================= NAVBAR ================= */}
 
-      <Navbar />
+      {/* =================================================
+          NAVBAR
+      ================================================= */}
+
+      <Navbar
+        onMenuClick={toggleSidebar}
+      />
 
 
-      {/* ================= BUILDER BODY ================= */}
+      {/* =================================================
+          BUILDER BODY
+      ================================================= */}
 
       <div className="builder-body">
 
-        {/* ================= SIDEBAR ================= */}
 
-        <Sidebar />
+        {/* =================================================
+            SIDEBAR
+        ================================================= */}
+
+        <Sidebar
+          isOpen={sidebarOpen}
+          onClose={closeSidebar}
+        />
 
 
-        {/* ================= MAIN ================= */}
+        {/* =================================================
+            MAIN
+        ================================================= */}
 
         <main className="builder-main">
 
+
           <div className="builder-workspace">
 
-            {/* ================= EDITOR ================= */}
+
+            {/* =================================================
+                EDITOR
+            ================================================= */}
 
             <div className="builder-editor">
 
@@ -36,15 +85,22 @@ function BuilderLayout() {
             </div>
 
 
-            {/* ================= RESUME PREVIEW ================= */}
+            {/* =================================================
+                RESUME PREVIEW
+            ================================================= */}
 
             <div className="builder-preview">
 
+
               <div className="preview-heading">
 
-                <h2>Resume Preview</h2>
+                <h2>
+                  Resume Preview
+                </h2>
 
-                <p>Live Preview</p>
+                <p>
+                  Live Preview
+                </p>
 
               </div>
 
@@ -55,16 +111,24 @@ function BuilderLayout() {
 
               </div>
 
+
             </div>
+
 
           </div>
 
+
         </main>
+
 
       </div>
 
+
     </div>
+
   );
+
 }
+
 
 export default BuilderLayout;

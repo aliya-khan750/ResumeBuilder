@@ -1,577 +1,1100 @@
-  /* =====================================================
-    EDITOR PANEL
-  ===================================================== */
+/* =====================================================
+   EDITOR PANEL
+===================================================== */
 
-  .editor-panel {
-    width: 100%;
-    max-width: none;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-
-  /* =====================================================
-    EDITOR HEADER
-  ===================================================== */
-
-  .editor-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
-  .editor-header h2 {
-    margin: 0;
-    font-size: 28px;
-    color: #2b211d;
-  }
+.editor-panel {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 
-  /* =====================================================
-    SAVE BUTTON
-  ===================================================== */
+/* =====================================================
+   EDITOR HEADER
+===================================================== */
 
-  .save-button {
-    background: var(--primary);
-    color: #ffffff;
-    border: none;
-    padding: 10px 22px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s ease;
-  }
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-  .save-button:hover {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
-  }
+.editor-header h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #2b211d;
+}
 
 
-  /* =====================================================
-    EDITOR SECTION
-  ===================================================== */
+/* =====================================================
+   SAVE BUTTON
+===================================================== */
 
-  .editor-section {
-    width: 100%;
-    background: var(--white);
-    border: 1px solid #e5ded8;
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 12px;
-    box-sizing: border-box;
-  }
+.save-button {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
 
+.save-button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
 
-  /* =====================================================
-    SECTION TITLE
-  ===================================================== */
-
-  .section-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 22px;
-  }
-
-  .section-title h3 {
-    margin: 0 0 6px;
-    font-size: 20px;
-    color: #2b211d;
-  }
-
-  .section-title p {
-    margin: 0;
-    color: #777777;
-    font-size: 14px;
-  }
-
-  .section-title span {
-    font-size: 18px;
-    cursor: pointer;
-    color: #2b211d;
-  }
+.save-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 
 
-  /* =====================================================
-    FORM GRID
-  ===================================================== */
+/* =====================================================
+   SAVE MESSAGE
+===================================================== */
 
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 17px;
-    width: 100%;
-  }
-
-
-  /* =====================================================
-    FORM GROUP
-  ===================================================== */
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    min-width: 0;
-  }
-
-  .form-group label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #3b302b;
-  }
+.save-message {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+}
 
 
-  /* =====================================================
-    INPUTS
-  ===================================================== */
+/* =====================================================
+   EDITOR SECTION
+===================================================== */
 
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 11px 13px;
-    border: 1px solid #d8cec6;
-    border-radius: 7px;
-    outline: none;
-    font-size: 14px;
-    font-family: inherit;
-    background: #ffffff;
-    color: #2b211d;
-    transition:
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .form-group input::placeholder,
-  .form-group textarea::placeholder {
-    color: #999999;
-  }
+.editor-section {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid #e5ded8;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
 
 
-  /* =====================================================
-    INPUT FOCUS
-  ===================================================== */
+/* =====================================================
+   SECTION TITLE
+===================================================== */
 
-  .form-group input:focus,
-  .form-group textarea:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(168, 71, 43, 0.1);
-  }
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
 
+.section-title h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: #2b211d;
+}
 
-  /* =====================================================
-    TEXTAREA
-  ===================================================== */
+.section-title p {
+  margin: 0;
+  color: #777777;
+  font-size: 14px;
+}
 
-  .form-group textarea {
-    min-height: 120px;
-    resize: vertical;
-  }
-
-
-  /* =====================================================
-    FULL WIDTH
-  ===================================================== */
-
-  .full-width {
-    grid-column: 1 / -1;
-  }
-
-
-  /* =====================================================
-    SELECT
-  ===================================================== */
-
-  .form-group select {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 11px 13px;
-    border: 1px solid #d8cec6;
-    border-radius: 7px;
-    outline: none;
-    font-size: 14px;
-    font-family: inherit;
-    background: #ffffff;
-    color: #2b211d;
-    cursor: pointer;
-  }
-
-  .form-group select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(168, 71, 43, 0.1);
-  }
+.section-title span {
+  font-size: 18px;
+  cursor: pointer;
+  color: #2b211d;
+}
 
 
-  /* =====================================================
-    ADD BUTTON
-  ===================================================== */
+/* =====================================================
+   FORM GRID
+===================================================== */
 
-  .add-button {
-    margin-top: 18px;
-    background: transparent;
-    color: var(--primary);
-    border: 1px solid var(--primary);
-    padding: 10px 18px;
-    border-radius: 7px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s ease;
-  }
-
-  .add-button:hover {
-    background: var(--primary);
-    color: #ffffff;
-  }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 17px;
+  width: 100%;
+}
 
 
-  /* =====================================================
-    ACCORDION
-  ===================================================== */
+/* =====================================================
+   FORM GROUP
+===================================================== */
 
-  .accordion-section {
-    width: 100%;
-    background: #ffffff;
-    border: 1px solid #e5ded8;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    overflow: hidden;
-    box-sizing: border-box;
-  }
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
 
-  .accordion-header {
-    width: 100%;
-    min-height: 66px;
-    padding: 16px 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    cursor: pointer;
-    background: #ffffff;
-    transition: background 0.2s ease;
-  }
-
-  .accordion-header:hover {
-    background: #fffaf6;
-  }
-
-  .accordion-header h3 {
-    margin: 0 0 4px;
-    font-size: 17px;
-    color: #2b211d;
-  }
-
-  .accordion-header p {
-    margin: 0;
-    font-size: 13px;
-    color: #777777;
-  }
-
-  .accordion-header > span {
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: #2b211d;
-    flex-shrink: 0;
-  }
-
-  .accordion-content {
-    padding: 0 22px 22px;
-    border-top: 1px solid #eee6e0;
-    box-sizing: border-box;
-  }
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3b302b;
+}
 
 
-  /* =====================================================
-    BUILDER WORKSPACE
-  ===================================================== */
+/* =====================================================
+   INPUTS
+===================================================== */
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 11px 13px;
+
+  border: 1px solid #d8cec6;
+  border-radius: 7px;
+
+  outline: none;
+
+  font-size: 14px;
+  font-family: inherit;
+
+  background: #ffffff;
+  color: #2b211d;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999999;
+}
+
+
+/* =====================================================
+   INPUT FOCUS
+===================================================== */
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 2px rgba(168, 71, 43, 0.1);
+}
+
+
+/* =====================================================
+   TEXTAREA
+===================================================== */
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+
+/* =====================================================
+   FULL WIDTH
+===================================================== */
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+.form-group select {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 11px 13px;
+
+  border: 1px solid #d8cec6;
+  border-radius: 7px;
+
+  outline: none;
+
+  font-size: 14px;
+  font-family: inherit;
+
+  background: #ffffff;
+  color: #2b211d;
+
+  cursor: pointer;
+}
+
+.form-group select:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 2px rgba(168, 71, 43, 0.1);
+}
+
+
+/* =====================================================
+   ADD BUTTON
+===================================================== */
+
+.add-button {
+  margin-top: 18px;
+
+  background: transparent;
+
+  color: var(--primary);
+
+  border: 1px solid var(--primary);
+
+  padding: 10px 18px;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.add-button:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+
+/* =====================================================
+   ACCORDION
+===================================================== */
+
+.accordion-section {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #e5ded8;
+
+  border-radius: 12px;
+
+  margin-bottom: 12px;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+.accordion-header {
+  width: 100%;
+
+  min-height: 66px;
+
+  padding: 16px 22px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  box-sizing: border-box;
+
+  cursor: pointer;
+
+  background: #ffffff;
+
+  transition: background 0.2s ease;
+}
+
+.accordion-header:hover {
+  background: #fffaf6;
+}
+
+.accordion-header h3 {
+  margin: 0 0 4px;
+
+  font-size: 17px;
+
+  color: #2b211d;
+}
+
+.accordion-header p {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: #777777;
+}
+
+.accordion-header > span {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+
+  color: #2b211d;
+
+  flex-shrink: 0;
+}
+
+.accordion-content {
+  padding: 0 22px 22px;
+
+  border-top: 1px solid #eee6e0;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BUILDER WORKSPACE
+===================================================== */
+
+.builder-workspace {
+  width: 100%;
+
+  height: calc(100vh - 72px);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(430px, 0.88fr)
+    minmax(560px, 1.12fr);
+
+  gap: 16px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  align-items: stretch;
+
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   EDITOR AREA
+===================================================== */
+
+.builder-editor {
+  min-width: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow-y: auto;
+
+  overflow-x: hidden;
+
+  padding-right: 5px;
+
+  box-sizing: border-box;
+}
+
+.builder-editor::-webkit-scrollbar {
+  width: 6px;
+}
+
+.builder-editor::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.builder-editor::-webkit-scrollbar-thumb {
+  background: #d8cec6;
+  border-radius: 10px;
+}
+
+
+/* =====================================================
+   PREVIEW AREA
+===================================================== */
+
+.builder-preview {
+  min-width: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  background: #f5f1eb;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PREVIEW HEADING
+===================================================== */
+
+.preview-heading {
+  flex-shrink: 0;
+
+  padding: 8px 16px 2px;
+
+  box-sizing: border-box;
+}
+
+.preview-heading h2 {
+  margin: 0;
+
+  font-size: 20px;
+
+  color: #2b211d;
+}
+
+.preview-heading p {
+  margin: 1px 0 0;
+
+  font-size: 14px;
+
+  color: #777777;
+}
+
+
+/* =====================================================
+   PREVIEW CONTENT
+===================================================== */
+
+.preview-content {
+  flex: 1;
+
+  min-width: 0;
+
+  min-height: 0;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  box-sizing: border-box;
+
+  padding: 2px 5px 8px;
+}
+
+
+/* =====================================================
+   RESUME PREVIEW
+===================================================== */
+
+.preview-content .resume-preview {
+  width: 100%;
+
+  height: 100%;
+
+  min-width: 0;
+
+  min-height: 0;
+}
+
+
+/* =====================================================
+   OLD PREVIEW CONTAINER
+===================================================== */
+
+.preview-container {
+  position: static;
+
+  width: 100%;
+
+  height: 100%;
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  background: transparent;
+
+  padding: 0;
+
+  border-radius: 0;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   LARGE LAPTOP
+===================================================== */
+
+@media (max-width: 1200px) {
 
   .builder-workspace {
-    width: 100%;
-    height: calc(100vh - 72px);
-
-    display: grid;
 
     grid-template-columns:
-      minmax(430px, 0.88fr)
-      minmax(560px, 1.12fr);
+      minmax(390px, 0.85fr)
+      minmax(500px, 1.15fr);
+
+    gap: 14px;
+
+    padding: 16px;
+  }
+
+  .editor-section {
+    padding: 20px;
+  }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .builder-workspace {
+
+    grid-template-columns: 1fr;
+
+    height: auto;
+
+    overflow: visible;
+  }
+
+  .builder-editor {
+
+    height: auto;
+
+    overflow: visible;
+  }
+
+  .builder-preview {
+
+    height: 850px;
+
+    min-height: 850px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE SIDEBAR OVERLAY
+===================================================== */
+
+/*
+   IMPORTANT:
+
+   Sidebar ko mobile par hide nahi karna hai.
+   Sidebar.jsx se .sidebar-open class milegi.
+*/
+
+.sidebar-overlay {
+
+  display: none;
+
+}
+
+
+/* =====================================================
+   MOBILE SIDEBAR CLOSE BUTTON
+===================================================== */
+
+.mobile-sidebar-close {
+
+  display: none;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+
+  /* =================================================
+     BUILDER FULL WIDTH
+  ================================================= */
+
+  .builder-app,
+  .builder-body,
+  .builder-main {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+  }
+
+
+  /* =================================================
+     BUILDER BODY
+  ================================================= */
+
+  .builder-body {
+
+    display: block;
+
+    min-height: calc(100vh - 74px);
+
+  }
+
+
+  /* =================================================
+     MOBILE SIDEBAR
+  ================================================= */
+
+  .sidebar {
+
+    display: block !important;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 280px;
+
+    height: 100vh;
+
+    z-index: 9999;
+
+    background: var(--cream);
+
+    border-right: 1px solid var(--border);
+
+    padding: 70px 14px 22px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    box-sizing: border-box;
+
+    transform: translateX(-100%);
+
+    transition:
+      transform 0.25s ease;
+
+    box-shadow:
+      4px 0 20px rgba(0, 0, 0, 0.12);
+
+  }
+
+
+  /* =================================================
+     SIDEBAR OPEN
+  ================================================= */
+
+  .sidebar.sidebar-open {
+
+    transform: translateX(0);
+
+  }
+
+
+  /* =================================================
+     SIDEBAR OVERLAY
+  ================================================= */
+
+  .sidebar-overlay {
+
+    display: block;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9998;
+
+    background: rgba(0, 0, 0, 0.35);
+
+  }
+
+
+  /* =================================================
+     SIDEBAR CLOSE BUTTON
+  ================================================= */
+
+  .mobile-sidebar-close {
+
+    display: flex;
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 15px;
+
+    width: 38px;
+
+    height: 38px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    z-index: 10000;
+
+  }
+
+
+  .mobile-sidebar-close:hover {
+
+    background: var(--cream-dark);
+
+    color: var(--primary);
+
+  }
+
+
+  /* =================================================
+     SIDEBAR NAV
+  ================================================= */
+
+  .sidebar-nav {
+
+    width: 100%;
+
+  }
+
+
+  .sidebar-item {
+
+    width: 100%;
+
+  }
+
+
+  /* =================================================
+     CREATE RESUME BUTTON
+  ================================================= */
+
+  .create-resume-btn {
+
+    width: 100%;
+
+  }
+
+
+  /* =================================================
+     MAIN CONTENT
+  ================================================= */
+
+  .builder-main {
+
+    width: 100%;
+
+    max-width: 100%;
+
+  }
+
+
+  /* =================================================
+     WORKSPACE
+  ================================================= */
+
+  .builder-workspace {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    height: auto;
+
+    padding: 12px;
 
     gap: 16px;
 
-    padding: 20px;
-
     box-sizing: border-box;
 
-    align-items: stretch;
+    overflow: visible;
 
-    overflow: hidden;
   }
 
 
-  /* =====================================================
-    EDITOR AREA
-  ===================================================== */
+  /* =================================================
+     EDITOR
+  ================================================= */
 
   .builder-editor {
-    min-width: 0;
-    width: 100%;
-    height: 100%;
-
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    padding-right: 5px;
-
-    box-sizing: border-box;
-  }
-
-  .builder-editor::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .builder-editor::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .builder-editor::-webkit-scrollbar-thumb {
-    background: #d8cec6;
-    border-radius: 10px;
-  }
-
-
-  /* =====================================================
-    PREVIEW AREA
-  ===================================================== */
-
-  .builder-preview {
-    min-width: 0;
-    width: 100%;
-    height: 100%;
-
-    background: #f5f1eb;
-
-    border-radius: 12px;
-
-    overflow: hidden;
-
-    display: flex;
-    flex-direction: column;
-
-    box-sizing: border-box;
-  }
-
-
-  /* =====================================================
-    PREVIEW HEADING
-  ===================================================== */
-
-  .preview-heading {
-    flex-shrink: 0;
-
-    /* Reduced extra space */
-    padding: 8px 16px 2px;
-
-    box-sizing: border-box;
-  }
-
-  .preview-heading h2 {
-    margin: 0;
-
-    font-size: 20px;
-
-    color: #2b211d;
-  }
-
-  .preview-heading p {
-    margin: 1px 0 0;
-
-    font-size: 14px;
-
-    color: #777777;
-  }
-
-
-  /* =====================================================
-    PREVIEW CONTENT
-  ===================================================== */
-
-  .preview-content {
-    flex: 1;
-
-    min-width: 0;
-    min-height: 0;
 
     width: 100%;
 
-    overflow: hidden;
+    max-width: 100%;
 
-    display: flex;
+    height: auto;
 
-    justify-content: center;
-
-    align-items: flex-start;
-
-    box-sizing: border-box;
-
-    padding: 2px 5px 8px;
-  }
-
-
-  /* =====================================================
-    RESUME PREVIEW
-  ===================================================== */
-
-  .preview-content .resume-preview {
-    width: 100%;
-    height: 100%;
-
-    min-width: 0;
-    min-height: 0;
-  }
-
-
-  /* =====================================================
-    OLD PREVIEW CONTAINER
-  ===================================================== */
-
-  .preview-container {
-    position: static;
-
-    width: 100%;
-    height: 100%;
-
-    min-height: 0;
-
-    overflow: hidden;
-
-    background: transparent;
+    overflow: visible;
 
     padding: 0;
 
-    border-radius: 0;
+  }
+
+
+  .editor-panel {
+
+    width: 100%;
+
+    max-width: 100%;
+
+  }
+
+
+  /* =================================================
+     EDITOR HEADER
+  ================================================= */
+
+  .editor-header {
+
+    width: 100%;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+  }
+
+
+  .editor-header h2 {
+
+    font-size: 22px;
+
+  }
+
+
+  /* =================================================
+     SAVE BUTTON
+  ================================================= */
+
+  .save-button {
+
+    padding: 9px 15px;
+
+    font-size: 13px;
+
+  }
+
+
+  /* =================================================
+     FORM
+  ================================================= */
+
+  .form-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+
+  }
+
+
+  .full-width {
+
+    grid-column: auto;
+
+  }
+
+
+  /* =================================================
+     SECTIONS
+  ================================================= */
+
+  .editor-section,
+  .accordion-section {
+
+    width: 100%;
+
+    max-width: 100%;
 
     box-sizing: border-box;
+
   }
 
 
-  /* =====================================================
-    LARGE LAPTOP
-  ===================================================== */
+  .editor-section {
 
-  @media (max-width: 1200px) {
+    padding: 18px;
 
-    .builder-workspace {
-      grid-template-columns:
-        minmax(390px, 0.85fr)
-        minmax(500px, 1.15fr);
-
-      gap: 14px;
-
-      padding: 16px;
-    }
-
-    .editor-section {
-      padding: 20px;
-    }
   }
 
 
-  /* =====================================================
-    TABLET
-  ===================================================== */
+  /* =================================================
+     ACCORDION
+  ================================================= */
 
-  @media (max-width: 1000px) {
+  .accordion-header {
 
-    .builder-workspace {
-      grid-template-columns: 1fr;
+    padding: 15px 17px;
 
-      height: auto;
-
-      overflow: visible;
-    }
-
-    .builder-editor {
-      height: auto;
-
-      overflow: visible;
-    }
-
-    .builder-preview {
-      height: 850px;
-
-      min-height: 850px;
-    }
   }
 
 
-  /* =====================================================
-    MOBILE
-  ===================================================== */
+  .accordion-content {
 
-  @media (max-width: 700px) {
+    padding: 0 17px 18px;
 
-    .builder-workspace {
-      padding: 12px;
-      gap: 12px;
-    }
-
-    .editor-header h2 {
-      font-size: 24px;
-    }
-
-    .form-grid {
-      grid-template-columns: 1fr;
-
-      gap: 15px;
-    }
-
-    .full-width {
-      grid-column: auto;
-    }
-
-    .editor-section {
-      padding: 18px;
-    }
-
-    .builder-preview {
-      height: 750px;
-
-      min-height: 750px;
-    }
   }
 
 
-  /* =====================================================
-    SMALL MOBILE
-  ===================================================== */
+  /* =================================================
+     PREVIEW
+  ================================================= */
 
-  @media (max-width: 500px) {
+  .builder-preview {
 
-    .builder-workspace {
-      padding: 10px;
-    }
+    width: 100%;
 
-    .editor-header h2 {
-      font-size: 22px;
-    }
+    max-width: 100%;
 
-    .save-button {
-      padding: 9px 17px;
-    }
+    height: 700px;
 
-    .editor-section {
-      padding: 16px;
-    }
+    min-height: 700px;
 
-    .builder-preview {
-      height: 700px;
-
-      min-height: 700px;
-    }
   }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+
+
+  .builder-workspace {
+
+    padding: 10px;
+
+  }
+
+
+  .editor-section {
+
+    padding: 16px;
+
+  }
+
+
+  .accordion-header {
+
+    padding: 14px;
+
+  }
+
+
+  .accordion-content {
+
+    padding: 0 14px 16px;
+
+  }
+
+
+  .editor-header {
+
+    gap: 8px;
+
+  }
+
+
+  .editor-header h2 {
+
+    font-size: 21px;
+
+  }
+
+
+  .save-button {
+
+    padding: 8px 14px;
+
+    font-size: 13px;
+
+  }
+
+
+  .builder-preview {
+
+    height: 650px;
+
+    min-height: 650px;
+
+  }
+
+
+  /* =================================================
+     MOBILE SIDEBAR WIDTH
+  ================================================= */
+
+  .sidebar {
+
+    width: 270px;
+
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 360px) {
+
+  .sidebar {
+
+    width: 250px;
+
+  }
+
+  .builder-workspace {
+
+    padding: 8px;
+
+  }
+
+  .editor-section {
+
+    padding: 14px;
+
+  }
+
+}
