@@ -22,7 +22,7 @@ function ForgotPassword() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/forgot-password",
+        "https://resumecraft-server-v3tm.onrender.com/api/auth/forgot-password",
         {
           method: "POST",
 

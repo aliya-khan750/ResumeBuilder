@@ -58,7 +58,7 @@ function ResetPassword() {
       setLoading(true);
 
       const response = await fetch(
-        `http://localhost:5000/api/auth/reset-password/${token}`,
+        `https://resumecraft-server-v3tm.onrender.com/api/auth/reset-password/${token}`,
         {
           method: "POST",
 

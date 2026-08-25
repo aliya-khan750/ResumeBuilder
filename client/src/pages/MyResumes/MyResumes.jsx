@@ -18,7 +18,7 @@ function MyResumes() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/resumes",
+        "https://resumecraft-server-v3tm.onrender.com/api/resumes",
         {
           method: "GET",
           headers: {
@@ -73,7 +73,7 @@ function MyResumes() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/resumes/${resumeId}`,
+        `https://resumecraft-server-v3tm.onrender.com/api/resumes/${resumeId}`,
         {
           method: "DELETE",
 

@@ -52,7 +52,7 @@ function Navbar() {
 
       // ================= URL + METHOD =================
 
-      let url = "http://localhost:5000/api/resumes";
+      let url = "https://resumecraft-server-v3tm.onrender.com/api/resumes";
 
       let method = "POST";
 
@@ -61,7 +61,7 @@ function Navbar() {
       if (currentResumeId) {
 
         url =
-          `http://localhost:5000/api/resumes/${currentResumeId}`;
+          `https://resumecraft-server-v3tm.onrender.com/api/resumes/${currentResumeId}`;
 
         method = "PUT";
 
