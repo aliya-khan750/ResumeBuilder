@@ -1,5 +1,8 @@
 :root {
-  /* ResumeCraft Theme */
+  /* =====================================================
+     RESUMECRAFT THEME
+  ===================================================== */
+
   --primary: #A8472B;
   --primary-dark: #8E3822;
   --primary-light: #C96A4D;
@@ -26,9 +29,9 @@
 }
 
 
-/* =========================
+/* =====================================================
    RESET
-========================= */
+===================================================== */
 
 * {
   margin: 0;
@@ -36,20 +39,26 @@
   box-sizing: border-box;
 }
 
-
 html {
   scroll-behavior: smooth;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+}
 
 body {
-  min-width: 320px;
   min-height: 100vh;
 
   background: var(--cream);
   color: var(--text);
-}
 
+  overflow-x: hidden;
+}
 
 button,
 input,
@@ -58,11 +67,9 @@ select {
   font: inherit;
 }
 
-
 button {
   cursor: pointer;
 }
-
 
 a {
   color: inherit;
@@ -70,9 +77,9 @@ a {
 }
 
 
-/* =========================
+/* =====================================================
    NAVBAR
-========================= */
+===================================================== */
 
 .navbar {
   height: 74px;
@@ -86,8 +93,9 @@ a {
 
   background: var(--cream);
   border-bottom: 1px solid var(--border);
-}
 
+  flex-shrink: 0;
+}
 
 .navbar-left,
 .navbar-right {
@@ -95,20 +103,18 @@ a {
   align-items: center;
 }
 
-
 .navbar-left {
   gap: 34px;
 }
-
 
 .navbar-right {
   gap: 14px;
 }
 
 
-/* =========================
+/* =====================================================
    BRAND
-========================= */
+===================================================== */
 
 .brand {
   display: flex;
@@ -120,7 +126,6 @@ a {
   font-size: 21px;
   font-weight: 700;
 }
-
 
 .brand-mark {
   width: 34px;
@@ -138,9 +143,9 @@ a {
 }
 
 
-/* =========================
+/* =====================================================
    ICON BUTTON
-========================= */
+===================================================== */
 
 .icon-button {
   width: 40px;
@@ -159,16 +164,15 @@ a {
   transition: 0.2s ease;
 }
 
-
 .icon-button:hover {
   background: var(--cream-dark);
   color: var(--primary);
 }
 
 
-/* =========================
+/* =====================================================
    PROFILE BUTTON
-========================= */
+===================================================== */
 
 .profile-button {
   display: flex;
@@ -186,11 +190,9 @@ a {
   font-weight: 500;
 }
 
-
 .profile-button:hover {
   background: var(--cream-dark);
 }
-
 
 .profile-avatar {
   width: 34px;
@@ -210,18 +212,24 @@ a {
 }
 
 
-/* =========================
-   SIDEBAR
-========================= */
+/* =====================================================
+   APP LAYOUT
+===================================================== */
 
 .app-layout {
   display: flex;
+  width: 100%;
   min-height: calc(100vh - 74px);
 }
 
 
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
 .sidebar {
   width: 236px;
+  min-width: 236px;
   flex-shrink: 0;
 
   padding: 22px 14px;
@@ -231,9 +239,9 @@ a {
 }
 
 
-/* =========================
+/* =====================================================
    CREATE RESUME BUTTON
-========================= */
+===================================================== */
 
 .create-resume-btn {
   width: 100%;
@@ -258,15 +266,14 @@ a {
   transition: 0.2s ease;
 }
 
-
 .create-resume-btn:hover {
   background: var(--primary-dark);
 }
 
 
-/* =========================
+/* =====================================================
    SIDEBAR NAV
-========================= */
+===================================================== */
 
 .sidebar-nav {
   display: flex;
@@ -277,9 +284,9 @@ a {
 }
 
 
-/* =========================
+/* =====================================================
    SIDEBAR ITEM
-========================= */
+===================================================== */
 
 .sidebar-item {
   width: 100%;
@@ -310,12 +317,10 @@ a {
   transition: 0.2s ease;
 }
 
-
 .sidebar-item:hover {
   background: var(--cream-dark);
   color: var(--primary);
 }
-
 
 .sidebar-item.active {
   background: var(--primary-light);
@@ -324,15 +329,14 @@ a {
   font-weight: 600;
 }
 
-
 .sidebar-item svg {
   flex-shrink: 0;
 }
 
 
-/* =========================
+/* =====================================================
    NEW BADGE
-========================= */
+===================================================== */
 
 .new-badge {
   margin-left: auto;
@@ -349,18 +353,18 @@ a {
 }
 
 
-/* =========================
+/* =====================================================
    MAIN CONTENT
-========================= */
+===================================================== */
 
 .main-content {
   flex: 1;
+  min-width: 0;
 
   padding: 32px;
 
   background: var(--white);
 }
-
 
 .main-content h1 {
   margin: 0 0 8px;
@@ -370,7 +374,6 @@ a {
   color: var(--text);
 }
 
-
 .main-content p {
   margin: 0;
 
@@ -378,43 +381,60 @@ a {
 }
 
 
-/* =========================
-   BUILDER LAYOUT
-========================= */
+/* =====================================================
+   BUILDER APP
+===================================================== */
 
 .builder-app {
+  width: 100%;
   min-height: 100vh;
+
+  background: var(--white);
+
+  overflow-x: hidden;
+}
+
+
+/* =====================================================
+   BUILDER BODY
+===================================================== */
+
+.builder-body {
+  width: 100%;
+
+  display: flex;
+
+  min-height: calc(100vh - 74px);
 
   background: var(--white);
 }
 
 
-.builder-body {
-  display: flex;
-
-  min-height: calc(100vh - 74px);
-}
-
+/* =====================================================
+   BUILDER MAIN
+===================================================== */
 
 .builder-main {
   flex: 1;
 
   min-width: 0;
+  width: 100%;
 
   padding: 28px;
 
   background: var(--white);
+
+  overflow: hidden;
 }
 
 
-/* =========================
+/* =====================================================
    BUILDER PLACEHOLDER
-========================= */
+===================================================== */
 
 .builder-placeholder {
   width: 100%;
 }
-
 
 .builder-placeholder h1 {
   margin: 0 0 8px;
@@ -424,9 +444,189 @@ a {
   color: var(--text);
 }
 
-
 .builder-placeholder p {
   margin: 0;
 
   color: var(--text-light);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .sidebar {
+    width: 210px;
+    min-width: 210px;
+  }
+
+  .builder-main {
+    padding: 18px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  /* ---------------------------------------------
+     NAVBAR
+  --------------------------------------------- */
+
+  .navbar {
+    height: 64px;
+
+    padding: 0 12px;
+  }
+
+  .navbar-left {
+    gap: 8px;
+  }
+
+  .navbar-right {
+    gap: 4px;
+  }
+
+  .brand {
+    font-size: 18px;
+  }
+
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+
+    font-size: 14px;
+  }
+
+  .icon-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .profile-button {
+    padding: 4px 5px;
+  }
+
+  .profile-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+
+  /* ---------------------------------------------
+     HIDE DESKTOP SIDEBAR
+  --------------------------------------------- */
+
+  .sidebar {
+    display: none !important;
+  }
+
+
+  /* ---------------------------------------------
+     APP
+  --------------------------------------------- */
+
+  .builder-app {
+    width: 100%;
+    max-width: 100%;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+  }
+
+
+  /* ---------------------------------------------
+     BUILDER BODY
+  --------------------------------------------- */
+
+  .builder-body {
+    width: 100%;
+    max-width: 100%;
+
+    display: block;
+
+    min-height: calc(100vh - 64px);
+
+    overflow: visible;
+  }
+
+
+  /* ---------------------------------------------
+     BUILDER MAIN
+  --------------------------------------------- */
+
+  .builder-main {
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    padding: 0;
+
+    overflow: visible;
+  }
+
+
+  /* ---------------------------------------------
+     APP LAYOUT
+  --------------------------------------------- */
+
+  .app-layout {
+    width: 100%;
+
+    display: block;
+
+    min-height: calc(100vh - 64px);
+  }
+
+
+  /* ---------------------------------------------
+     MAIN CONTENT
+  --------------------------------------------- */
+
+  .main-content {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 18px;
+
+    overflow-x: hidden;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+
+  .navbar {
+    padding: 0 10px;
+  }
+
+  .brand {
+    font-size: 17px;
+  }
+
+  .navbar-right {
+    gap: 2px;
+  }
+
+  .profile-button {
+    gap: 4px;
+  }
+
+  .main-content {
+    padding: 14px;
+  }
+
 }
