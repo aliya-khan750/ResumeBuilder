@@ -630,3 +630,131 @@ a {
   }
 
 }
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+html.dark {
+  --cream: #171311;
+  --cream-dark: #241c19;
+  --beige: #302620;
+
+  --white: #211b18;
+
+  --text: #f5eee8;
+  --text-light: #b8aaa1;
+  --border: #443831;
+
+  --primary: #C96A4D;
+  --primary-dark: #A8472B;
+  --primary-light: #8E3822;
+}
+
+
+/* BODY */
+
+html.dark,
+html.dark body {
+  background: var(--cream);
+  color: var(--text);
+}
+
+
+/* NAVBAR */
+
+html.dark .navbar {
+  background: var(--cream);
+  border-color: var(--border);
+}
+
+
+/* SIDEBAR */
+
+html.dark .sidebar {
+  background: var(--cream);
+  border-color: var(--border);
+}
+
+
+/* MAIN */
+
+html.dark .builder-app,
+html.dark .builder-main {
+  background: var(--cream);
+}
+
+
+/* EDITOR */
+
+html.dark .editor-section,
+html.dark .accordion-section {
+  background: var(--white);
+  border-color: var(--border);
+}
+
+
+/* INPUTS */
+
+html.dark .form-group input,
+html.dark .form-group textarea,
+html.dark .form-group select {
+  background: #181310;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+
+/* PLACEHOLDER */
+
+html.dark .form-group input::placeholder,
+html.dark .form-group textarea::placeholder {
+  color: #8f8178;
+}
+
+
+/* ACCORDION */
+
+html.dark .accordion-header {
+  background: var(--white);
+}
+
+html.dark .accordion-header:hover {
+  background: var(--cream-dark);
+}
+
+
+/* PREVIEW */
+
+html.dark .builder-preview {
+  background: #171311;
+}
+
+
+/* SIDEBAR ITEMS */
+
+html.dark .sidebar-item {
+  color: var(--text);
+}
+
+html.dark .sidebar-item:hover {
+  background: var(--cream-dark);
+}
+
+
+/* ICON BUTTON */
+
+html.dark .icon-button {
+  color: var(--text);
+}
+
+html.dark .icon-button:hover {
+  background: var(--cream-dark);
+}
+
+
+/* PROFILE */
+
+html.dark .profile-button {
+  color: var(--text);
+}

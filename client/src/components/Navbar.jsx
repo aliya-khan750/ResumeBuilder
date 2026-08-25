@@ -3,21 +3,66 @@ import { useResume } from "../context/ResumeContext";
 import {
   Menu,
   Sun,
+  Moon,
   Bell,
   ChevronDown,
 } from "lucide-react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 function Navbar() {
+
   const {
     resumeData,
     currentResumeId,
     setResumeId,
   } = useResume();
 
+
   const [saving, setSaving] = useState(false);
+
   const [saveMessage, setSaveMessage] = useState("");
+
+
+  // ================= THEME =================
+
+  const [darkMode, setDarkMode] = useState(() => {
+
+    return localStorage.getItem("theme") === "dark";
+
+  });
+
+
+  // ================= APPLY THEME =================
+
+  useEffect(() => {
+
+    if (darkMode) {
+
+      document.documentElement.classList.add("dark");
+
+      localStorage.setItem("theme", "dark");
+
+    } else {
+
+      document.documentElement.classList.remove("dark");
+
+      localStorage.setItem("theme", "light");
+
+    }
+
+  }, [darkMode]);
+
+
+  // ================= TOGGLE THEME =================
+
+  const handleThemeToggle = () => {
+
+    setDarkMode((previous) => !previous);
+
+  };
+
 
   // ================= LOGGED-IN USER =================
 
@@ -29,35 +74,51 @@ function Navbar() {
   // ================= SAVE RESUME =================
 
   const handleSave = async () => {
+
     const token = localStorage.getItem("token");
 
+
     // Check login
+
     if (!token) {
+
       alert("Please login first.");
+
       window.location.href = "/login";
+
       return;
+
     }
 
+
     setSaving(true);
+
     setSaveMessage("");
 
+
     try {
+
 
       // ================= RESUME TITLE =================
 
       const title = resumeData.personal?.fullName
+
         ? `${resumeData.personal.fullName}'s Resume`
+
         : "My Resume";
 
 
       // ================= URL + METHOD =================
 
-      let url = "https://resumecraft-server-v3tm.onrender.com/api/resumes";
+      let url =
+        "https://resumecraft-server-v3tm.onrender.com/api/resumes";
+
 
       let method = "POST";
 
 
-      // If existing resume
+      // ================= EXISTING RESUME =================
+
       if (currentResumeId) {
 
         url =
@@ -71,23 +132,32 @@ function Navbar() {
       // ================= API REQUEST =================
 
       const response = await fetch(
+
         url,
+
         {
+
           method,
 
           headers: {
+
             "Content-Type": "application/json",
 
             Authorization:
               `Bearer ${token}`,
+
           },
 
           body: JSON.stringify({
+
             title,
 
             resumeData,
+
           }),
+
         }
+
       );
 
 
@@ -100,8 +170,10 @@ function Navbar() {
       if (!response.ok) {
 
         setSaveMessage(
+
           data.message ||
           "Failed to save resume."
+
         );
 
         return;
@@ -112,8 +184,10 @@ function Navbar() {
       // ================= NEW RESUME =================
 
       if (
+
         method === "POST" &&
         data.resume
+
       ) {
 
         setResumeId(
@@ -142,15 +216,18 @@ function Navbar() {
         error
       );
 
+
       setSaveMessage(
         "Unable to connect to server."
       );
+
 
     } finally {
 
       setSaving(false);
 
     }
+
   };
 
 
@@ -163,28 +240,41 @@ function Navbar() {
 
       <div className="navbar-left">
 
+
         <div className="brand">
 
           <div className="brand-mark">
+
             R
+
           </div>
 
+
           <span>
+
             ResumeCraft
+
           </span>
 
         </div>
 
 
         <button
+
+          type="button"
+
           className="icon-button"
+
           aria-label="Open menu"
+
         >
+
           <Menu size={22} />
+
         </button>
 
-      </div>
 
+      </div>
 
 
       {/* ================= RIGHT ================= */}
@@ -195,40 +285,78 @@ function Navbar() {
         {/* ================= THEME ================= */}
 
         <button
-          className="icon-button"
-          aria-label="Toggle theme"
-        >
-          <Sun size={20} />
-        </button>
 
+          type="button"
+
+          className="icon-button"
+
+          aria-label={
+            darkMode
+              ? "Switch to light mode"
+              : "Switch to dark mode"
+          }
+
+          title={
+            darkMode
+              ? "Light Mode"
+              : "Dark Mode"
+          }
+
+          onClick={handleThemeToggle}
+
+        >
+
+          {darkMode ? (
+
+            <Sun size={20} />
+
+          ) : (
+
+            <Moon size={20} />
+
+          )}
+
+        </button>
 
 
         {/* ================= NOTIFICATIONS ================= */}
 
         <button
-          className="icon-button"
-          aria-label="Notifications"
-        >
-          <Bell size={20} />
-        </button>
 
+          type="button"
+
+          className="icon-button"
+
+          aria-label="Notifications"
+
+        >
+
+          <Bell size={20} />
+
+        </button>
 
 
         {/* ================= SAVE ================= */}
 
         <button
+
           type="button"
+
           className="save-button"
+
           onClick={handleSave}
+
           disabled={saving}
+
         >
 
           {saving
+
             ? "Saving..."
+
             : "Save"}
 
         </button>
-
 
 
         {/* ================= SAVE STATUS ================= */}
@@ -244,11 +372,14 @@ function Navbar() {
         )}
 
 
-
         {/* ================= PROFILE ================= */}
 
         <button
+
+          type="button"
+
           className="profile-button"
+
         >
 
           <div className="profile-avatar">
@@ -283,5 +414,6 @@ function Navbar() {
   );
 
 }
+
 
 export default Navbar;
